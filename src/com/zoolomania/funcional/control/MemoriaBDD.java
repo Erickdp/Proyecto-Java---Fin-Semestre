@@ -38,7 +38,6 @@ public abstract class MemoriaBDD<T> {
      * Método que crea el fichero si esque este aún no existe, además de darle
      * un valor por defecto.
      *
-     * @return File
      */
     private void crearFichero() {
         File fichero = new File(rutaFichero);

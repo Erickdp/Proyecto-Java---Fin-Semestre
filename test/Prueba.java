@@ -1,7 +1,17 @@
 
+import com.zoolomania.funcional.control.EspecieTrs;
+import com.zoolomania.funcional.control.GuiaTrs;
+import com.zoolomania.funcional.control.HabitatTrs;
+import com.zoolomania.funcional.control.ItinerarioTrs;
 import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.control.UsuarioTrs;
+import com.zoolomania.funcional.control.ZonaTrs;
+import com.zoolomania.funcional.modelo.Especie;
+import com.zoolomania.funcional.modelo.Guia;
+import com.zoolomania.funcional.modelo.Habitat;
+import com.zoolomania.funcional.modelo.Itinerario;
 import com.zoolomania.funcional.modelo.Usuario;
+import com.zoolomania.funcional.modelo.Zona;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,35 +27,49 @@ import java.util.Scanner;
 public class Prueba {
 
     static Scanner leer = new Scanner(System.in);
-    static UsuarioTrs utrs = new UsuarioTrs();
-    static List<Usuario> listaUsuarios = (List<Usuario>) utrs.listar();
     static int numero;
+    static UsuarioTrs utrs = new UsuarioTrs();
+    static EspecieTrs etrs = new EspecieTrs();
+    static GuiaTrs gtrs = new GuiaTrs();
+    static HabitatTrs htrs = new HabitatTrs();
+    static ItinerarioTrs itrs = new ItinerarioTrs();
+    static ZonaTrs ztrs = new ZonaTrs();
+    static List<Usuario> listaUsuarios = (List<Usuario>) utrs.listar();
+    static List<Especie> listaEspecie = (List<Especie>) etrs.listar();
+    static List<Guia> listaGuia = (List<Guia>) gtrs.listar();
+    static List<Habitat> listaHabitat = (List<Habitat>) htrs.listar();
+    static List<Itinerario> listaItinerario = (List<Itinerario>) itrs.listar();
+    static List<Zona> listaZona = (List<Zona>) ztrs.listar();
 
-    public static void realizar() {
-        for (Usuario listaUsuario : listaUsuarios) {
-            System.out.println(listaUsuario);
+    public static void inicializar() {
+
+        System.out.println("Usuarios del Fichero:\n");
+        for (Usuario usario : listaUsuarios) {
+            System.out.println(usario);
         }
-        /*EspecieTrs etrs = new EspecieTrs();
-        GuiaTrs gtrs = new GuiaTrs();
-        HabitatTrs htrs = new HabitatTrs();
-        List<Habitat> listaHabitat = (List<Habitat>) htrs.listar();
-        System.out.println("");
-        List<Especie> listaEspecie = (List<Especie>) etrs.listar();
+        System.out.println("\nEspecies:\n");
         for (Especie especie : listaEspecie) {
             System.out.println(especie);
         }
-        System.out.println("");
-        List<Guia> listaGuia = (List<Guia>) gtrs.listar();
+        System.out.println("\nGuias:\n");
         for (Guia guia : listaGuia) {
             System.out.println(guia);
         }
-        System.out.println("");
+        System.out.println("\nHabitats:\n");
         for (Habitat habitat : listaHabitat) {
             System.out.println(habitat);
-        }*/
+        }
+        System.out.println("\nZonas:\n");
+        for (Zona zona : listaZona) {
+            System.out.println(zona);
+        }
+        System.out.println("\nItinerarios:\n");
+        for (Itinerario itinerario : listaItinerario) {
+            System.out.println(itinerario);
+        }
     }
 
-    public static void operacionCrud() {
+    /*public static void operacionCrud() {
         System.out.println("1. Agregar");
         System.out.println("2. Actaulizar");
         System.out.println("3. Consultar con ID");
@@ -75,13 +99,8 @@ public class Prueba {
                 break;
         }
 
-    }
-
+    }*/
     public static void main(String[] args) {
-        Prueba.realizar();
-        System.out.println(listaUsuarios.size());
-        do {
-            Prueba.operacionCrud();
-        } while (Prueba.numero != 6);
+        inicializar();
     }
 }

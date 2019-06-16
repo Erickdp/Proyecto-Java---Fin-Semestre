@@ -27,9 +27,6 @@ public class Cuidador extends Guia implements Serializable, Comparable<Guia>{
 
     @Override
     public String toString() {
-        return sb.append("Nombre del cuidador ").append(super.getNombreGuia()).append(". Direccion [").append(super.getDireccion())
-                .append("]").append(" Número de teléfono: ").append(super.getTelefono()).append(" Con fecha de inicio de trabajo del "
-                        + "Zoo").append(super.getFechInicioTrabajar()).toString();
+        return "Cuidador{" + nombreGuia + '}';
     }
-
 }

@@ -78,23 +78,21 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
 
     @Override
     protected void valoresDefecto() {
-        if (listaObjetos.isEmpty()) {
-            try {
-                guardar(new Especie("Leon", "Panthera", "Mamífero Carníror de la familia de los félidos y una "
-                        + "de las cinco especies del género Panthera."));
-                guardar(new Especie("Elefante", "Elephantidee", "Son una familia de mamíderos placentarios del orden "
-                        + "Proboscidea. Existen hoy en día tres especies y diversas subespecies"));
-                guardar(new Especie("Chimpancé", "Pan", "Es un género de primates homínidos que comprende las "
-                        + "especies Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años."));
-                guardar(new Especie("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
-                        + "social depende de la especie. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
-                        + " como \"harenes"));
-            } catch (MyExcepcion ex) {
-                ex.getMessage();
-                ex.getStackTrace();
-            }
-
+        try {
+            guardar(new Especie("Leon", "Panthera", "Mamífero Carníror de la familia de los félidos y una "
+                    + "de las cinco especies del género Panthera."));
+            guardar(new Especie("Elefante", "Elephantidee", "Son una familia de mamíderos placentarios del orden "
+                    + "Proboscidea. Existen hoy en día tres especies y diversas subespecies"));
+            guardar(new Especie("Chimpancé", "Pan", "Es un género de primates homínidos que comprende las "
+                    + "especies Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años."));
+            guardar(new Especie("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
+                    + "social depende de la especie. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
+                    + " como \"harenes"));
+        } catch (MyExcepcion ex) {
+            ex.getMessage();
+            ex.getStackTrace();
         }
+
     }
 
 }

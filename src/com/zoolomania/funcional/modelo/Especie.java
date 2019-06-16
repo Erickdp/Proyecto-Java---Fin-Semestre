@@ -23,7 +23,6 @@ public class Especie implements Serializable, Comparable<Especie>{
      */
     public static boolean bandera = false;
     private short id; //Variable que permitirá ordenar objetos según su ID
-    private StringBuilder sb = new StringBuilder();
 
     /**
      * Método constructor de la clase Especie
@@ -107,9 +106,7 @@ public class Especie implements Serializable, Comparable<Especie>{
 
     @Override
     public String toString() {
-        return sb.append(id).append(". Especie: ").append(this.nombreEspecie).append("\nNombre Científico: ")
-                .append(this.nombreCientifico).append("\nDescripción:\n").append(this.descripcion).toString();
+        return "Especie{" + "nombreEspecie=" + nombreEspecie + ", nombreCientifico=" + nombreCientifico + ", descripcion=" + descripcion + ", id=" + id + '}';
     }
-    
-    
+
 }

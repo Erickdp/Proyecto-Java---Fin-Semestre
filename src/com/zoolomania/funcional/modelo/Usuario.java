@@ -26,8 +26,6 @@ public class Usuario implements Serializable, Comparable<Usuario> {
     public static boolean bandera = false;
     private short id; //Variable que permitirá ordenar objetos según su ID
 
-    private StringBuilder sb = new StringBuilder();
-
     public Usuario(String userName, String password) {
         this.userName = userName;
         this.password = password;
@@ -56,8 +54,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 
     @Override
     public String toString() {
-        return sb.append(id).append(". User Name [").append(this.userName).append("] & Password [")
-                .append(this.password).append("]").toString();
+        return "Usuario{" + "userName=" + userName + ", password=" + password + ", id=" + id + '}';
     }
 
     @Override

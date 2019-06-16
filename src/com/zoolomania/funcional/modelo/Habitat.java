@@ -26,7 +26,6 @@ public class Habitat implements Serializable, Comparable<Habitat> {
      */
     public static boolean bandera = false;
     private short id; //Variable que permitirá ordenar objetos según su ID
-    private StringBuilder sb = new StringBuilder();
 
     /**
      * Método contructor de la clase Habitat
@@ -111,10 +110,9 @@ public class Habitat implements Serializable, Comparable<Habitat> {
 
     @Override
     public String toString() {
-        return sb.append(id).append(". Nombre del Hábitat: ").append(this.nombreHabitat).append(". El cual tiene"
-                + "un clima ").append(this.clima).append(".\nCon vegetación ").append(this.vegetacion)
-                .append("\nEncontrado principalmente en ").append(this.continente).toString();
+        return "Habitat{" + "nombreHabitat=" + nombreHabitat + ", clima=" + clima + ", vegetacion=" + vegetacion + ", continente=" + continente + ", id=" + id + '}';
     }
+
 
     @Override
     public int compareTo(Habitat otroHabitat) {

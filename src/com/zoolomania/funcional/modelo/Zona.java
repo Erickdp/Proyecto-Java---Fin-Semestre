@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class Zona implements Serializable, Comparable<Zona> {
 
-    private static long serialVersionUID = -1L; //Constante que evita errores en la serializacion
+    private static final long serialVersionUID = -1L; //Constante que evita errores en la serializacion
 
     private String nombreZona;
     private float extension;

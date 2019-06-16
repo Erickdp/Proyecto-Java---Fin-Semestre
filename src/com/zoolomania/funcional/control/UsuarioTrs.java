@@ -59,7 +59,7 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
     }
 
     @Override
-    public String eliminar(int indice) throws MyExcepcion{
+    public String eliminar(int indice) throws MyExcepcion {
         try {
             Usuario borrarUsuario = (Usuario) consultarConId(indice);
             listaObjetos.remove(borrarUsuario);
@@ -78,15 +78,13 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
 
     @Override
     protected void valoresDefecto() {
-        if (listaObjetos.isEmpty()) {
-            try {
-                guardar(new Usuario("Erick", "1234"));
-            } catch (MyExcepcion ex) {
-                ex.getMessage();
-                ex.getStackTrace();
-            }
-
+        try {
+            guardar(new Usuario("Erick", "1234"));
+        } catch (MyExcepcion ex) {
+            ex.getMessage();
+            ex.getStackTrace();
         }
+
     }
 
 }

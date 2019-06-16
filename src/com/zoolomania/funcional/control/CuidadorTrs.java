@@ -5,17 +5,23 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.modelo.Cuidador;
 import java.util.List;
 
 /**
- * Clase que representa las operaciones de negio para Itinerarios
- * @author Santiago Sisalem - Erick Díaz
+ *
+ * @author Erick Díaz
  */
-public class Itinerario extends MemoriaBDD<Itinerario> implements ICrud{
+public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud{
 
-    public Itinerario() {
-        super("Itinerario");
+    public CuidadorTrs(String nombreFichero) {
+        super("Cuidador");
         leerFichero();
+    }
+
+    @Override
+    protected void valoresDefecto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -29,22 +35,17 @@ public class Itinerario extends MemoriaBDD<Itinerario> implements ICrud{
     }
 
     @Override
-    public Object consultarConId(int indice) throws MyExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<?> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected void valoresDefecto() {
+    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String eliminar(int indice) throws MyExcepcion {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<?> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

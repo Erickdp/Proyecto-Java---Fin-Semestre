@@ -16,12 +16,12 @@ import java.util.logging.Logger;
  * @author Santiago Sisalem - Erick Díaz (Unplugged)
  */
 public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
-    
+
     public HabitatTrs() {
         super("Habitat");
         leerFichero();
     }
-    
+
     @Override
     public String guardar(Object registro) throws MyExcepcion {
         Habitat nuevoHabitat = (Habitat) registro;
@@ -32,9 +32,9 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
             guardarFichero();
             return "Habitat guardado correctamente";
         }
-        
+
     }
-    
+
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Habitat actualizarHabitat = (Habitat) registro;
@@ -47,7 +47,7 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
         }
         throw new MyExcepcion("2");
     }
-    
+
     @Override
     public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
         for (Habitat buscarId : listaObjetos) {
@@ -57,7 +57,7 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
         }
         throw new MyExcepcion("3");
     }
-    
+
     @Override
     public String eliminar(int indice) throws MyExcepcion {
         try {
@@ -70,26 +70,24 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
         }
         throw new MyExcepcion("4");
     }
-    
+
     @Override
     public List<?> listar() {
         return listaObjetos;
     }
-    
+
     @Override
     protected void valoresDefecto() {
-        if (listaObjetos.isEmpty()) {
-            try {
-                guardar(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea","África"));
-                guardar(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia"));
-                guardar(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América"));
-                guardar(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica"));
-            } catch (MyExcepcion ex) {
-                ex.getMessage();
-                ex.getStackTrace();
-            }
-            
+        try {
+            guardar(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África"));
+            guardar(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia"));
+            guardar(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América"));
+            guardar(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica"));
+        } catch (MyExcepcion ex) {
+            ex.getMessage();
+            ex.getStackTrace();
         }
+
     }
-    
+
 }

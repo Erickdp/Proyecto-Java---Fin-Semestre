@@ -5,45 +5,44 @@
  */
 package com.zoolomania.funcional.control;
 
-import com.zoolomania.funcional.modelo.Guia;
-import java.time.LocalDate;
+import com.zoolomania.funcional.modelo.Itinerario;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Clase que representa las operaciones de negocio para los Cuidadores
+ * Clase que representa las operaciones de negio para Itinerarios
  *
- * @author Santiago Sisalem - Erick Díaz (Unplugged)
+ * @author Santiago Sisalem - Erick Díaz
  */
-public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
+public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
 
-    public GuiaTrs() {
-        super("Guia");
+    public ItinerarioTrs() {
+        super("Itinerario");
         leerFichero();
     }
 
     @Override
     public String guardar(Object registro) throws MyExcepcion {
-        Guia nuevoGuia = (Guia) registro;
-        if (listaObjetos.contains(nuevoGuia)) {
+        Itinerario nuevoItinerario = (Itinerario) registro;
+        if (listaObjetos.contains(nuevoItinerario)) {
             throw new MyExcepcion("1");
         } else {
-            listaObjetos.add(nuevoGuia);
+            listaObjetos.add(nuevoItinerario);
             guardarFichero();
-            return "Guia guardado correctamente";
+            return "Itinerario guardado correctamente";
         }
 
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
-        Guia actualizarGuia = (Guia) registro;
-        for (Guia guiaAntiguo : listaObjetos) {
-            if (guiaAntiguo.equals(actualizarGuia)) {
-                guiaAntiguo = actualizarGuia;
+        Itinerario actualizarItinerario = (Itinerario) registro;
+        for (Itinerario itinerarioAntiguo : listaObjetos) {
+            if (itinerarioAntiguo.equals(actualizarItinerario)) {
+                itinerarioAntiguo = actualizarItinerario;
                 guardarFichero();
-                return "Contraseña actualizada";
+                return "Itinerario actualizado";
             }
         }
         throw new MyExcepcion("2");
@@ -51,7 +50,7 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
 
     @Override
     public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
-        for (Guia buscarId : listaObjetos) {
+        for (Itinerario buscarId : listaObjetos) {
             if (buscarId.getId() == indice) {
                 return listaObjetos.get(indice);
             }
@@ -62,12 +61,12 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
     @Override
     public String eliminar(int indice) throws MyExcepcion {
         try {
-            Guia borrarGuia = (Guia) consultarConId(indice);
-            listaObjetos.remove(borrarGuia);
+            Itinerario borrarItinerario = (Itinerario) consultarConId(indice);
+            listaObjetos.remove(borrarItinerario);
             guardarFichero();
             return "Eliminación correcta";
         } catch (NumberFormatException ex) {
-            Logger.getLogger(GuiaTrs.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ItinerarioTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
         throw new MyExcepcion("4");
     }
@@ -80,14 +79,9 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
-            guardar(new Guia("Pedro", "Zona centro", "2626-166", LocalDate.of(2019, 04, 05)));
-            guardar(new Guia("Mauro", "Quitumbe", "1137-553", LocalDate.of(2019, 01, 03)));
-            guardar(new Guia("Yayo", "Foch", "1111-2323", LocalDate.of(2006, 12, 04)));
+            guardar(new Itinerario("1212", (short) 90, 2.10F, (byte) 30));
         } catch (MyExcepcion ex) {
-            ex.getMessage();
-            ex.getStackTrace();
+            Logger.getLogger(ItinerarioTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
 }

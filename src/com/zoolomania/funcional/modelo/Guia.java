@@ -25,8 +25,6 @@ public class Guia implements Serializable, Comparable<Guia> {
     protected LocalDate fechInicioTrabajar;
     //Variable que permite comprar de acuerdo al nombre o id
     public static boolean bandera = false;
-    //Objeto que permite concatenar Texto.
-    protected StringBuilder sb = new StringBuilder();
     // variable que permitirá ordenar por índice
     private short id;
 
@@ -113,10 +111,10 @@ public class Guia implements Serializable, Comparable<Guia> {
 
     @Override
     public String toString() {
-        return sb.append(id).append(". Nombre del Guia: ").append(this.nombreGuia).append(" Con dirección[").append(this.direccion)
-                .append("] Número de teléfono ").append(this.telefono).append(" Y fecha de inicio de trabajo ").append(this.fechInicioTrabajar)
-                .toString();
+        return "Guia{" + "nombreGuia=" + nombreGuia + ", direccion=" + direccion + ", telefono=" + telefono + ", fechInicioTrabajar=" + fechInicioTrabajar + ", id=" + id + '}';
     }
+
+  
 
     @Override
     public int compareTo(Guia otroGuia) {
