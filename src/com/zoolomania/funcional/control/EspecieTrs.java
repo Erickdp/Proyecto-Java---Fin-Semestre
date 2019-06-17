@@ -5,7 +5,10 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Especie;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,15 +82,19 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
+            List<Cuidador> cuidadoresDefecto = new ArrayList<>();
+            cuidadoresDefecto.add(new Cuidador("Carlos", "Zona centro", "123434", LocalDate.of(2019, 02, 02)));
+            cuidadoresDefecto.add(new Cuidador("Juan", "Av doce", "854743", LocalDate.of(2010, 04, 04)));
+            cuidadoresDefecto.add(new Cuidador("Mario", "Zona rosa", "432123", LocalDate.of(2015, 06, 11)));
             guardar(new Especie("Leon", "Panthera", "Mamífero Carníror de la familia de los félidos y una "
-                    + "de las cinco especies del género Panthera."));
+                    + "de las cinco especies del género Panthera.", cuidadoresDefecto));
             guardar(new Especie("Elefante", "Elephantidee", "Son una familia de mamíderos placentarios del orden "
-                    + "Proboscidea. Existen hoy en día tres especies y diversas subespecies"));
+                    + "Proboscidea. Existen hoy en día tres especies y diversas subespecies", cuidadoresDefecto));
             guardar(new Especie("Chimpancé", "Pan", "Es un género de primates homínidos que comprende las "
-                    + "especies Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años."));
+                    + "especies Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años.", cuidadoresDefecto));
             guardar(new Especie("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
                     + "social depende de la especie. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
-                    + " como \"harenes"));
+                    + " como \"harenes", cuidadoresDefecto));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();

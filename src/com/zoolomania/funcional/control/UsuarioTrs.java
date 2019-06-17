@@ -21,6 +21,15 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
         super("Usuario");
         leerFichero();
     }
+    
+    public Usuario buscarUsuario(String nombre, String pass) {
+        for (Usuario buscarU : listaObjetos) {
+            if (buscarU.getPassword().equals(pass) & buscarU.getUserName().equals(nombre)) {
+                return buscarU;
+            }
+        }
+        return null;
+    }
 
     @Override
     public String guardar(Object registro) throws MyExcepcion {

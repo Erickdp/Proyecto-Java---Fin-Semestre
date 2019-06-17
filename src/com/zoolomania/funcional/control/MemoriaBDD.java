@@ -51,8 +51,7 @@ public abstract class MemoriaBDD<T> {
                 Logger.getLogger(MemoriaBDD.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            System.out.println("El fichero " + nombreFichero + " ya existe");
-            System.out.println("Su ruta ->" + fichero.getAbsolutePath() + "\n");
+            System.out.println("Fichero existente, Su ruta ->" + fichero.getAbsolutePath() + "\n");
         }
     }
 
