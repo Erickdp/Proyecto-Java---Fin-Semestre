@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Erick Díaz
  */
-public class FormularioRegistro extends javax.swing.JFrame {
+public class frmRegistro extends javax.swing.JFrame {
 
     String acceso;
     Usuario nuevoUsuario;
@@ -23,7 +23,7 @@ public class FormularioRegistro extends javax.swing.JFrame {
     /**
      * Creates new form FormularioRegistro
      */
-    public FormularioRegistro() {
+    public frmRegistro() {
         initComponents();
         this.setLocationRelativeTo(null);
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel2, "src/iconos/imagenRegistro.jpg");
@@ -180,6 +180,7 @@ public class FormularioRegistro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Las contraseñas no coindice, vuleva a intentar", "Registro Denegado", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
+                //Falta crear el campo que necesita ngresar email para el constructor de Usuario
                 acceso = utrs.guardar(new Usuario(jtxt1.getText(), jps1.getText()));
             } catch (MyExcepcion ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error de Registro", JOptionPane.ERROR_MESSAGE);
@@ -192,7 +193,7 @@ public class FormularioRegistro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new Menu_de_acceso().setVisible(true);
+        new frmLoginUser().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -213,20 +214,21 @@ public class FormularioRegistro extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormularioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormularioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormularioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormularioRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmRegistro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularioRegistro().setVisible(true);
+                new frmRegistro().setVisible(true);
             }
         });
     }

@@ -5,8 +5,9 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.util.UtilNumeros;
+import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,6 +23,9 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
     private short duracionRecorrido;
     private float longitud;
     private byte numMaxVisitantes;
+    private byte numEspeciesVisitadas;
+    private List<Zona> zonas;
+
     /*
     Permite determinar a través de que atributo se ordenará la lista
      */
@@ -29,19 +33,38 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
     private short id; //Variable que permitirá ordenar objetos según su ID
 
     /**
-     * Método contrstructor de la clase Itinerario
-     *
+     * Método constructor de la clase Itinerario
      * @param codigo
      * @param duracionRecorrido
      * @param longitud
      * @param numMaxVisitantes
+     * @param numEspeciesVisitadas
+     * @param zonas 
      */
-    public Itinerario(String codigo, short duracionRecorrido, float longitud, byte numMaxVisitantes) {
+    public Itinerario(String codigo, short duracionRecorrido, float longitud, byte numMaxVisitantes, byte numEspeciesVisitadas, List<Zona> zonas) {
         this.codigo = codigo;
         this.duracionRecorrido = duracionRecorrido;
         this.longitud = longitud;
         this.numMaxVisitantes = numMaxVisitantes;
+        this.numEspeciesVisitadas = numEspeciesVisitadas;
+        this.zonas = zonas;
         id = UtilNumeros.getNumeroAleatorio();
+    }
+
+    public List<Zona> getZonas() {
+        return zonas;
+    }
+
+    public void setZonas(List<Zona> zonas) {
+        this.zonas = zonas;
+    }
+
+    public byte getNumEspeciesVisitadas() {
+        return numEspeciesVisitadas;
+    }
+
+    public void setNumEspeciesVisitadas(byte numEspeciesVisitadas) {
+        this.numEspeciesVisitadas = numEspeciesVisitadas;
     }
 
     public byte getNumMaxVisitantes() {

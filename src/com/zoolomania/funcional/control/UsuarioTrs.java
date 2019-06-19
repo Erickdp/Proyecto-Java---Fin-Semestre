@@ -7,8 +7,6 @@ package com.zoolomania.funcional.control;
 
 import com.zoolomania.funcional.modelo.Usuario;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Clase que representa las operaciones de negocio para Usuarios
@@ -20,15 +18,6 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
     public UsuarioTrs() {
         super("Usuario");
         leerFichero();
-    }
-    
-    public Usuario buscarUsuario(String nombre, String pass) {
-        for (Usuario buscarU : listaObjetos) {
-            if (buscarU.getPassword().equals(pass) & buscarU.getUserName().equals(nombre)) {
-                return buscarU;
-            }
-        }
-        return null;
     }
 
     @Override
@@ -75,9 +64,8 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
             guardarFichero();
             return "Eliminación correcta";
         } catch (NumberFormatException ex) {
-            Logger.getLogger(UsuarioTrs.class.getName()).log(Level.SEVERE, null, ex);
+            throw new MyExcepcion("4");
         }
-        throw new MyExcepcion("4");
     }
 
     @Override
@@ -88,12 +76,21 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
-            guardar(new Usuario("Erick", "1234"));
+            guardar(new Usuario("Erick", "123", "erickdp@hotmail.com"));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();
         }
 
+    }
+
+    public Usuario buscarUsuario(String usuario, String pass) {
+        for (Usuario usuarios : listaObjetos) {
+            if (usuarios.getUserName().equals(usuario) & usuarios.getPassword().equals(pass)) {
+                return usuarios;
+            }
+        }
+        return null;
     }
 
 }

@@ -5,21 +5,26 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.util.UtilNumeros;
+import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Clase que representa al objeto especie
+ *
  * @author DELL
  */
-public class Especie implements Serializable, Comparable<Especie>{
-    
+public class Especie implements Serializable, Comparable<Especie> {
+
+    private static final long serialVersionUID = -1L;
+
     private String nombreEspecie;
     private String nombreCientifico;
     private String descripcion;
     private List<Cuidador> cuiadores;
+    private List<Habitat> habitats;
+    private List<Zona> zonas;
     /*
     Permite determinar a través de que atributo se ordenará la lista
      */
@@ -27,17 +32,54 @@ public class Especie implements Serializable, Comparable<Especie>{
     private short id; //Variable que permitirá ordenar objetos según su ID
 
     /**
-     * Método contructor de la clase especie
+     * Contructor de la clase Especie
+     *
      * @param nombreEspecie
      * @param nombreCientifico
      * @param descripcion
-     * @param cuiadores 
+     * @param cuiadores
+     * @param habitats
+     * @param zonas
      */
-    public Especie(String nombreEspecie, String nombreCientifico, String descripcion, List<Cuidador> cuiadores) {
+    public Especie(String nombreEspecie, String nombreCientifico, String descripcion, List<Cuidador> cuiadores, List<Habitat> habitats, List<Zona> zonas) {
         this.nombreEspecie = nombreEspecie;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
         this.cuiadores = cuiadores;
+        this.habitats = habitats;
+        this.zonas = zonas;
+        id = UtilNumeros.getNumeroAleatorio();
+    }
+
+    /**
+     * Método constructor que se utilizará como parámetro para los habitats,
+     * zonas y cuidadores
+     *
+     * @param nombreEspecie
+     * @param nombreCientifico
+     * @param descripcion
+     */
+    public Especie(String nombreEspecie, String nombreCientifico, String descripcion) {
+        this.nombreEspecie = nombreEspecie;
+        this.nombreCientifico = nombreCientifico;
+        this.descripcion = descripcion;
+        id = UtilNumeros.getNumeroAleatorio();
+    }
+
+    public List<Habitat> getHabitats() {
+        return habitats;
+    }
+
+    public void setHabitats(List<Habitat> habitats) {
+        this.habitats = habitats;
+    }
+
+    public List<Zona> getZonas() {
+        return zonas;
+    }
+
+    public void setZonas(List<Zona> zonas) {
+        this.zonas = zonas;
     }
 
     public List<Cuidador> getCuiadores() {
@@ -47,7 +89,6 @@ public class Especie implements Serializable, Comparable<Especie>{
     public void setCuiadores(List<Cuidador> cuiadores) {
         this.cuiadores = cuiadores;
     }
-    
 
     public String getDescripcion() {
         return descripcion;
@@ -107,13 +148,14 @@ public class Especie implements Serializable, Comparable<Especie>{
     public short getId() {
         return id;
     }
-    
+
     @Override
     public int compareTo(Especie otraEspecie) {
         if (!bandera) {
             return this.nombreEspecie.compareToIgnoreCase(otraEspecie.nombreEspecie);
+        } else {
+            return Short.compare(this.id, otraEspecie.id);
         }
-        return Short.compare(this.id, otraEspecie.id);
     }
 
     @Override

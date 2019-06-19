@@ -79,6 +79,9 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
+            /*
+            Esto no sirve crear con listas
+            */
             guardar(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África"));
             guardar(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia"));
             guardar(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América"));

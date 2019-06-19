@@ -7,6 +7,8 @@ package com.zoolomania.funcional.control;
 
 import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Especie;
+import com.zoolomania.funcional.modelo.Habitat;
+import com.zoolomania.funcional.modelo.Zona;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,20 +83,25 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
 
     @Override
     protected void valoresDefecto() {
-        try {
             List<Cuidador> cuidadoresDefecto = new ArrayList<>();
+            List<Habitat> habitatDefecto = new ArrayList<>();
+            List<Zona> zonasDefecto = new ArrayList<>();
+
             cuidadoresDefecto.add(new Cuidador("Carlos", "Zona centro", "123434", LocalDate.of(2019, 02, 02)));
             cuidadoresDefecto.add(new Cuidador("Juan", "Av doce", "854743", LocalDate.of(2010, 04, 04)));
             cuidadoresDefecto.add(new Cuidador("Mario", "Zona rosa", "432123", LocalDate.of(2015, 06, 11)));
+
+            habitatDefecto.add(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África"));
+            habitatDefecto.add(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia"));
+            habitatDefecto.add(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América"));
+            habitatDefecto.add(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica"));
+            
+            zonasDefecto.add(new Zona("Zona Norte", 2.4F));
+            zonasDefecto.add(new Zona("Zona Media", 1.4F));
+
+        try {
             guardar(new Especie("Leon", "Panthera", "Mamífero Carníror de la familia de los félidos y una "
-                    + "de las cinco especies del género Panthera.", cuidadoresDefecto));
-            guardar(new Especie("Elefante", "Elephantidee", "Son una familia de mamíderos placentarios del orden "
-                    + "Proboscidea. Existen hoy en día tres especies y diversas subespecies", cuidadoresDefecto));
-            guardar(new Especie("Chimpancé", "Pan", "Es un género de primates homínidos que comprende las "
-                    + "especies Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años.", cuidadoresDefecto));
-            guardar(new Especie("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
-                    + "social depende de la especie. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
-                    + " como \"harenes", cuidadoresDefecto));
+                    + "de las cinco especies del género Panthera.", cuidadoresDefecto, habitatDefecto, zonasDefecto));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();

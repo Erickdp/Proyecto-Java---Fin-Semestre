@@ -5,7 +5,7 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.util.UtilNumeros;
+import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,16 +20,26 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 
     private String userName;
     private String password;
+    private String email;
     /*
     Permite determinar a través de que atributo se ordenará la lista
      */
     public static boolean bandera = false;
     private short id; //Variable que permitirá ordenar objetos según su ID
 
-    public Usuario(String userName, String password) {
+    public Usuario(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
+        this.email = email;
         id = UtilNumeros.getNumeroAleatorio();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -54,7 +64,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 
     @Override
     public String toString() {
-        return "Usuario{" + "userName=" + userName + ", password=" + password + ", id=" + id + '}';
+        return "Usuario{" + "userName=" + userName + ", password=" + password + ", email=" + email + ", id=" + id + '}';
     }
 
     @Override

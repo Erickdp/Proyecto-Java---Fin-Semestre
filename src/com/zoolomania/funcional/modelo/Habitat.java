@@ -5,12 +5,14 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.util.UtilNumeros;
+import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * Clase que representa la tabla de Habitat
+ *
  * @author Santiago Sisalem - Erick Díaz
  */
 public class Habitat implements Serializable, Comparable<Habitat> {
@@ -21,6 +23,7 @@ public class Habitat implements Serializable, Comparable<Habitat> {
     private String clima;
     private String vegetacion;
     private String continente;
+    private List<Especie> especies;
     /*
     Permite determinar a través de que atributo se ordenará la lista
      */
@@ -34,14 +37,35 @@ public class Habitat implements Serializable, Comparable<Habitat> {
      * @param clima
      * @param vegetacion
      * @param continente
+     * @param especies
+     * @param id
+     */
+    public Habitat(String nombreHabitat, String clima, String vegetacion, String continente, List<Especie> especies) {
+        this.nombreHabitat = nombreHabitat;
+        this.clima = clima;
+        this.vegetacion = vegetacion;
+        this.continente = continente;
+        this.especies = especies;
+        this.id = UtilNumeros.getNumeroAleatorio();
+    }
+
+    /**
+     * Método contrucor que se usará como objeto para pasarlo como parámetro a un objeto Especie
+     * que necesite de una lista de habitats
+     * @param nombreHabitat
+     * @param clima
+     * @param vegetacion
+     * @param continente 
      */
     public Habitat(String nombreHabitat, String clima, String vegetacion, String continente) {
         this.nombreHabitat = nombreHabitat;
         this.clima = clima;
         this.vegetacion = vegetacion;
         this.continente = continente;
-        id = UtilNumeros.getNumeroAleatorio();
+        this.id = UtilNumeros.getNumeroAleatorio();
     }
+    
+    
 
     public String getContinente() {
         return continente;
@@ -112,7 +136,6 @@ public class Habitat implements Serializable, Comparable<Habitat> {
     public String toString() {
         return "Habitat{" + "nombreHabitat=" + nombreHabitat + ", clima=" + clima + ", vegetacion=" + vegetacion + ", continente=" + continente + ", id=" + id + '}';
     }
-
 
     @Override
     public int compareTo(Habitat otroHabitat) {
