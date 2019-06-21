@@ -6,8 +6,6 @@
 package com.zoolomania.funcional.control;
 
 import com.zoolomania.funcional.modelo.Cuidador;
-import com.zoolomania.funcional.modelo.Especie;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,10 +92,9 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
         especies.add(new Especie("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
                 + "social depende de la especie. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
                 + " como \"harenes"));*/
-        Cuidador cuidadorDefecto = new Cuidador("Carlos", "Centro-Sur", "342423", LocalDate.now(), (short) 1);
 //        cuidadorDefecto.cuidarNuevaEspecie(new Especie("Perro", "Perrus", "Pelusa", (short) 1));
         try {
-            guardar(cuidadorDefecto);
+            guardar(new Cuidador("Carlos", "Floresta", "331234", (short)1));
         } catch (MyExcepcion ex) {
             Logger.getLogger(CuidadorTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

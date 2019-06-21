@@ -6,6 +6,7 @@
 package com.zoolomania.funcional.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,6 +45,17 @@ public class Habitat implements Serializable, Comparable<Habitat> {
         this.vegetacion = vegetacion;
         this.continente = continente;
         this.id = id;
+        especies = new ArrayList<>();
+    }
+    
+    public void agregarEspecie(Especie especie) {
+        especies.add(especie);
+        System.out.println("Especie agregada al habitat " + this.nombreHabitat);
+    }
+    
+    public void eliminarEspecie(Especie especie) {
+        especies.remove(especie);
+        System.out.println("Especie eliminada del habitat " + this.nombreHabitat);
     }
 
     public List<Especie> getEspecies() {

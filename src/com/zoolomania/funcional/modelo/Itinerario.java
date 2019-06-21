@@ -6,6 +6,8 @@
 package com.zoolomania.funcional.modelo;
 
 import java.io.Serializable;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,8 +24,10 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
     private short duracionRecorrido;
     private short longitud;
     private byte numMaxVisitantes;
+    private LocalTime horaDeItinerario; //Perimte asignar una hora a la que el guia tendrá el itinarario
 //    private byte numEspeciesVisitadas;
     private List<Zona> zonas;
+    private List<Guia> guias;
 
     /*
     Permite determinar a través de que identificador se ordenará la lista
@@ -42,11 +46,38 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         this.id = id;
         this.numMaxVisitantes = numMaxVisitantes;
         duracionRecorrido = (short) Math.floor(Math.random() * 180); //Tendrá hasta un límite de 3 horas de duración
-        longitud = (short) Math.floor(Math.random() * 6); //Tendrá una longitud hasta de 6 Km
+        longitud = (short) Math.floor(Math.random() * 8); //Tendrá una longitud hasta de 8 Km
+        zonas = new ArrayList<>();
+        guias = new ArrayList<>();
+        horaDeItinerario = LocalTime.of((int) Math.floor(Math.random() * 23), (int) Math.floor(Math.random() * 59));
+    }
+
+    public void agregarZona(Zona zona) {
+        zonas.add(zona);
+        System.out.println("Zona agregada al Itinerario");
+    }
+
+    public void eliminarZona(Zona zona) {
+        zonas.remove(zona);
+        System.out.println("Zona eliinara del Itinerario");
+    }
+
+    public void agregarGuia(Guia guia) {
+        guias.add(guia);
+        System.out.println("Guia agregado al itinerario " + this.getCodigo());
+    }
+
+    public void eliminarGuia(Guia guia) {
+        guias.remove(guia);
+        System.out.println("Guia eliminado del itinerario " + this.codigo);
     }
 
     public List<Zona> getZonas() {
         return zonas;
+    }
+
+    public LocalTime getHoraDeItinerario() {
+        return horaDeItinerario;
     }
 
     public byte getNumMaxVisitantes() {
@@ -108,7 +139,7 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
 
     @Override
     public String toString() {
-        return "Itinerario{" + "codigo=" + codigo + ", duracionRecorrido=" + duracionRecorrido + ", longitud=" + longitud + ", numMaxVisitantes=" + numMaxVisitantes + '}';
+        return "Itinerario{" + "codigo=" + codigo + ", duracionRecorrido=" + duracionRecorrido + ", longitud=" + longitud + "KM, numMaxVisitantes=" + numMaxVisitantes + '}';
     }
 
     @Override

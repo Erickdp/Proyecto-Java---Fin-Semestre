@@ -6,6 +6,7 @@
 package com.zoolomania.funcional.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,8 +39,31 @@ public class Zona implements Serializable, Comparable<Zona> {
         this.nombreZona = nombreZona;
         this.extension = extension;
         this.id = id;
+        especies = new ArrayList<>();
+        itinerarios = new ArrayList<>();
     }
+    
 
+    public void agregarEspecie(Especie especie) {
+        especies.add(especie);
+        System.out.println("Especie agregada al habitat " + this.nombreZona);
+    }
+    
+    public void eliminarEspecie(Especie especie) {
+        especies.remove(especie);
+        System.out.println("Especie eliminada del habitat " + this.nombreZona);
+    }
+    
+    public void agregarItinerario(Itinerario itinerario) {
+        itinerarios.add(itinerario);
+        System.out.println("Itinerario agregado a la zona " + this.nombreZona);
+    }
+    
+    public void eliminarItinerario(Itinerario itinerario) {
+        itinerarios.remove(itinerario);
+        System.out.println("Itinerario eliminado de la zona " + this.nombreZona);
+    }
+    
     public List<Especie> getEspecies() {
         return especies;
     }
@@ -95,7 +119,7 @@ public class Zona implements Serializable, Comparable<Zona> {
 
     @Override
     public String toString() {
-        return "Zona{" + "nombreZona=" + nombreZona + ", extension=" + extension + ", especies=" + especies + ", itinerarios=" + itinerarios + ", id=" + id + '}';
+        return "Zona{" + "nombreZona=" + nombreZona + ", extension=" + ", id=" + id + '}';
     }
 
     @Override

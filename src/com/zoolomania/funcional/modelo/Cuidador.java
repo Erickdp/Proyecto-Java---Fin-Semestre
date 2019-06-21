@@ -21,7 +21,6 @@ public class Cuidador extends Empleado implements Serializable, Comparable<Emple
 
     private List<Especie> especies;
     private LocalDate fechaDeEspecie;
-    
 
     /**
      * Método constructor de la clase Cuidador
@@ -29,11 +28,10 @@ public class Cuidador extends Empleado implements Serializable, Comparable<Emple
      * @param nombre
      * @param direccion
      * @param telefono
-     * @param fechInicioTrabajar
      * @param id
      */
-    public Cuidador(String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar, short id) {
-        super(nombre, direccion, telefono, fechInicioTrabajar, id);
+    public Cuidador(String nombre, String direccion, String telefono, short id) {
+        super(nombre, direccion, telefono, id);
         especies = new ArrayList<>();
     }
 
@@ -48,12 +46,12 @@ public class Cuidador extends Empleado implements Serializable, Comparable<Emple
      */
     public void cuidarNuevaEspecie(Especie nuevaEspecie) {
         especies.add(nuevaEspecie);
-        System.out.println("Nueva especie agregada a Cuidar");
+        System.out.println("Nueva especie agregada al cuiaddor " + this.getNombre());
     }
 
     public void eliminarEspecie(Especie especie) {
         especies.remove(especie);
-        System.out.println("Especie removida correctamente");
+        System.out.println("Especie removida correctamente del cuidador " + this.getNombre());
     }
 
 }

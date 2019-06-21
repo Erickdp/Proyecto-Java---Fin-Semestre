@@ -7,6 +7,8 @@ package com.zoolomania.funcional.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -20,7 +22,7 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
     private String nombre;
     private String direccion;
     private String telefono;
-    private LocalDate fechInicioTrabajar;
+    private LocalDateTime fechInicioTrabajar;
     //Variable que servirá como identificador
     private short id;
     //Variable que permite comprar de acuerdo al nombre o id
@@ -32,15 +34,14 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
      * @param nombre
      * @param direccion
      * @param telefono
-     * @param fechInicioTrabajar
      * @param id
      */
-    protected Empleado(String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar, short id) {
+    protected Empleado(String nombre, String direccion, String telefono, short id) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.fechInicioTrabajar = fechInicioTrabajar;
         this.id = id;
+        this.fechInicioTrabajar = LocalDateTime.of(LocalDate.now(), LocalTime.now());
     }
 
     public String getNombre() {
@@ -67,12 +68,8 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
         this.telefono = telefono;
     }
 
-    public LocalDate getFechInicioTrabajar() {
+    public LocalDateTime getFechInicioTrabajar() {
         return fechInicioTrabajar;
-    }
-
-    public void setFechInicioTrabajar(LocalDate fechInicioTrabajar) {
-        this.fechInicioTrabajar = fechInicioTrabajar;
     }
 
     public short getId() {

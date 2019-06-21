@@ -35,6 +35,16 @@ public class Guia extends Empleado implements Serializable {
         itinerarios = new ArrayList<>();
     }
 
+    public void agregarItinerario(Itinerario itinerario) {
+        itinerarios.add(itinerario);
+        System.out.println("Itinerario agregado al Guia: " + this.getNombre() + " En " + itinerario.getHoraDeItinerario());
+    }
+
+    public void eliminarItinerario(Itinerario itinerario) {
+        itinerarios.remove(itinerario);
+        System.out.println("Itinerario eliminado del Guia " + this.getNombre());
+    }
+
     public List<Itinerario> getItinerarios() {
         return itinerarios;
     }

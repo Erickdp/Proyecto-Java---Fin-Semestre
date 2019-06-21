@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Clase que representa al objeto de tipo Usuario
  *
- * @author Santiago Sisalem - Erick Díaz
+ * @author Erick Díaz
  */
 public class Usuario implements Serializable, Comparable<Usuario> {
 
@@ -24,7 +24,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
     Permite determinar a través de que atributo se ordenará la lista
      */
     public static boolean bandera = false;
-    private final short id;
+    private short id;
 
     /**
      * Método constructor de la clase Usuario
@@ -38,6 +38,22 @@ public class Usuario implements Serializable, Comparable<Usuario> {
         this.password = password;
         this.email = email;
         id = (short) Math.floor(Math.random() * 100);
+    }
+
+    /**
+     * Método contructor que permitirá validar campos de actualización tomando
+     * como ID el ID antiguo
+     *
+     * @param userName
+     * @param password
+     * @param email
+     * @param id
+     */
+    public Usuario(String userName, String password, String email, short id) {
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.id = id;
     }
 
     public String getEmail() {
@@ -106,8 +122,9 @@ public class Usuario implements Serializable, Comparable<Usuario> {
     public int compareTo(Usuario otroUsuario) {
         if (!bandera) {
             return this.userName.compareToIgnoreCase(otroUsuario.userName);
+        } else {
+            return Short.compare(this.id, otroUsuario.getId());
         }
-        return Short.compare(this.id, otroUsuario.getId());
     }
 
 }

@@ -7,13 +7,15 @@ package com.zoolomania.funcional.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Clase que representa al objeto especie
  *
- * @author DELL
+ * @author Erick Díaz
  */
 public class Especie implements Serializable, Comparable<Especie> {
 
@@ -26,7 +28,7 @@ public class Especie implements Serializable, Comparable<Especie> {
     private List<Habitat> habitats;
     private List<Zona> zonas;
     //Variable que permite agregar la fecha en la que la especie tiene asignado un cuidador
-    private LocalDate fechaRegistrada;
+    private LocalDateTime fechaRegistrada;
     /*
     Permite determinar a través de que atributo se ordenará la lista
      */
@@ -46,19 +48,57 @@ public class Especie implements Serializable, Comparable<Especie> {
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
         this.marca = marca;
-        fechaRegistrada = LocalDate.now();
+        fechaRegistrada = LocalDateTime.of(LocalDate.now(), LocalTime.now());
         cuiadores = new ArrayList<>();
+        habitats = new ArrayList<>();
+        zonas = new ArrayList<>();
     }
 
+    /**
+     * Método que permite agregar un cuidador a la lista cuidadores
+     *
+     * @param nuevoCuidador
+     */
     public void agregarCuidador(Cuidador nuevoCuidador) {
         cuiadores.add(nuevoCuidador);
-        System.out.println("Cuidador agregado");
+        System.out.println("Cuidador agregado a " + this.nombreEspecie);
     }
-    
+
+    /**
+     * Método que permite eliminar o quitar a un cuidador de la lista de
+     * cuidadores de una especie.
+     *
+     * @param eCuidador
+     */
     public void eliminarCuidador(Cuidador eCuidador) {
         cuiadores.remove(eCuidador);
-        System.out.println("Eliminación correcta");
+        System.out.println("Cuidador eliminado de " + this.nombreEspecie);
     }
+
+    public void agregarHabitat(Habitat habitat) {
+        habitats.add(habitat);
+        System.out.println("Habitat agregada a la especie");
+    }
+
+    public void elimninarHabitat(Habitat habitat) {
+        habitats.remove(habitat);
+        System.out.println("Habitat eliminada de especie");
+    }
+
+    public LocalDateTime getFechaRegistrada() {
+        return fechaRegistrada;
+    }
+
+    public void agregarZona(Zona zona) {
+        zonas.add(zona);
+        System.out.println("Zona agregada a la especie");
+    }
+
+    public void eliminarZona(Zona zona) {
+        zonas.remove(zona);
+        System.out.println("Zona eliinara de la especie");
+    }
+
     public List<Cuidador> getCuiadores() {
         return cuiadores;
     }
@@ -141,5 +181,5 @@ public class Especie implements Serializable, Comparable<Especie> {
         return "Marca N°" + this.marca + " Especie: " + this.nombreEspecie + ". Nombre Científico: " + this.nombreCientifico
                 + ". Descripción: \n" + this.descripcion;
     }
-    
+
 }

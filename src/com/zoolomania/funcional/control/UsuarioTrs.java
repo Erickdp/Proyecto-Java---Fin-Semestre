@@ -23,33 +23,41 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
     @Override
     public String guardar(Object registro) throws MyExcepcion {
         Usuario guardarUsuario = (Usuario) registro;
+        boolean bandera = false;
         if (buscarConId(guardarUsuario.getId()) != null) {
             throw new MyExcepcion("3");
-        }
-        for (Usuario usuarioRepetido : listaObjetos) {
-            if (usuarioRepetido.equals(guardarUsuario)) {
-                throw new MyExcepcion("1");
+        } else {
+            for (Usuario usuarioRepetido : listaObjetos) {
+                if (usuarioRepetido.equals(guardarUsuario)) {
+                    bandera = true;
+                    throw new MyExcepcion("1");
+                }
+            }
+            if (!bandera) {
+                listaObjetos.add(guardarUsuario);
+                guardarFichero();
+                return "Guardado Correctamente";
+            } else {
+                return "No se pudo guardar";
             }
         }
-        listaObjetos.add(guardarUsuario);
-        guardarFichero();
-        return "Guardado Correctamente";
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Usuario actualizarUsuario = (Usuario) registro;
-        if (buscarConId(actualizarUsuario.getId()) != null) {
+        if (buscarConId(actualizarUsuario.getId()) == null) {
             throw new MyExcepcion("2");
-        }
-        for (Usuario usuarioAntiguo : listaObjetos) {
-            if (usuarioAntiguo.getId() == actualizarUsuario.getId()) {
-                usuarioAntiguo = actualizarUsuario;
-                guardarFichero();
-                return "Actualizado Correctamente";
+        } else {
+            for (Usuario usuarioAntiguo : listaObjetos) {
+                if (usuarioAntiguo.getId() == actualizarUsuario.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(usuarioAntiguo), actualizarUsuario);
+                    guardarFichero();
+                    return "Actualizado Correctamente";
+                }
             }
         }
-        return null;
+        return "No se pudo actualizar";
     }
 
     @Override
@@ -57,10 +65,11 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
         Usuario eliminarUsuario = (Usuario) registro;
         if (buscarConId(eliminarUsuario.getId()) == null) {
             throw new MyExcepcion("4");
+        } else {
+            listaObjetos.remove(eliminarUsuario);
+            guardarFichero();
+            return "Eliminación Correcta";
         }
-        listaObjetos.remove(eliminarUsuario);
-        guardarFichero();
-        return "Eliminación Correcta";
     }
 
     @Override
