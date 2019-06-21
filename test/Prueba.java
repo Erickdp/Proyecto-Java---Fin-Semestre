@@ -3,7 +3,6 @@ import com.zoolomania.funcional.control.EspecieTrs;
 import com.zoolomania.funcional.control.GuiaTrs;
 import com.zoolomania.funcional.control.HabitatTrs;
 import com.zoolomania.funcional.control.ItinerarioTrs;
-import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.control.UsuarioTrs;
 import com.zoolomania.funcional.control.ZonaTrs;
 import com.zoolomania.funcional.modelo.Especie;

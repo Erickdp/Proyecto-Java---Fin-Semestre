@@ -5,7 +5,6 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -16,7 +15,7 @@ import java.util.Objects;
  */
 public class Usuario implements Serializable, Comparable<Usuario> {
 
-    private static long serialVersionUID = -1L; //Constante que evita errores en la serializacion
+    private static final long serialVersionUID = -1L; //Constante que evita errores en la serializacion
 
     private String userName;
     private String password;
@@ -25,13 +24,20 @@ public class Usuario implements Serializable, Comparable<Usuario> {
     Permite determinar a través de que atributo se ordenará la lista
      */
     public static boolean bandera = false;
-    private short id; //Variable que permitirá ordenar objetos según su ID
+    private final short id;
 
+    /**
+     * Método constructor de la clase Usuario
+     *
+     * @param userName
+     * @param password
+     * @param email
+     */
     public Usuario(String userName, String password, String email) {
         this.userName = userName;
         this.password = password;
         this.email = email;
-        id = UtilNumeros.getNumeroAleatorio();
+        id = (short) Math.floor(Math.random() * 100);
     }
 
     public String getEmail() {
@@ -64,13 +70,14 @@ public class Usuario implements Serializable, Comparable<Usuario> {
 
     @Override
     public String toString() {
-        return "Usuario{" + "userName=" + userName + ", password=" + password + ", email=" + email + ", id=" + id + '}';
+        return "Usuario{" + "userName=" + userName + ", password=" + password + ", email=" + email + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.userName);
+        hash = 29 * hash + Objects.hashCode(this.userName);
+        hash = 29 * hash + Objects.hashCode(this.email);
         return hash;
     }
 
@@ -89,6 +96,9 @@ public class Usuario implements Serializable, Comparable<Usuario> {
         if (!Objects.equals(this.userName, other.userName)) {
             return false;
         }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
         return true;
     }
 
@@ -97,7 +107,7 @@ public class Usuario implements Serializable, Comparable<Usuario> {
         if (!bandera) {
             return this.userName.compareToIgnoreCase(otroUsuario.userName);
         }
-        return Short.compare(this.id, otroUsuario.id);
+        return Short.compare(this.id, otroUsuario.getId());
     }
 
 }

@@ -7,6 +7,7 @@ package com.zoolomania.funcional.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,32 +18,25 @@ import java.util.List;
 public class Guia extends Empleado implements Serializable {
 
     private static long serialVersionUID = -1L; //Constante que evita errores en la serializacion
-    
+
     private List<Itinerario> itinerarios;
 
     /**
-     * Método contructor de la calse Guia que extiende de Empleado
-     * @param itinerarios
+     * Método constructor de la clase Guia
+     *
      * @param nombre
      * @param direccion
      * @param telefono
-     * @param fechInicioTrabajar 
+     * @param fechInicioTrabajar
+     * @param id
      */
-    public Guia(List<Itinerario> itinerarios, String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar) {
-        super(nombre, direccion, telefono, fechInicioTrabajar);
-        this.itinerarios = itinerarios;
+    public Guia(String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar, short id) {
+        super(nombre, direccion, telefono, fechInicioTrabajar, id);
+        itinerarios = new ArrayList<>();
     }
 
     public List<Itinerario> getItinerarios() {
         return itinerarios;
     }
 
-    public void setItinerarios(List<Itinerario> itinerarios) {
-        this.itinerarios = itinerarios;
-    }
-
-    @Override
-    public String toString() {
-        return "Guia{" + super.toString() + " itinerarios=" + itinerarios + '}';
-    }
 }

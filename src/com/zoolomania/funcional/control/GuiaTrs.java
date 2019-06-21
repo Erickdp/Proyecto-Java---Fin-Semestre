@@ -8,13 +8,11 @@ package com.zoolomania.funcional.control;
 import com.zoolomania.funcional.modelo.Guia;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- * Clase que representa las operaciones de negocio para los Cuidadores
+ * Clase que representa las operaciones de negocio para los Guiaes
  *
- * @author Santiago Sisalem - Erick Díaz (Unplugged)
+ * @author Erick Díaz (Unplugged)
  */
 public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
 
@@ -25,51 +23,55 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
 
     @Override
     public String guardar(Object registro) throws MyExcepcion {
-        Guia nuevoGuia = (Guia) registro;
-        if (listaObjetos.contains(nuevoGuia)) {
-            throw new MyExcepcion("1");
-        } else {
-            listaObjetos.add(nuevoGuia);
-            guardarFichero();
-            return "Guia guardado correctamente";
+        Guia guardarGuia = (Guia) registro;
+        if (buscarConId(guardarGuia.getId()) != null) {
+            throw new MyExcepcion("3");
         }
-
+        for (Guia guiaRepetido : listaObjetos) {
+            if (guiaRepetido.equals(guardarGuia)) {
+                throw new MyExcepcion("1");
+            }
+        }
+        listaObjetos.add(guardarGuia);
+        guardarFichero();
+        return "Guardado Correctamente";
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Guia actualizarGuia = (Guia) registro;
+        if (buscarConId(actualizarGuia.getId()) != null) {
+            throw new MyExcepcion("2");
+        }
         for (Guia guiaAntiguo : listaObjetos) {
-            if (guiaAntiguo.equals(actualizarGuia)) {
+            if (guiaAntiguo.getId() == actualizarGuia.getId()) {
                 guiaAntiguo = actualizarGuia;
                 guardarFichero();
-                return "Contraseña actualizada";
+                return "Actualizado Correctamente";
             }
         }
-        throw new MyExcepcion("2");
+        return null;
     }
 
     @Override
-    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
-        for (Guia buscarId : listaObjetos) {
-            if (buscarId.getId() == indice) {
-                return listaObjetos.get(indice);
-            }
+    public String eliminar(Object registro) throws MyExcepcion {
+        Guia eliminarGuia = (Guia) registro;
+        if (buscarConId(eliminarGuia.getId()) == null) {
+            throw new MyExcepcion("4");
         }
-        throw new MyExcepcion("3");
+        listaObjetos.remove(eliminarGuia);
+        guardarFichero();
+        return "Eliminación Correcta";
     }
 
     @Override
-    public String eliminar(int indice) throws MyExcepcion {
-        try {
-            Guia borrarGuia = (Guia) consultarConId(indice);
-            listaObjetos.remove(borrarGuia);
-            guardarFichero();
-            return "Eliminación correcta";
-        } catch (NumberFormatException ex) {
-            Logger.getLogger(GuiaTrs.class.getName()).log(Level.SEVERE, null, ex);
+    public Object buscarConId(short id) throws NumberFormatException {
+        for (Guia guia : listaObjetos) {
+            if (guia.getId() == id) {
+                return guia;
+            }
         }
-        throw new MyExcepcion("4");
+        return null;
     }
 
     @Override
@@ -80,9 +82,9 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
-            guardar(new Guia("Pedro", "Zona centro", "2626-166", LocalDate.of(2019, 04, 05)));
-            guardar(new Guia("Mauro", "Quitumbe", "1137-553", LocalDate.of(2019, 01, 03)));
-            guardar(new Guia("Yayo", "Foch", "1111-2323", LocalDate.of(2006, 12, 04)));
+            guardar(new Guia("Pedro", "Zona centro", "2626-166", LocalDate.of(2017, 12, 07), (short) 1));
+            guardar(new Guia("Mauro", "Quitumbe", "1137-553", LocalDate.of(2019, 05, 03), (short) 2));
+            guardar(new Guia("Yayo", "Zona Baja", "24324", LocalDate.now(), (short) 3));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();

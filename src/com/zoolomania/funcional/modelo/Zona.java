@@ -5,7 +5,6 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -30,46 +29,23 @@ public class Zona implements Serializable, Comparable<Zona> {
     private short id; //Variable que permitirá ordenar objetos según su ID
 
     /**
-     * Método contructor de la clase Zona
-     *
+     * Método constructor de la clase Zona
      * @param nombreZona
      * @param extension
-     * @param especies
-     * @param itinerarios
+     * @param id 
      */
-    public Zona(String nombreZona, float extension, List<Especie> especies, List<Itinerario> itinerarios) {
+    public Zona(String nombreZona, float extension, short id) {
         this.nombreZona = nombreZona;
         this.extension = extension;
-        this.especies = especies;
-        this.itinerarios = itinerarios;
-        id = UtilNumeros.getNumeroAleatorio();
-    }
-
-    /**
-     * Método constructor que permitirá crear especies
-     * @param nombreZona
-     * @param extension 
-     */
-    public Zona(String nombreZona, float extension) {
-        this.nombreZona = nombreZona;
-        this.extension = extension;
-        id = UtilNumeros.getNumeroAleatorio();
-    }
-
-    public List<Itinerario> getItinerarios() {
-        return itinerarios;
-    }
-
-    public void setItinerarios(List<Itinerario> itinerarios) {
-        this.itinerarios = itinerarios;
+        this.id = id;
     }
 
     public List<Especie> getEspecies() {
         return especies;
     }
 
-    public void setEspecies(List<Especie> especies) {
-        this.especies = especies;
+    public List<Itinerario> getItinerarios() {
+        return itinerarios;
     }
 
     public float getExtension() {
@@ -90,8 +66,8 @@ public class Zona implements Serializable, Comparable<Zona> {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.nombreZona);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.nombreZona);
         return hash;
     }
 
@@ -107,9 +83,6 @@ public class Zona implements Serializable, Comparable<Zona> {
             return false;
         }
         final Zona other = (Zona) obj;
-        if (Float.floatToIntBits(this.extension) != Float.floatToIntBits(other.extension)) {
-            return false;
-        }
         if (!Objects.equals(this.nombreZona, other.nombreZona)) {
             return false;
         }

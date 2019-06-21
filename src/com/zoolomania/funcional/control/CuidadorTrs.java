@@ -8,7 +8,6 @@ package com.zoolomania.funcional.control;
 import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Especie;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,58 +18,62 @@ import java.util.logging.Logger;
  */
 public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
 
-    public CuidadorTrs(String nombreFichero) {
+    public CuidadorTrs() {
         super("Cuidador");
         leerFichero();
     }
 
     @Override
     public String guardar(Object registro) throws MyExcepcion {
-        Cuidador nuevoCuidador = (Cuidador) registro;
-        if (listaObjetos.contains(nuevoCuidador)) {
-            throw new MyExcepcion("1");
-        } else {
-            listaObjetos.add(nuevoCuidador);
-            guardarFichero();
-            return "Cuidador guardado correctamente";
+        Cuidador guardarCuidador = (Cuidador) registro;
+        if (buscarConId(guardarCuidador.getId()) != null) {
+            throw new MyExcepcion("3");
         }
-
+        for (Cuidador cuidadorRepetido : listaObjetos) {
+            if (cuidadorRepetido.equals(guardarCuidador)) {
+                throw new MyExcepcion("1");
+            }
+        }
+        listaObjetos.add(guardarCuidador);
+        guardarFichero();
+        return "Guardado Correctamente";
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Cuidador actualizarCuidador = (Cuidador) registro;
+        if (buscarConId(actualizarCuidador.getId()) == null) {
+            throw new MyExcepcion("2");
+        }
         for (Cuidador cuidadorAntiguo : listaObjetos) {
-            if (cuidadorAntiguo.equals(actualizarCuidador)) {
-                cuidadorAntiguo = actualizarCuidador;
+            if (cuidadorAntiguo.getId() == actualizarCuidador.getId()) {
+                listaObjetos.set(listaObjetos.indexOf(cuidadorAntiguo), actualizarCuidador);
                 guardarFichero();
-                return "Cuidador actualizado";
+                return "Actualizado Correctamente";
             }
         }
-        throw new MyExcepcion("2");
+        return null;
     }
 
     @Override
-    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
-        for (Cuidador buscarId : listaObjetos) {
-            if (buscarId.getId() == indice) {
-                return listaObjetos.get(indice);
-            }
+    public String eliminar(Object registro) throws MyExcepcion {
+        Cuidador eliminarCuidador = (Cuidador) registro;
+        if (buscarConId(eliminarCuidador.getId()) == null) {
+            throw new MyExcepcion("4");
         }
-        throw new MyExcepcion("3");
+        listaObjetos.remove(eliminarCuidador);
+        guardarFichero();
+        return "Eliminación Correcta";
     }
 
     @Override
-    public String eliminar(int indice) throws MyExcepcion {
-        try {
-            Cuidador borrarCuidador = (Cuidador) consultarConId(indice);
-            listaObjetos.remove(borrarCuidador);
-            guardarFichero();
-            return "Eliminación correcta";
-        } catch (NumberFormatException ex) {
-            Logger.getLogger(CuidadorTrs.class.getName()).log(Level.SEVERE, null, ex);
+    public Object buscarConId(short id) throws NumberFormatException {
+        for (Cuidador cuidador : listaObjetos) {
+            if (cuidador.getId() == id) {
+                return cuidador;
+            }
         }
-        throw new MyExcepcion("4");
+        return null;
     }
 
     @Override
@@ -80,7 +83,7 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
 
     @Override
     protected void valoresDefecto() {
-        List<Especie> especies = new ArrayList<>();
+        /*List<Especie> especies = new ArrayList<>();
 
         especies.add(new Especie("Leon", "Panthera",
                 "Mamífero Carníror de la familia de los félidos y una de las cinco especies del género Panthera."));
@@ -90,11 +93,11 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
                 + "especies Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años."));
         especies.add(new Especie("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
                 + "social depende de la especie. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
-                + " como \"harenes"));
-
-        //Guardar Usuarios con su constructor que se puede ingresar Listas
+                + " como \"harenes"));*/
+        Cuidador cuidadorDefecto = new Cuidador("Carlos", "Centro-Sur", "342423", LocalDate.now(), (short) 1);
+//        cuidadorDefecto.cuidarNuevaEspecie(new Especie("Perro", "Perrus", "Pelusa", (short) 1));
         try {
-            guardar(new Cuidador(especies, "Alejadnro", "Av Solanda", "123124", LocalDate.now()));
+            guardar(cuidadorDefecto);
         } catch (MyExcepcion ex) {
             Logger.getLogger(CuidadorTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

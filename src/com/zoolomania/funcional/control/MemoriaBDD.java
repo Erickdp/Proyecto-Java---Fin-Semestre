@@ -84,6 +84,10 @@ public abstract class MemoriaBDD<T> {
         }
     }
 
+    /**
+     * Método que permite, si no existen ficheros creados, agregar objetos evitar un
+     * funcionamiento desde 0.
+     */
     protected abstract void valoresDefecto();
 
 }

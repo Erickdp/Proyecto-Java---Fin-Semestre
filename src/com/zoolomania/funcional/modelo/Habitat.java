@@ -5,7 +5,6 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -28,44 +27,28 @@ public class Habitat implements Serializable, Comparable<Habitat> {
     Permite determinar a través de que atributo se ordenará la lista
      */
     public static boolean bandera = false;
-    private short id; //Variable que permitirá ordenar objetos según su ID
+    private final short id; //Variable que permitirá ordenar objetos según su ID
 
     /**
-     * Método contructor de la clase Habitat
+     * Método constructor de la clase Habitat
      *
      * @param nombreHabitat
      * @param clima
      * @param vegetacion
      * @param continente
-     * @param especies
      * @param id
      */
-    public Habitat(String nombreHabitat, String clima, String vegetacion, String continente, List<Especie> especies) {
+    public Habitat(String nombreHabitat, String clima, String vegetacion, String continente, short id) {
         this.nombreHabitat = nombreHabitat;
         this.clima = clima;
         this.vegetacion = vegetacion;
         this.continente = continente;
-        this.especies = especies;
-        this.id = UtilNumeros.getNumeroAleatorio();
+        this.id = id;
     }
 
-    /**
-     * Método contrucor que se usará como objeto para pasarlo como parámetro a un objeto Especie
-     * que necesite de una lista de habitats
-     * @param nombreHabitat
-     * @param clima
-     * @param vegetacion
-     * @param continente 
-     */
-    public Habitat(String nombreHabitat, String clima, String vegetacion, String continente) {
-        this.nombreHabitat = nombreHabitat;
-        this.clima = clima;
-        this.vegetacion = vegetacion;
-        this.continente = continente;
-        this.id = UtilNumeros.getNumeroAleatorio();
+    public List<Especie> getEspecies() {
+        return especies;
     }
-    
-    
 
     public String getContinente() {
         return continente;
@@ -105,9 +88,9 @@ public class Habitat implements Serializable, Comparable<Habitat> {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.nombreHabitat);
-        hash = 29 * hash + Objects.hashCode(this.clima);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.nombreHabitat);
+        hash = 37 * hash + Objects.hashCode(this.clima);
         return hash;
     }
 

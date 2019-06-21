@@ -17,34 +17,38 @@ public interface ICrud {
     /**
      * Método que permite Guardar/Crear un objeto
      *
-     * @param registro - Objeto a crear/guardar
-     * @return Mensaje de guardado para el Usuario
+     * @param registro
+     * @return
+     * @throws MyExcepcion
      */
     public String guardar(Object registro) throws MyExcepcion;
 
     /**
      * Método que permite actualizar un objeto
      *
-     * @param registro - Objeto a actulizarse
-     * @return Mensaje de actualización de registro
+     * @param registro
+     * @return
+     * @throws MyExcepcion
      */
     public String actulizar(Object registro) throws MyExcepcion;
 
     /**
+     * Método que permitirá devolver el estado del objeto a consultar
      *
-     * @param indice - Buscará al objeto según su posición
-     * @return Devolverá el objeto encontrado en caso de existir
+     * @param id
+     * @return
+     * @throws NumberFormatException
      */
-    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion;
+    public Object buscarConId(short id) throws NumberFormatException;
 
     /**
      * Método que permite eliminar un registro a través de su ID
      *
-     * @param indice
-     * @return Mensaje de eliminación de registro
+     * @param registro
+     * @return
      * @throws MyExcepcion
      */
-    public String eliminar(int indice) throws MyExcepcion;
+    public String eliminar(Object registro) throws MyExcepcion;
 
     /**
      * Método que permite listar con conjuto de objetos

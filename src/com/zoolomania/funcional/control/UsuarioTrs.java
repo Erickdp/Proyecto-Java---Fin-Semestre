@@ -22,50 +22,55 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
 
     @Override
     public String guardar(Object registro) throws MyExcepcion {
-        Usuario nuevoUsuario = (Usuario) registro;
-        if (listaObjetos.contains(nuevoUsuario)) {
-            throw new MyExcepcion("1");
-        } else {
-            listaObjetos.add(nuevoUsuario);
-            guardarFichero();
-            return "Usuario guardado correctamente";
+        Usuario guardarUsuario = (Usuario) registro;
+        if (buscarConId(guardarUsuario.getId()) != null) {
+            throw new MyExcepcion("3");
         }
-
+        for (Usuario usuarioRepetido : listaObjetos) {
+            if (usuarioRepetido.equals(guardarUsuario)) {
+                throw new MyExcepcion("1");
+            }
+        }
+        listaObjetos.add(guardarUsuario);
+        guardarFichero();
+        return "Guardado Correctamente";
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Usuario actualizarUsuario = (Usuario) registro;
+        if (buscarConId(actualizarUsuario.getId()) != null) {
+            throw new MyExcepcion("2");
+        }
         for (Usuario usuarioAntiguo : listaObjetos) {
-            if (usuarioAntiguo.equals(actualizarUsuario)) {
+            if (usuarioAntiguo.getId() == actualizarUsuario.getId()) {
                 usuarioAntiguo = actualizarUsuario;
                 guardarFichero();
-                return "Contraseña actualizada";
+                return "Actualizado Correctamente";
             }
         }
-        throw new MyExcepcion("2");
+        return null;
     }
 
     @Override
-    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
-        for (Usuario buscarId : listaObjetos) {
-            if (buscarId.getId() == indice) {
-                return listaObjetos.get(indice);
-            }
-        }
-        throw new MyExcepcion("3");
-    }
-
-    @Override
-    public String eliminar(int indice) throws MyExcepcion {
-        try {
-            Usuario borrarUsuario = (Usuario) consultarConId(indice);
-            listaObjetos.remove(borrarUsuario);
-            guardarFichero();
-            return "Eliminación correcta";
-        } catch (NumberFormatException ex) {
+    public String eliminar(Object registro) throws MyExcepcion {
+        Usuario eliminarUsuario = (Usuario) registro;
+        if (buscarConId(eliminarUsuario.getId()) == null) {
             throw new MyExcepcion("4");
         }
+        listaObjetos.remove(eliminarUsuario);
+        guardarFichero();
+        return "Eliminación Correcta";
+    }
+
+    @Override
+    public Object buscarConId(short id) throws NumberFormatException {
+        for (Usuario usuario : listaObjetos) {
+            if (usuario.getId() == id) {
+                return usuario;
+            }
+        }
+        return null;
     }
 
     @Override

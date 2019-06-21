@@ -5,10 +5,10 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Clase que representa al objeto especie
@@ -25,69 +25,54 @@ public class Especie implements Serializable, Comparable<Especie> {
     private List<Cuidador> cuiadores;
     private List<Habitat> habitats;
     private List<Zona> zonas;
+    //Variable que permite agregar la fecha en la que la especie tiene asignado un cuidador
+    private LocalDate fechaRegistrada;
     /*
     Permite determinar a través de que atributo se ordenará la lista
      */
     public static boolean bandera = false;
-    private short id; //Variable que permitirá ordenar objetos según su ID
+    private short marca; //La marca de un objeto creado no puede ser actualizado, también sirve para poder ordenar segun la marca
 
     /**
-     * Contructor de la clase Especie
+     * Método constructor de la clase Especie
      *
      * @param nombreEspecie
      * @param nombreCientifico
      * @param descripcion
-     * @param cuiadores
-     * @param habitats
-     * @param zonas
+     * @param marca
      */
-    public Especie(String nombreEspecie, String nombreCientifico, String descripcion, List<Cuidador> cuiadores, List<Habitat> habitats, List<Zona> zonas) {
+    public Especie(String nombreEspecie, String nombreCientifico, String descripcion, short marca) {
         this.nombreEspecie = nombreEspecie;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
-        this.cuiadores = cuiadores;
-        this.habitats = habitats;
-        this.zonas = zonas;
-        id = UtilNumeros.getNumeroAleatorio();
+        this.marca = marca;
+        fechaRegistrada = LocalDate.now();
+        cuiadores = new ArrayList<>();
     }
 
-    /**
-     * Método constructor que se utilizará como parámetro para los habitats,
-     * zonas y cuidadores
-     *
-     * @param nombreEspecie
-     * @param nombreCientifico
-     * @param descripcion
-     */
-    public Especie(String nombreEspecie, String nombreCientifico, String descripcion) {
-        this.nombreEspecie = nombreEspecie;
-        this.nombreCientifico = nombreCientifico;
-        this.descripcion = descripcion;
-        id = UtilNumeros.getNumeroAleatorio();
+    public void agregarCuidador(Cuidador nuevoCuidador) {
+        cuiadores.add(nuevoCuidador);
+        System.out.println("Cuidador agregado");
+    }
+    
+    public void eliminarCuidador(Cuidador eCuidador) {
+        cuiadores.remove(eCuidador);
+        System.out.println("Eliminación correcta");
+    }
+    public List<Cuidador> getCuiadores() {
+        return cuiadores;
     }
 
     public List<Habitat> getHabitats() {
         return habitats;
     }
 
-    public void setHabitats(List<Habitat> habitats) {
-        this.habitats = habitats;
-    }
-
     public List<Zona> getZonas() {
         return zonas;
     }
 
-    public void setZonas(List<Zona> zonas) {
-        this.zonas = zonas;
-    }
-
-    public List<Cuidador> getCuiadores() {
-        return cuiadores;
-    }
-
-    public void setCuiadores(List<Cuidador> cuiadores) {
-        this.cuiadores = cuiadores;
+    public short getMarca() {
+        return marca;
     }
 
     public String getDescripcion() {
@@ -114,10 +99,13 @@ public class Especie implements Serializable, Comparable<Especie> {
         this.nombreCientifico = nombreCientifico;
     }
 
+    /*Estos métodos para comparar se los implementa solamente con la marca pues pueden existir
+    varias especies con el mismo nombre, descripción y nombreCientífico pero no con la misma marca
+     */
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.nombreEspecie);
+        int hash = 3;
+        hash = 89 * hash + this.marca;
         return hash;
     }
 
@@ -133,20 +121,10 @@ public class Especie implements Serializable, Comparable<Especie> {
             return false;
         }
         final Especie other = (Especie) obj;
-        if (!Objects.equals(this.nombreEspecie, other.nombreEspecie)) {
-            return false;
-        }
-        if (!Objects.equals(this.nombreCientifico, other.nombreCientifico)) {
-            return false;
-        }
-        if (!Objects.equals(this.descripcion, other.descripcion)) {
+        if (this.marca != other.marca) {
             return false;
         }
         return true;
-    }
-
-    public short getId() {
-        return id;
     }
 
     @Override
@@ -154,13 +132,14 @@ public class Especie implements Serializable, Comparable<Especie> {
         if (!bandera) {
             return this.nombreEspecie.compareToIgnoreCase(otraEspecie.nombreEspecie);
         } else {
-            return Short.compare(this.id, otraEspecie.id);
+            return Short.compare(this.marca, otraEspecie.getMarca());
         }
     }
 
     @Override
     public String toString() {
-        return "Especie{" + "nombreEspecie=" + nombreEspecie + ", nombreCientifico=" + nombreCientifico + ", descripcion=" + descripcion + ", id=" + id + '}';
+        return "Marca N°" + this.marca + " Especie: " + this.nombreEspecie + ". Nombre Científico: " + this.nombreCientifico
+                + ". Descripción: \n" + this.descripcion;
     }
-
+    
 }

@@ -36,7 +36,7 @@ public class MyExcepcion extends Exception {
             case 2:
                 return "No se puede actualizar el Registro pues no existe";
             case 3:
-                return "No se econtró el índice en el Registro";
+                return "ID repetido, ingrese otro";
             case 4:
                 return "No se pudo eliminar el Registro";
             default:

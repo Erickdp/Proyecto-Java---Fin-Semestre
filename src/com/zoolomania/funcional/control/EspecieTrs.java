@@ -5,12 +5,7 @@
  */
 package com.zoolomania.funcional.control;
 
-import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Especie;
-import com.zoolomania.funcional.modelo.Habitat;
-import com.zoolomania.funcional.modelo.Zona;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,51 +24,55 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
 
     @Override
     public String guardar(Object registro) throws MyExcepcion {
-        Especie nuevaEspecie = (Especie) registro;
-        if (listaObjetos.contains(nuevaEspecie)) {
-            throw new MyExcepcion("1");
-        } else {
-            listaObjetos.add(nuevaEspecie);
-            guardarFichero();
-            return "Especie guardada correctamente";
+        Especie guardarEspecie = (Especie) registro;
+        if (buscarConId(guardarEspecie.getMarca()) != null) {
+            throw new MyExcepcion("3");
         }
-
+        for (Especie especieRepetido : listaObjetos) {
+            if (especieRepetido.equals(guardarEspecie)) {
+                throw new MyExcepcion("1");
+            }
+        }
+        listaObjetos.add(guardarEspecie);
+        guardarFichero();
+        return "Guardado Correctamente";
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Especie actualizarEspecie = (Especie) registro;
-        for (Especie EspecieAntiguo : listaObjetos) {
-            if (EspecieAntiguo.equals(actualizarEspecie)) {
-                EspecieAntiguo = actualizarEspecie;
+        if (buscarConId(actualizarEspecie.getMarca()) == null) {
+            throw new MyExcepcion("2");
+        }
+        for (Especie especieAntiguo : listaObjetos) {
+            if (especieAntiguo.getMarca() == actualizarEspecie.getMarca()) {
+                listaObjetos.set(listaObjetos.indexOf(especieAntiguo), actualizarEspecie);
                 guardarFichero();
-                return "Especie actualizada";
+                return "Actualizado Correctamente";
             }
         }
-        throw new MyExcepcion("2");
+        return null;
     }
 
     @Override
-    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
-        for (Especie buscarId : listaObjetos) {
-            if (buscarId.getId() == indice) {
-                return listaObjetos.get(indice);
-            }
+    public String eliminar(Object registro) throws MyExcepcion {
+        Especie eliminarEspecie = (Especie) registro;
+        if (buscarConId(eliminarEspecie.getMarca()) == null) {
+            throw new MyExcepcion("4");
         }
-        throw new MyExcepcion("3");
+        listaObjetos.remove(eliminarEspecie);
+        guardarFichero();
+        return "Eliminación Correcta";
     }
 
     @Override
-    public String eliminar(int indice) throws MyExcepcion {
-        try {
-            Especie borrarEspecie = (Especie) consultarConId(indice);
-            listaObjetos.remove(borrarEspecie);
-            guardarFichero();
-            return "Especie eliminada correctamente";
-        } catch (NumberFormatException ex) {
-            Logger.getLogger(EspecieTrs.class.getName()).log(Level.SEVERE, null, ex);
+    public Object buscarConId(short id) throws NumberFormatException {
+        for (Especie especie : listaObjetos) {
+            if (especie.getMarca() == id) {
+                return especie;
+            }
         }
-        throw new MyExcepcion("4");
+        return null;
     }
 
     @Override
@@ -83,28 +82,16 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
 
     @Override
     protected void valoresDefecto() {
-            List<Cuidador> cuidadoresDefecto = new ArrayList<>();
-            List<Habitat> habitatDefecto = new ArrayList<>();
-            List<Zona> zonasDefecto = new ArrayList<>();
 
-            cuidadoresDefecto.add(new Cuidador("Carlos", "Zona centro", "123434", LocalDate.of(2019, 02, 02)));
-            cuidadoresDefecto.add(new Cuidador("Juan", "Av doce", "854743", LocalDate.of(2010, 04, 04)));
-            cuidadoresDefecto.add(new Cuidador("Mario", "Zona rosa", "432123", LocalDate.of(2015, 06, 11)));
-
-            habitatDefecto.add(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África"));
+            /*habitatDefecto.add(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África"));
             habitatDefecto.add(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia"));
             habitatDefecto.add(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América"));
-            habitatDefecto.add(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica"));
-            
-            zonasDefecto.add(new Zona("Zona Norte", 2.4F));
-            zonasDefecto.add(new Zona("Zona Media", 1.4F));
-
+            habitatDefecto.add(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica"));*/
         try {
             guardar(new Especie("Leon", "Panthera", "Mamífero Carníror de la familia de los félidos y una "
-                    + "de las cinco especies del género Panthera.", cuidadoresDefecto, habitatDefecto, zonasDefecto));
+                    + "de las cinco especies del género Panthera.", (short) 1));
         } catch (MyExcepcion ex) {
-            ex.getMessage();
-            ex.getStackTrace();
+            Logger.getLogger(EspecieTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

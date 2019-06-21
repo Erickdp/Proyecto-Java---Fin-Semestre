@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/MenuPrincipal.java</file>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/FormularioRegistro.java</file>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/MenuUsuario.java</file>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/iconos/usuario.jpg</file>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/iconos/ticket.jpg</file>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/Menu_de_acceso.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/test/PruebaCrud.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/control/EspecieTrs.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/control/CuidadorTrs.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/test/PruebaEquals.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/modelo/Especie.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/modelo/Cuidador.java</file>
         </group>
     </open-files>
 </project-private>

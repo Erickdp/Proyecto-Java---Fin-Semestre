@@ -7,8 +7,6 @@ package com.zoolomania.funcional.control;
 
 import com.zoolomania.funcional.modelo.Habitat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Clase que representa las operaciones de negocio para Habitats
@@ -22,53 +20,57 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
         leerFichero();
     }
 
-    @Override
+     @Override
     public String guardar(Object registro) throws MyExcepcion {
-        Habitat nuevoHabitat = (Habitat) registro;
-        if (listaObjetos.contains(nuevoHabitat)) {
-            throw new MyExcepcion("1");
-        } else {
-            listaObjetos.add(nuevoHabitat);
-            guardarFichero();
-            return "Habitat guardado correctamente";
+        Habitat guardarHabitat = (Habitat) registro;
+        if (buscarConId(guardarHabitat.getId()) != null) {
+            throw new MyExcepcion("3");
         }
-
+        for (Habitat habitatRepetido : listaObjetos) {
+            if (habitatRepetido.equals(guardarHabitat)) {
+                throw new MyExcepcion("1");
+            }
+        }
+        listaObjetos.add(guardarHabitat);
+        guardarFichero();
+        return "Guardado Correctamente";
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Habitat actualizarHabitat = (Habitat) registro;
+        if (buscarConId(actualizarHabitat.getId()) != null) {
+            throw new MyExcepcion("2");
+        }
         for (Habitat habitatAntiguo : listaObjetos) {
-            if (habitatAntiguo.equals(actualizarHabitat)) {
+            if (habitatAntiguo.getId() == actualizarHabitat.getId()) {
                 habitatAntiguo = actualizarHabitat;
                 guardarFichero();
-                return "Habitat actualizado";
+                return "Actualizado Correctamente";
             }
         }
-        throw new MyExcepcion("2");
+        return null;
     }
 
     @Override
-    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
-        for (Habitat buscarId : listaObjetos) {
-            if (buscarId.getId() == indice) {
-                return listaObjetos.get(indice);
-            }
+    public String eliminar(Object registro) throws MyExcepcion {
+        Habitat eliminarHabitat = (Habitat) registro;
+        if (buscarConId(eliminarHabitat.getId()) == null) {
+            throw new MyExcepcion("4");
         }
-        throw new MyExcepcion("3");
+        listaObjetos.remove(eliminarHabitat);
+        guardarFichero();
+        return "Eliminación Correcta";
     }
 
     @Override
-    public String eliminar(int indice) throws MyExcepcion {
-        try {
-            Habitat borrarHabitat = (Habitat) consultarConId(indice);
-            listaObjetos.remove(borrarHabitat);
-            guardarFichero();
-            return "Habitat eliminado";
-        } catch (NumberFormatException ex) {
-            Logger.getLogger(HabitatTrs.class.getName()).log(Level.SEVERE, null, ex);
+    public Object buscarConId(short id) throws NumberFormatException {
+        for (Habitat habitat : listaObjetos) {
+            if (habitat.getId() == id) {
+                return habitat;
+            }
         }
-        throw new MyExcepcion("4");
+        return null;
     }
 
     @Override
@@ -82,10 +84,10 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
             /*
             Esto no sirve crear con listas
             */
-            guardar(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África"));
-            guardar(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia"));
-            guardar(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América"));
-            guardar(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica"));
+            guardar(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África", (short) 1));
+            guardar(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia", (short) 2));
+            guardar(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América", (short) 3));
+            guardar(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica", (short) 4));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();

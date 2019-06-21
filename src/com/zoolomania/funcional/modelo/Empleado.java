@@ -5,7 +5,6 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -18,25 +17,30 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
 
     private static final Long serialVersionUID = -1L;
 
-    protected String nombre;
-    protected String direccion;
-    protected String telefono;
-    protected LocalDate fechInicioTrabajar;
+    private String nombre;
+    private String direccion;
+    private String telefono;
+    private LocalDate fechInicioTrabajar;
+    //Variable que servirá como identificador
+    private short id;
     //Variable que permite comprar de acuerdo al nombre o id
     public static boolean bandera = false;
-    // variable que permitirá ordenar por índice
-    private short id;
 
-    public Empleado(String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar) {
+    /**
+     * Método constructor de la clase Empleado
+     *
+     * @param nombre
+     * @param direccion
+     * @param telefono
+     * @param fechInicioTrabajar
+     * @param id
+     */
+    protected Empleado(String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar, short id) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.fechInicioTrabajar = fechInicioTrabajar;
-        id = UtilNumeros.getNumeroAleatorio();
-    }
-
-    public short getId() {
-        return id;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -71,17 +75,21 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
         this.fechInicioTrabajar = fechInicioTrabajar;
     }
 
+    public short getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
-        return "Empleado{" + "nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechInicioTrabajar=" + fechInicioTrabajar + ", id=" + id + '}';
+        return "ID: " + this.id + " Nombre: " + this.nombre + ". Dirección: " + this.direccion + " Teléfono: "
+                + this.telefono + " Fecha que inició a trabajar: " + this.fechInicioTrabajar;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.nombre);
-        hash = 41 * hash + Objects.hashCode(this.telefono);
-        hash = 41 * hash + this.id;
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.nombre);
+        hash = 23 * hash + Objects.hashCode(this.telefono);
         return hash;
     }
 
@@ -97,9 +105,6 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
             return false;
         }
         final Empleado other = (Empleado) obj;
-        if (this.id != other.id) {
-            return false;
-        }
         if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
@@ -114,7 +119,7 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
         if (!bandera) {
             return this.nombre.compareToIgnoreCase(otroEmpleado.getNombre());
         } else {
-            return Short.compare(id, otroEmpleado.id);
+            return Short.compare(this.id, otroEmpleado.id);
         }
     }
 }

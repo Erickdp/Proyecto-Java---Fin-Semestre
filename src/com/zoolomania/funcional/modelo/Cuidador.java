@@ -7,12 +7,13 @@ package com.zoolomania.funcional.modelo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Clase que representa al objeto Cuidador y extiende de la clase Empleado.
  *
- * @author Santiago Sisalem - Erick Díaz
+ * @author Erick Díaz
  */
 public class Cuidador extends Empleado implements Serializable, Comparable<Empleado> {
 
@@ -20,54 +21,39 @@ public class Cuidador extends Empleado implements Serializable, Comparable<Emple
 
     private List<Especie> especies;
     private LocalDate fechaDeEspecie;
+    
 
     /**
-     * Método contructor de la clase Cuidador que llamará al contructor de la
-     * clase Empleado (Ancestro)
-     *
-     * @param especies
-     * @param nombre
-     * @param direccion
-     * @param telefono
-     * @param fechInicioTrabajar
-     */
-    public Cuidador(List<Especie> especies, String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar) {
-        super(nombre, direccion, telefono, fechInicioTrabajar);
-        this.especies = especies;
-    }
-
-    /**
-     * Método contructor que se asignarán a las especies
+     * Método constructor de la clase Cuidador
      *
      * @param nombre
      * @param direccion
      * @param telefono
      * @param fechInicioTrabajar
+     * @param id
      */
-    public Cuidador(String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar) {
-        super(nombre, direccion, telefono, fechInicioTrabajar);
-        setFechaDeEspecie(LocalDate.now());
-    }
-
-    public LocalDate getFechaDeEspecie() {
-        return fechaDeEspecie;
-    }
-
-    public void setFechaDeEspecie(LocalDate fechaDeEspecie) {
-        this.fechaDeEspecie = fechaDeEspecie;
+    public Cuidador(String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar, short id) {
+        super(nombre, direccion, telefono, fechInicioTrabajar, id);
+        especies = new ArrayList<>();
     }
 
     public List<Especie> getEspecies() {
         return especies;
     }
 
-    public void setEspecies(List<Especie> especies) {
-        this.especies = especies;
+    /**
+     * Método que permitirá cuidar nuevas especies
+     *
+     * @param nuevaEspecie
+     */
+    public void cuidarNuevaEspecie(Especie nuevaEspecie) {
+        especies.add(nuevaEspecie);
+        System.out.println("Nueva especie agregada a Cuidar");
     }
 
-    @Override
-    public String toString() {
-        return "Cuidador{" + super.toString() + " especies=" + especies + '}';
+    public void eliminarEspecie(Especie especie) {
+        especies.remove(especie);
+        System.out.println("Especie removida correctamente");
     }
 
 }

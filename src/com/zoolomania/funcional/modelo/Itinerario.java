@@ -5,7 +5,6 @@
  */
 package com.zoolomania.funcional.modelo;
 
-import com.zoolomania.funcional.control.UtilNumeros;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -17,54 +16,37 @@ import java.util.Objects;
  */
 public class Itinerario implements Serializable, Comparable<Itinerario> {
 
-    private static long serialVersionUID = -1L; //Constante que evita errores en la serializacion
+    private static final long serialVersionUID = -1L; //Constante que evita errores en la serializacion
 
-    private String codigo;
+    private String codigo; //El código no puede ser modificado una vez creado el itinerario
     private short duracionRecorrido;
-    private float longitud;
+    private short longitud;
     private byte numMaxVisitantes;
-    private byte numEspeciesVisitadas;
+//    private byte numEspeciesVisitadas;
     private List<Zona> zonas;
 
     /*
-    Permite determinar a través de que atributo se ordenará la lista
+    Permite determinar a través de que identificador se ordenará la lista
      */
     public static boolean bandera = false;
-    private short id; //Variable que permitirá ordenar objetos según su ID
+    private short id;
 
     /**
      * Método constructor de la clase Itinerario
+     *
      * @param codigo
-     * @param duracionRecorrido
-     * @param longitud
      * @param numMaxVisitantes
-     * @param numEspeciesVisitadas
-     * @param zonas 
      */
-    public Itinerario(String codigo, short duracionRecorrido, float longitud, byte numMaxVisitantes, byte numEspeciesVisitadas, List<Zona> zonas) {
+    public Itinerario(String codigo, byte numMaxVisitantes, short id) {
         this.codigo = codigo;
-        this.duracionRecorrido = duracionRecorrido;
-        this.longitud = longitud;
+        this.id = id;
         this.numMaxVisitantes = numMaxVisitantes;
-        this.numEspeciesVisitadas = numEspeciesVisitadas;
-        this.zonas = zonas;
-        id = UtilNumeros.getNumeroAleatorio();
+        duracionRecorrido = (short) Math.floor(Math.random() * 180); //Tendrá hasta un límite de 3 horas de duración
+        longitud = (short) Math.floor(Math.random() * 6); //Tendrá una longitud hasta de 6 Km
     }
 
     public List<Zona> getZonas() {
         return zonas;
-    }
-
-    public void setZonas(List<Zona> zonas) {
-        this.zonas = zonas;
-    }
-
-    public byte getNumEspeciesVisitadas() {
-        return numEspeciesVisitadas;
-    }
-
-    public void setNumEspeciesVisitadas(byte numEspeciesVisitadas) {
-        this.numEspeciesVisitadas = numEspeciesVisitadas;
     }
 
     public byte getNumMaxVisitantes() {
@@ -79,10 +61,6 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public short getDuracionRecorrido() {
         return duracionRecorrido;
     }
@@ -95,14 +73,18 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         return longitud;
     }
 
-    public void setLongitud(float longitud) {
+    public void setLongitud(short longitud) {
         this.longitud = longitud;
+    }
+
+    public short getId() {
+        return id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 61 * hash + Objects.hashCode(this.codigo);
+        int hash = 3;
+        hash = 19 * hash + Objects.hashCode(this.codigo);
         return hash;
     }
 
@@ -118,23 +100,10 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
             return false;
         }
         final Itinerario other = (Itinerario) obj;
-        if (this.duracionRecorrido != other.duracionRecorrido) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.longitud) != Float.floatToIntBits(other.longitud)) {
-            return false;
-        }
-        if (this.numMaxVisitantes != other.numMaxVisitantes) {
-            return false;
-        }
         if (!Objects.equals(this.codigo, other.codigo)) {
             return false;
         }
         return true;
-    }
-
-    public short getId() {
-        return id;
     }
 
     @Override
@@ -147,7 +116,7 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         if (!bandera) {
             return this.codigo.compareToIgnoreCase(otroItinerario.codigo);
         }
-        return Short.compare(this.id, otroItinerario.id);
+        return Short.compare(this.id, otroItinerario.getId());
     }
 
 }

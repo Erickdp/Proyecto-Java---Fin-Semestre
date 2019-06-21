@@ -22,53 +22,57 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
         leerFichero();
     }
 
-    @Override
+     @Override
     public String guardar(Object registro) throws MyExcepcion {
-        Zona nuevoZona = (Zona) registro;
-        if (listaObjetos.contains(nuevoZona)) {
-            throw new MyExcepcion("1");
-        } else {
-            listaObjetos.add(nuevoZona);
-            guardarFichero();
-            return "Zona guardado correctamente";
+        Zona guardarZona = (Zona) registro;
+        if (buscarConId(guardarZona.getId()) != null) {
+            throw new MyExcepcion("3");
         }
-
+        for (Zona zonaRepetido : listaObjetos) {
+            if (zonaRepetido.equals(guardarZona)) {
+                throw new MyExcepcion("1");
+            }
+        }
+        listaObjetos.add(guardarZona);
+        guardarFichero();
+        return "Guardado Correctamente";
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Zona actualizarZona = (Zona) registro;
+        if (buscarConId(actualizarZona.getId()) != null) {
+            throw new MyExcepcion("2");
+        }
         for (Zona zonaAntiguo : listaObjetos) {
-            if (zonaAntiguo.equals(actualizarZona)) {
+            if (zonaAntiguo.getId() == actualizarZona.getId()) {
                 zonaAntiguo = actualizarZona;
                 guardarFichero();
-                return "Zona actualizada";
+                return "Actualizado Correctamente";
             }
         }
-        throw new MyExcepcion("2");
+        return null;
     }
 
     @Override
-    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
-        for (Zona buscarId : listaObjetos) {
-            if (buscarId.getId() == indice) {
-                return listaObjetos.get(indice);
-            }
+    public String eliminar(Object registro) throws MyExcepcion {
+        Zona eliminarZona = (Zona) registro;
+        if (buscarConId(eliminarZona.getId()) == null) {
+            throw new MyExcepcion("4");
         }
-        throw new MyExcepcion("3");
+        listaObjetos.remove(eliminarZona);
+        guardarFichero();
+        return "Eliminación Correcta";
     }
 
     @Override
-    public String eliminar(int indice) throws MyExcepcion {
-        try {
-            Zona borrarZona = (Zona) consultarConId(indice);
-            listaObjetos.remove(borrarZona);
-            guardarFichero();
-            return "Eliminación correcta";
-        } catch (NumberFormatException ex) {
-            Logger.getLogger(ZonaTrs.class.getName()).log(Level.SEVERE, null, ex);
+    public Object buscarConId(short id) throws NumberFormatException {
+        for (Zona zona : listaObjetos) {
+            if (zona.getId() == id) {
+                return zona;
+            }
         }
-        throw new MyExcepcion("4");
+        return null;
     }
 
     @Override
@@ -82,7 +86,7 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
             /*
             Esta zona no sirve utilizar constructor que permite ingresar listas
             */
-            guardar(new Zona("Media", 2.2F));
+            guardar(new Zona("Media", 2.2F, (short) 1));
         } catch (MyExcepcion ex) {
             Logger.getLogger(ZonaTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

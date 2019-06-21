@@ -22,53 +22,57 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
         leerFichero();
     }
 
-    @Override
+     @Override
     public String guardar(Object registro) throws MyExcepcion {
-        Itinerario nuevoItinerario = (Itinerario) registro;
-        if (listaObjetos.contains(nuevoItinerario)) {
-            throw new MyExcepcion("1");
-        } else {
-            listaObjetos.add(nuevoItinerario);
-            guardarFichero();
-            return "Itinerario guardado correctamente";
+        Itinerario guardarItinerario = (Itinerario) registro;
+        if (buscarConId(guardarItinerario.getId()) != null) {
+            throw new MyExcepcion("3");
         }
-
+        for (Itinerario itinerarioRepetido : listaObjetos) {
+            if (itinerarioRepetido.equals(guardarItinerario)) {
+                throw new MyExcepcion("1");
+            }
+        }
+        listaObjetos.add(guardarItinerario);
+        guardarFichero();
+        return "Guardado Correctamente";
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Itinerario actualizarItinerario = (Itinerario) registro;
+        if (buscarConId(actualizarItinerario.getId()) != null) {
+            throw new MyExcepcion("2");
+        }
         for (Itinerario itinerarioAntiguo : listaObjetos) {
-            if (itinerarioAntiguo.equals(actualizarItinerario)) {
+            if (itinerarioAntiguo.getId() == actualizarItinerario.getId()) {
                 itinerarioAntiguo = actualizarItinerario;
                 guardarFichero();
-                return "Itinerario actualizado";
+                return "Actualizado Correctamente";
             }
         }
-        throw new MyExcepcion("2");
+        return null;
     }
 
     @Override
-    public Object consultarConId(int indice) throws NumberFormatException, MyExcepcion {
-        for (Itinerario buscarId : listaObjetos) {
-            if (buscarId.getId() == indice) {
-                return listaObjetos.get(indice);
-            }
+    public String eliminar(Object registro) throws MyExcepcion {
+        Itinerario eliminarItinerario = (Itinerario) registro;
+        if (buscarConId(eliminarItinerario.getId()) == null) {
+            throw new MyExcepcion("4");
         }
-        throw new MyExcepcion("3");
+        listaObjetos.remove(eliminarItinerario);
+        guardarFichero();
+        return "Eliminación Correcta";
     }
 
     @Override
-    public String eliminar(int indice) throws MyExcepcion {
-        try {
-            Itinerario borrarItinerario = (Itinerario) consultarConId(indice);
-            listaObjetos.remove(borrarItinerario);
-            guardarFichero();
-            return "Eliminación correcta";
-        } catch (NumberFormatException ex) {
-            Logger.getLogger(ItinerarioTrs.class.getName()).log(Level.SEVERE, null, ex);
+    public Object buscarConId(short id) throws NumberFormatException {
+        for (Itinerario itinerario : listaObjetos) {
+            if (itinerario.getId() == id) {
+                return itinerario;
+            }
         }
-        throw new MyExcepcion("4");
+        return null;
     }
 
     @Override
@@ -79,7 +83,7 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
-            guardar(new Itinerario("1212", (short) 90, 2.10F, (byte) 30));
+            guardar(new Itinerario("1212", (byte) 30, (short) 1));
         } catch (MyExcepcion ex) {
             Logger.getLogger(ItinerarioTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
