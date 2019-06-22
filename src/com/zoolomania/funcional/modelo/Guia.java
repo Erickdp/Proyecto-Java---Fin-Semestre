@@ -22,16 +22,14 @@ public class Guia extends Empleado implements Serializable {
     private List<Itinerario> itinerarios;
 
     /**
-     * Método constructor de la clase Guia
      *
      * @param nombre
      * @param direccion
      * @param telefono
-     * @param fechInicioTrabajar
      * @param id
      */
-    public Guia(String nombre, String direccion, String telefono, LocalDate fechInicioTrabajar, short id) {
-        super(nombre, direccion, telefono, fechInicioTrabajar, id);
+    public Guia(String nombre, String direccion, String telefono, short id) {
+        super(nombre, direccion, telefono, id);
         itinerarios = new ArrayList<>();
     }
 

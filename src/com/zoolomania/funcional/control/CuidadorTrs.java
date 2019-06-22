@@ -6,6 +6,7 @@
 package com.zoolomania.funcional.control;
 
 import com.zoolomania.funcional.modelo.Cuidador;
+import com.zoolomania.funcional.modelo.Especie;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,17 +25,24 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
     @Override
     public String guardar(Object registro) throws MyExcepcion {
         Cuidador guardarCuidador = (Cuidador) registro;
+        boolean bandera = false;
         if (buscarConId(guardarCuidador.getId()) != null) {
             throw new MyExcepcion("3");
-        }
-        for (Cuidador cuidadorRepetido : listaObjetos) {
-            if (cuidadorRepetido.equals(guardarCuidador)) {
-                throw new MyExcepcion("1");
+        } else {
+            for (Cuidador cuidadorRepetido : listaObjetos) {
+                if (cuidadorRepetido.equals(guardarCuidador)) {
+                    bandera = true;
+                    throw new MyExcepcion("1");
+                }
             }
         }
-        listaObjetos.add(guardarCuidador);
-        guardarFichero();
-        return "Guardado Correctamente";
+        if (!bandera) {
+            listaObjetos.add(guardarCuidador);
+            guardarFichero();
+            return "Guardado Correctamente";
+        } else {
+            return "No se pudo guardar";
+        }
     }
 
     @Override
@@ -42,15 +50,16 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
         Cuidador actualizarCuidador = (Cuidador) registro;
         if (buscarConId(actualizarCuidador.getId()) == null) {
             throw new MyExcepcion("2");
-        }
-        for (Cuidador cuidadorAntiguo : listaObjetos) {
-            if (cuidadorAntiguo.getId() == actualizarCuidador.getId()) {
-                listaObjetos.set(listaObjetos.indexOf(cuidadorAntiguo), actualizarCuidador);
-                guardarFichero();
-                return "Actualizado Correctamente";
+        } else {
+            for (Cuidador cuidadorAntiguo : listaObjetos) {
+                if (cuidadorAntiguo.getId() == actualizarCuidador.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(cuidadorAntiguo), actualizarCuidador);
+                    guardarFichero();
+                    return "Actualizado Correctamente";
+                }
             }
         }
-        return null;
+        return "No se pudo actualizar";
     }
 
     @Override
@@ -58,10 +67,11 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
         Cuidador eliminarCuidador = (Cuidador) registro;
         if (buscarConId(eliminarCuidador.getId()) == null) {
             throw new MyExcepcion("4");
+        } else {
+            listaObjetos.remove(eliminarCuidador);
+            guardarFichero();
+            return "Eliminación Correcta";
         }
-        listaObjetos.remove(eliminarCuidador);
-        guardarFichero();
-        return "Eliminación Correcta";
     }
 
     @Override
@@ -81,18 +91,18 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
 
     @Override
     protected void valoresDefecto() {
-        /*List<Especie> especies = new ArrayList<>();
+        /*List<Cuidador> cuidadors = new ArrayList<>();
 
-        especies.add(new Especie("Leon", "Panthera",
-                "Mamífero Carníror de la familia de los félidos y una de las cinco especies del género Panthera."));
-        especies.add(new Especie("Elefante", "Elephantidee", "Son una familia de mamíderos placentarios del orden "
-                + "Proboscidea. Existen hoy en día tres especies y diversas subespecies"));
-        especies.add(new Especie("Chimpancé", "Pan", "Es un género de primates homínidos que comprende las "
-                + "especies Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años."));
-        especies.add(new Especie("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
-                + "social depende de la especie. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
+        cuidadors.add(new Cuidador("Leon", "Panthera",
+                "Mamífero Carníror de la familia de los félidos y una de las cinco cuidadors del género Panthera."));
+        cuidadors.add(new Cuidador("Elefante", "Elephantidee", "Son una familia de mamíderos placentarios del orden "
+                + "Proboscidea. Existen hoy en día tres cuidadors y diversas subcuidadors"));
+        cuidadors.add(new Cuidador("Chimpancé", "Pan", "Es un género de primates homínidos que comprende las "
+                + "cuidadors Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años."));
+        cuidadors.add(new Cuidador("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
+                + "social depende de la cuidador. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
                 + " como \"harenes"));*/
-//        cuidadorDefecto.cuidarNuevaEspecie(new Especie("Perro", "Perrus", "Pelusa", (short) 1));
+//        cuidadorDefecto.cuidarNuevaCuidador(new Cuidador("Perro", "Perrus", "Pelusa", (short) 1));
         try {
             guardar(new Cuidador("Carlos", "Floresta", "331234", (short)1));
         } catch (MyExcepcion ex) {

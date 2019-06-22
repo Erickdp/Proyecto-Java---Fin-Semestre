@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * Clase que representa las operaciones de negocio para Especies
  *
- * @author Santiago Sisalem - Erick Díaz
+ * @author Erick Díaz
  */
 public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
 
@@ -25,17 +25,24 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
     @Override
     public String guardar(Object registro) throws MyExcepcion {
         Especie guardarEspecie = (Especie) registro;
+        boolean bandera = false;
         if (buscarConId(guardarEspecie.getMarca()) != null) {
             throw new MyExcepcion("3");
-        }
-        for (Especie especieRepetido : listaObjetos) {
-            if (especieRepetido.equals(guardarEspecie)) {
-                throw new MyExcepcion("1");
+        } else {
+            for (Especie especieRepetida : listaObjetos) {
+                if (especieRepetida.equals(guardarEspecie)) {
+                    bandera = true;
+                    throw new MyExcepcion("1");
+                }
             }
         }
-        listaObjetos.add(guardarEspecie);
-        guardarFichero();
-        return "Guardado Correctamente";
+        if (!bandera) {
+            listaObjetos.add(guardarEspecie);
+            guardarFichero();
+            return "Guardado Correctamente";
+        } else {
+            return "No se pudo guardar";
+        }
     }
 
     @Override
@@ -43,15 +50,16 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
         Especie actualizarEspecie = (Especie) registro;
         if (buscarConId(actualizarEspecie.getMarca()) == null) {
             throw new MyExcepcion("2");
-        }
-        for (Especie especieAntiguo : listaObjetos) {
-            if (especieAntiguo.getMarca() == actualizarEspecie.getMarca()) {
-                listaObjetos.set(listaObjetos.indexOf(especieAntiguo), actualizarEspecie);
-                guardarFichero();
-                return "Actualizado Correctamente";
+        } else {
+            for (Especie especieAntiguo : listaObjetos) {
+                if (especieAntiguo.getMarca() == actualizarEspecie.getMarca()) {
+                    listaObjetos.set(listaObjetos.indexOf(especieAntiguo), actualizarEspecie);
+                    guardarFichero();
+                    return "Actualizado Correctamente";
+                }
             }
         }
-        return null;
+        return "No se pudo actualizar";
     }
 
     @Override
@@ -59,10 +67,11 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
         Especie eliminarEspecie = (Especie) registro;
         if (buscarConId(eliminarEspecie.getMarca()) == null) {
             throw new MyExcepcion("4");
+        } else {
+            listaObjetos.remove(eliminarEspecie);
+            guardarFichero();
+            return "Eliminación Correcta";
         }
-        listaObjetos.remove(eliminarEspecie);
-        guardarFichero();
-        return "Eliminación Correcta";
     }
 
     @Override
@@ -83,7 +92,7 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
     @Override
     protected void valoresDefecto() {
 
-            /*habitatDefecto.add(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África"));
+        /*habitatDefecto.add(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África"));
             habitatDefecto.add(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia"));
             habitatDefecto.add(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América"));
             habitatDefecto.add(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica"));*/

@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * Clase que representa al objeto itinerario
  *
- * @author Santiago Sisalem - Erick Díaz
+ * @author Erick Díaz
  */
 public class Itinerario implements Serializable, Comparable<Itinerario> {
 

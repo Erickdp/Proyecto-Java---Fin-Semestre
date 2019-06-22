@@ -131,6 +131,10 @@ public class Especie implements Serializable, Comparable<Especie> {
         this.nombreEspecie = nombreEspecie;
     }
 
+    public void setFechaRegistrada(LocalDateTime fechaRegistrada) {
+        this.fechaRegistrada = fechaRegistrada;
+    }
+
     public String getNombreCientifico() {
         return nombreCientifico;
     }

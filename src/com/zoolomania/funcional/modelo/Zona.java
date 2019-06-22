@@ -13,7 +13,7 @@ import java.util.Objects;
 /**
  * Clase que representa al objeto Zona con sus atributos y métodos
  *
- * @author Santiago Sisalem - Erick Díaz
+ * @author Erick Díaz
  */
 public class Zona implements Serializable, Comparable<Zona> {
 
@@ -43,7 +43,7 @@ public class Zona implements Serializable, Comparable<Zona> {
         itinerarios = new ArrayList<>();
     }
     
-
+    
     public void agregarEspecie(Especie especie) {
         especies.add(especie);
         System.out.println("Especie agregada al habitat " + this.nombreZona);

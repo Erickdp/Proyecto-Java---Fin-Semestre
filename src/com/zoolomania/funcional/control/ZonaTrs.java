@@ -22,36 +22,44 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
         leerFichero();
     }
 
-     @Override
+    @Override
     public String guardar(Object registro) throws MyExcepcion {
         Zona guardarZona = (Zona) registro;
+        boolean bandera = false;
         if (buscarConId(guardarZona.getId()) != null) {
             throw new MyExcepcion("3");
-        }
-        for (Zona zonaRepetido : listaObjetos) {
-            if (zonaRepetido.equals(guardarZona)) {
-                throw new MyExcepcion("1");
+        } else {
+            for (Zona zonaRepetido : listaObjetos) {
+                if (zonaRepetido.equals(guardarZona)) {
+                    bandera = true;
+                    throw new MyExcepcion("1");
+                }
             }
         }
-        listaObjetos.add(guardarZona);
-        guardarFichero();
-        return "Guardado Correctamente";
+        if (!bandera) {
+            listaObjetos.add(guardarZona);
+            guardarFichero();
+            return "Guardado Correctamente";
+        } else {
+            return "No se pudo guardar";
+        }
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Zona actualizarZona = (Zona) registro;
-        if (buscarConId(actualizarZona.getId()) != null) {
+        if (buscarConId(actualizarZona.getId()) == null) {
             throw new MyExcepcion("2");
-        }
-        for (Zona zonaAntiguo : listaObjetos) {
-            if (zonaAntiguo.getId() == actualizarZona.getId()) {
-                zonaAntiguo = actualizarZona;
-                guardarFichero();
-                return "Actualizado Correctamente";
+        } else {
+            for (Zona zonaAntiguo : listaObjetos) {
+                if (zonaAntiguo.getId() == actualizarZona.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(zonaAntiguo), actualizarZona);
+                    guardarFichero();
+                    return "Actualizado Correctamente";
+                }
             }
         }
-        return null;
+        return "No se pudo actualizar";
     }
 
     @Override
@@ -59,10 +67,11 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
         Zona eliminarZona = (Zona) registro;
         if (buscarConId(eliminarZona.getId()) == null) {
             throw new MyExcepcion("4");
+        } else {
+            listaObjetos.remove(eliminarZona);
+            guardarFichero();
+            return "Eliminación Correcta";
         }
-        listaObjetos.remove(eliminarZona);
-        guardarFichero();
-        return "Eliminación Correcta";
     }
 
     @Override
@@ -85,7 +94,7 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
         try {
             /*
             Esta zona no sirve utilizar constructor que permite ingresar listas
-            */
+             */
             guardar(new Zona("Media", 2.2F, (short) 1));
         } catch (MyExcepcion ex) {
             Logger.getLogger(ZonaTrs.class.getName()).log(Level.SEVERE, null, ex);

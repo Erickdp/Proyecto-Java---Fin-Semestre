@@ -35,6 +35,10 @@ public class Cuidador extends Empleado implements Serializable, Comparable<Emple
         especies = new ArrayList<>();
     }
 
+    public void setEspecies(List<Especie> especies) {
+        this.especies = especies;
+    }
+
     public List<Especie> getEspecies() {
         return especies;
     }

@@ -5,6 +5,7 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Itinerario;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,36 +23,44 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
         leerFichero();
     }
 
-     @Override
+    @Override
     public String guardar(Object registro) throws MyExcepcion {
         Itinerario guardarItinerario = (Itinerario) registro;
+        boolean bandera = false;
         if (buscarConId(guardarItinerario.getId()) != null) {
             throw new MyExcepcion("3");
-        }
-        for (Itinerario itinerarioRepetido : listaObjetos) {
-            if (itinerarioRepetido.equals(guardarItinerario)) {
-                throw new MyExcepcion("1");
+        } else {
+            for (Itinerario itinerarioRepetido : listaObjetos) {
+                if (itinerarioRepetido.equals(guardarItinerario)) {
+                    bandera = true;
+                    throw new MyExcepcion("1");
+                }
             }
         }
-        listaObjetos.add(guardarItinerario);
-        guardarFichero();
-        return "Guardado Correctamente";
+        if (!bandera) {
+            listaObjetos.add(guardarItinerario);
+            guardarFichero();
+            return "Guardado Correctamente";
+        } else {
+            return "No se pudo guardar";
+        }
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Itinerario actualizarItinerario = (Itinerario) registro;
-        if (buscarConId(actualizarItinerario.getId()) != null) {
+        if (buscarConId(actualizarItinerario.getId()) == null) {
             throw new MyExcepcion("2");
-        }
-        for (Itinerario itinerarioAntiguo : listaObjetos) {
-            if (itinerarioAntiguo.getId() == actualizarItinerario.getId()) {
-                itinerarioAntiguo = actualizarItinerario;
-                guardarFichero();
-                return "Actualizado Correctamente";
+        } else {
+            for (Itinerario itinerarioAntiguo : listaObjetos) {
+                if (itinerarioAntiguo.getId() == actualizarItinerario.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(itinerarioAntiguo), actualizarItinerario);
+                    guardarFichero();
+                    return "Actualizado Correctamente";
+                }
             }
         }
-        return null;
+        return "No se pudo actualizar";
     }
 
     @Override
@@ -59,10 +68,11 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
         Itinerario eliminarItinerario = (Itinerario) registro;
         if (buscarConId(eliminarItinerario.getId()) == null) {
             throw new MyExcepcion("4");
+        } else {
+            listaObjetos.remove(eliminarItinerario);
+            guardarFichero();
+            return "Eliminación Correcta";
         }
-        listaObjetos.remove(eliminarItinerario);
-        guardarFichero();
-        return "Eliminación Correcta";
     }
 
     @Override

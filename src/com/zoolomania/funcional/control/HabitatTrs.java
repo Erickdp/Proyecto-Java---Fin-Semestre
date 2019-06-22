@@ -5,6 +5,7 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Habitat;
 import java.util.List;
 
@@ -20,36 +21,44 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
         leerFichero();
     }
 
-     @Override
+   @Override
     public String guardar(Object registro) throws MyExcepcion {
         Habitat guardarHabitat = (Habitat) registro;
+        boolean bandera = false;
         if (buscarConId(guardarHabitat.getId()) != null) {
             throw new MyExcepcion("3");
-        }
-        for (Habitat habitatRepetido : listaObjetos) {
-            if (habitatRepetido.equals(guardarHabitat)) {
-                throw new MyExcepcion("1");
+        } else {
+            for (Habitat habitatRepetido : listaObjetos) {
+                if (habitatRepetido.equals(guardarHabitat)) {
+                    bandera = true;
+                    throw new MyExcepcion("1");
+                }
             }
         }
-        listaObjetos.add(guardarHabitat);
-        guardarFichero();
-        return "Guardado Correctamente";
+        if (!bandera) {
+            listaObjetos.add(guardarHabitat);
+            guardarFichero();
+            return "Guardado Correctamente";
+        } else {
+            return "No se pudo guardar";
+        }
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Habitat actualizarHabitat = (Habitat) registro;
-        if (buscarConId(actualizarHabitat.getId()) != null) {
+        if (buscarConId(actualizarHabitat.getId()) == null) {
             throw new MyExcepcion("2");
-        }
-        for (Habitat habitatAntiguo : listaObjetos) {
-            if (habitatAntiguo.getId() == actualizarHabitat.getId()) {
-                habitatAntiguo = actualizarHabitat;
-                guardarFichero();
-                return "Actualizado Correctamente";
+        } else {
+            for (Habitat habitatAntiguo : listaObjetos) {
+                if (habitatAntiguo.getId() == actualizarHabitat.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(habitatAntiguo), actualizarHabitat);
+                    guardarFichero();
+                    return "Actualizado Correctamente";
+                }
             }
         }
-        return null;
+        return "No se pudo actualizar";
     }
 
     @Override
@@ -57,10 +66,11 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
         Habitat eliminarHabitat = (Habitat) registro;
         if (buscarConId(eliminarHabitat.getId()) == null) {
             throw new MyExcepcion("4");
+        } else {
+            listaObjetos.remove(eliminarHabitat);
+            guardarFichero();
+            return "Eliminación Correcta";
         }
-        listaObjetos.remove(eliminarHabitat);
-        guardarFichero();
-        return "Eliminación Correcta";
     }
 
     @Override

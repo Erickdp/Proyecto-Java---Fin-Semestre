@@ -6,7 +6,6 @@
 package com.zoolomania.funcional.control;
 
 import com.zoolomania.funcional.modelo.Guia;
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -24,33 +23,41 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
     @Override
     public String guardar(Object registro) throws MyExcepcion {
         Guia guardarGuia = (Guia) registro;
+        boolean bandera = false;
         if (buscarConId(guardarGuia.getId()) != null) {
             throw new MyExcepcion("3");
-        }
-        for (Guia guiaRepetido : listaObjetos) {
-            if (guiaRepetido.equals(guardarGuia)) {
-                throw new MyExcepcion("1");
+        } else {
+            for (Guia guiaRepetido : listaObjetos) {
+                if (guiaRepetido.equals(guardarGuia)) {
+                    bandera = true;
+                    throw new MyExcepcion("1");
+                }
             }
         }
-        listaObjetos.add(guardarGuia);
-        guardarFichero();
-        return "Guardado Correctamente";
+        if (!bandera) {
+            listaObjetos.add(guardarGuia);
+            guardarFichero();
+            return "Guardado Correctamente";
+        } else {
+            return "No se pudo guardar";
+        }
     }
 
     @Override
     public String actulizar(Object registro) throws MyExcepcion {
         Guia actualizarGuia = (Guia) registro;
-        if (buscarConId(actualizarGuia.getId()) != null) {
+        if (buscarConId(actualizarGuia.getId()) == null) {
             throw new MyExcepcion("2");
-        }
-        for (Guia guiaAntiguo : listaObjetos) {
-            if (guiaAntiguo.getId() == actualizarGuia.getId()) {
-                guiaAntiguo = actualizarGuia;
-                guardarFichero();
-                return "Actualizado Correctamente";
+        } else {
+            for (Guia guiaAntiguo : listaObjetos) {
+                if (guiaAntiguo.getId() == actualizarGuia.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(guiaAntiguo), actualizarGuia);
+                    guardarFichero();
+                    return "Actualizado Correctamente";
+                }
             }
         }
-        return null;
+        return "No se pudo actualizar";
     }
 
     @Override
@@ -58,10 +65,11 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
         Guia eliminarGuia = (Guia) registro;
         if (buscarConId(eliminarGuia.getId()) == null) {
             throw new MyExcepcion("4");
+        } else {
+            listaObjetos.remove(eliminarGuia);
+            guardarFichero();
+            return "Eliminación Correcta";
         }
-        listaObjetos.remove(eliminarGuia);
-        guardarFichero();
-        return "Eliminación Correcta";
     }
 
     @Override
@@ -82,9 +90,10 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
-            guardar(new Guia("Pedro", "Zona centro", "2626-166", LocalDate.of(2017, 12, 07), (short) 1));
-            guardar(new Guia("Mauro", "Quitumbe", "1137-553", LocalDate.of(2019, 05, 03), (short) 2));
-            guardar(new Guia("Yayo", "Zona Baja", "24324", LocalDate.now(), (short) 3));
+            guardar(new Guia("Marcelo", "Patria", "42321", (short) 1));
+            guardar(new Guia("Marco", "América", "42134", (short) 2));
+            guardar(new Guia("Octavio", "Solanda", "51233", (short) 3));
+            guardar(new Guia("Omar", "Beaterio", "32412", (short) 4));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();
