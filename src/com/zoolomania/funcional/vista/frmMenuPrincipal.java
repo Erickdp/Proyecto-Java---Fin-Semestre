@@ -75,12 +75,27 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         jButton4.setFont(new java.awt.Font("Arial Rounded MT Bold", 2, 14)); // NOI18N
         jButton4.setText("Zonas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Arial Rounded MT Bold", 2, 14)); // NOI18N
         jButton5.setText("Especies");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton11.setFont(new java.awt.Font("Arial Rounded MT Bold", 2, 14)); // NOI18N
         jButton11.setText("Guias");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jButton12.setFont(new java.awt.Font("Arial Rounded MT Bold", 2, 14)); // NOI18N
         jButton12.setText("Cuidadores");
@@ -92,9 +107,19 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         jButton13.setFont(new java.awt.Font("Arial Rounded MT Bold", 2, 14)); // NOI18N
         jButton13.setText("Habitats");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setFont(new java.awt.Font("Arial Rounded MT Bold", 2, 14)); // NOI18N
         jButton14.setText("Itininerarios");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
 
         jButton15.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
         jButton15.setText("Ver Usuarios");
@@ -227,14 +252,45 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         // TODO add your handling code here:
-        new frmUsuario().setVisible(true);
         this.setVisible(false);
+        new frmUsuario().setVisible(true);
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
-        new frmCuidador();
+        this.setVisible(false);
+        new frmCuidador().setVisible(true);
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new frmEspecie().setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new frmZona().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new frmItinerario().setVisible(true);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new frmHabitat().setVisible(true);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new frmGuia().setVisible(true);
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments

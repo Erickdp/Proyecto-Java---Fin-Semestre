@@ -21,10 +21,9 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
     private static final long serialVersionUID = -1L; //Constante que evita errores en la serializacion
 
     private String codigo; //El código no puede ser modificado una vez creado el itinerario
-    private short duracionRecorrido;
+    private LocalTime duracionRecorrido;
     private short longitud;
     private byte numMaxVisitantes;
-    private LocalTime horaDeItinerario; //Perimte asignar una hora a la que el guia tendrá el itinarario
 //    private byte numEspeciesVisitadas;
     private List<Zona> zonas;
     private List<Guia> guias;
@@ -41,15 +40,15 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
      * @param codigo
      * @param numMaxVisitantes
      */
-    public Itinerario(String codigo, byte numMaxVisitantes, short id) {
+    public Itinerario(String codigo, byte numMaxVisitantes, short id, short longitud) {
         this.codigo = codigo;
         this.id = id;
         this.numMaxVisitantes = numMaxVisitantes;
-        duracionRecorrido = (short) Math.floor(Math.random() * 180); //Tendrá hasta un límite de 3 horas de duración
-        longitud = (short) Math.floor(Math.random() * 8); //Tendrá una longitud hasta de 8 Km
+        this.longitud = longitud;
+        duracionRecorrido = LocalTime.of((int) Math.floor(Math.random() * 2),
+                (int) Math.floor(Math.random() * 59)); //Tendrá hasta un límite de 3 horas de duración
         zonas = new ArrayList<>();
         guias = new ArrayList<>();
-        horaDeItinerario = LocalTime.of((int) Math.floor(Math.random() * 23), (int) Math.floor(Math.random() * 59));
     }
 
     public void agregarZona(Zona zona) {
@@ -62,6 +61,14 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         System.out.println("Zona eliinara del Itinerario");
     }
 
+    public int especiesVisitadas(List<Zona> zonas) {
+        int numeroEspecies = 0;
+        for (Zona z : zonas) {
+            numeroEspecies += z.getEspecies().size();
+        }
+        return numeroEspecies;
+    }
+    
     public void agregarGuia(Guia guia) {
         guias.add(guia);
         System.out.println("Guia agregado al itinerario " + this.getCodigo());
@@ -76,10 +83,6 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         return zonas;
     }
 
-    public LocalTime getHoraDeItinerario() {
-        return horaDeItinerario;
-    }
-
     public byte getNumMaxVisitantes() {
         return numMaxVisitantes;
     }
@@ -92,12 +95,20 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         return codigo;
     }
 
-    public short getDuracionRecorrido() {
+    public LocalTime getDuracionRecorrido() {
         return duracionRecorrido;
     }
 
-    public void setDuracionRecorrido(short duracionRecorrido) {
+    public void setDuracionRecorrido(LocalTime duracionRecorrido) {
         this.duracionRecorrido = duracionRecorrido;
+    }
+
+    public List<Guia> getGuias() {
+        return guias;
+    }
+
+    public void setGuias(List<Guia> guias) {
+        this.guias = guias;
     }
 
     public float getLongitud() {

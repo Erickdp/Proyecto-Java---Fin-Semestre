@@ -169,12 +169,6 @@ public class PruebaCrud {
                 case 3:
                     System.out.println("Ingrese nuevo nombre del Cuidador");
                     nombreC = leer.next();
-                    try {
-                        System.out.println(ctrs.actulizar(new Cuidador(nombreC, cuidadorCrud.getDireccion(),
-                                cuidadorCrud.getTelefono(), cuidadorCrud.getFechInicioTrabajar(), cuidadorCrud.getId())));
-                    } catch (MyExcepcion ex) {
-                        ex.getMessage();
-                    }
                     break;
                 case 4:
                     for (Especie cuidador : listaE) {
@@ -225,16 +219,6 @@ public class PruebaCrud {
                         id = leer.nextShort();
                         cuidadorV = (Cuidador) ctrs.buscarConId(id);
                     }
-                    cuidadorN = new Cuidador(nombre, nombreC, descripcion, LocalDate.now(), id);
-                    especieCrud.agregarCuidador(cuidadorN);
-                    cuidadorN.cuidarNuevaEspecie(especieCrud);
-                    try {
-                        System.out.println("\n" + ctrs.guardar(cuidadorN));
-                        System.out.println(etrs.actulizar(especieCrud) + "\n");
-                    } catch (MyExcepcion ex) {
-                        ex.getMessage();
-                    }
-
                     break;
                 case 2:
                     for (Cuidador cuidador : cuidadores) {
@@ -256,12 +240,6 @@ public class PruebaCrud {
                     descripcion = leer.next();
                     System.out.println("El día que es el mismo que la última vez");
                     System.out.println("El ID no se puede modificar");
-                    try {
-                        System.out.println(ctrs.actulizar(new Cuidador(nombre, nombreC, descripcion, cuidadorV.
-                                getFechInicioTrabajar(), cuidadorV.getId())));
-                    } catch (MyExcepcion ex) {
-                        ex.getMessage();
-                    }
                     break;
                 case 3:
                     System.out.println("Ingrese nuevo nombre científico de la especie");

@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/com/zoolomania/funcional/vista/frmZona.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>458</line>
+                <key/>
+            </bookmark>
+            <bookmark id="2">
+                <name/>
+                <line>458</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/control/EspecieTrs.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmGuia.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmUsuario.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmItinerario.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/control/GuiaTrs.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmZona.java</file>
             <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmCuidador.java</file>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/modelo/Habitat.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmRegistro.java</file>
             <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmEspecie.java</file>
             <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/modelo/Empleado.java</file>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/modelo/Especie.java</file>
-            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/modelo/Zona.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmHabitat.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmMenuPrincipal.java</file>
+            <file>file:/C:/Users/erick/Desktop/Zoologico/src/com/zoolomania/funcional/vista/frmLogin.java</file>
         </group>
     </open-files>
 </project-private>

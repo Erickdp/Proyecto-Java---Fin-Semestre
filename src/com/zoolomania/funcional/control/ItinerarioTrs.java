@@ -93,7 +93,13 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
-            guardar(new Itinerario("1212", (byte) 30, (short) 1));
+            guardar(new Itinerario("1212", (byte) 30, (short) 1, (short) 5));
+            guardar(new Itinerario("4523", (byte) 40, (short) 2, (short) 10));
+            guardar(new Itinerario("3425", (byte) 15, (short) 3, (short) 3));
+            guardar(new Itinerario("4356", (byte) 11, (short) 4, (short) 4));
+            guardar(new Itinerario("90832", (byte) 12, (short) 5, (short) 10));
+            guardar(new Itinerario("8243", (byte) 5, (short) 6, (short) 7));
+            guardar(new Itinerario("94352", (byte) 4, (short) 7, (short) 5));
         } catch (MyExcepcion ex) {
             Logger.getLogger(ItinerarioTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

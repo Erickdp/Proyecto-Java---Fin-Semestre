@@ -28,9 +28,10 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
             throw new MyExcepcion("3");
         } else {
             for (Usuario usuarioRepetido : listaObjetos) {
-                if (usuarioRepetido.equals(guardarUsuario)) {
+                if (usuarioRepetido.getUserName().equalsIgnoreCase(guardarUsuario.getUserName()) 
+                        || usuarioRepetido.getEmail().equalsIgnoreCase(guardarUsuario.getEmail())) {
                     bandera = true;
-                    throw new MyExcepcion("1");
+                    break;
                 }
             }
             if (!bandera) {
@@ -38,7 +39,7 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
                 guardarFichero();
                 return "Guardado Correctamente";
             } else {
-                return "No se pudo guardar";
+                throw new MyExcepcion("1");
             }
         }
     }
@@ -90,7 +91,8 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
-            guardar(new Usuario("Erick", "123", "erickdp@hotmail.com"));
+            guardar(new Usuario("admin", "123", "admin@uce", (short) 1));
+            guardar(new Usuario("erick", "123", "erick@hotmail.com", (short) 2));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();

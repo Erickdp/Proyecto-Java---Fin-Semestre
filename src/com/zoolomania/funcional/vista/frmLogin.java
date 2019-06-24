@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class frmLogin extends javax.swing.JFrame {
     
     UsuarioTrs utrs = new UsuarioTrs();
-    static Usuario usuario;
+    Usuario usuario;
     /**
      * Creates new form Login
      */

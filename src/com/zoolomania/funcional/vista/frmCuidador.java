@@ -8,6 +8,7 @@ package com.zoolomania.funcional.vista;
 import com.zoolomania.funcional.control.CuidadorTrs;
 import com.zoolomania.funcional.control.EspecieTrs;
 import com.zoolomania.funcional.control.MyExcepcion;
+import com.zoolomania.funcional.control.UtilGestion;
 import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Empleado;
 import com.zoolomania.funcional.modelo.Especie;
@@ -30,15 +31,14 @@ public class frmCuidador extends javax.swing.JFrame {
     CuidadorTrs ctrs = new CuidadorTrs();
     EspecieTrs etrs = new EspecieTrs();
     List<Cuidador> cuidadores = (List<Cuidador>) ctrs.listar();
-    List<Especie> especiese = (List<Especie>) etrs.listar();
-    DefaultTableModel modeloC, modeloE;
-    Cuidador cuidador;
-    Especie especie;
-    List<Especie> especies;
+    List<Especie> especies = (List<Especie>) etrs.listar();
+    Cuidador cuidadorEliminar;
+    Especie especieEliminar;
+    boolean bandera = false;
 
     public void cargarTablaC() {
         Object[] columna = {"ID", "Nombre", "Dirección", "Teléfono", "Ingreso"};
-        modeloC = new DefaultTableModel(columna, 0);
+        DefaultTableModel modeloC = new DefaultTableModel(columna, 0);
         for (Cuidador c : cuidadores) {
             short id = c.getId();
             String nombre = c.getNombre();
@@ -51,26 +51,9 @@ public class frmCuidador extends javax.swing.JFrame {
         this.tablaC.setModel(modeloC);
     }
 
-    public void cargarTablaE(Cuidador cuidador) {
+    public void cargarTablaE() {
         Object[] columna = {"Marca", "Especie", "Nombre Científico", "Fecha de Cuidado", "Descripción"};
-        modeloE = new DefaultTableModel(columna, 0);
-        List<Especie> especies = cuidador.getEspecies();
-        for (Especie e : especies) {
-            short marca = e.getMarca();
-            String especie = e.getNombreEspecie();
-            String nombreC = e.getNombreCientifico();
-            LocalDateTime fechaC = e.getFechaRegistrada();
-            String descripcion = e.getDescripcion();
-            Object[] fila = {marca, especie, nombreC, fechaC, descripcion};
-            modeloE.addRow(fila);
-        }
-        this.tablaE.setModel(modeloE);
-    }
-
-    public void cargarPrimero() {
-        Object[] columna = {"Marca", "Especie", "Nombre Científico", "Fecha de Cuidado", "Descripción"};
-        modeloE = new DefaultTableModel(columna, 0);
-        List<Especie> especies = (List<Especie>) etrs.listar();
+        DefaultTableModel modeloE = new DefaultTableModel(columna, 0);
         for (Especie e : especies) {
             short marca = e.getMarca();
             String especie = e.getNombreEspecie();
@@ -84,13 +67,13 @@ public class frmCuidador extends javax.swing.JFrame {
     }
 
     /**
-     * Creates new form frmCuidador
+     * Creates new form frmCuidadorU
      */
     public frmCuidador() {
         initComponents();
         setLocationRelativeTo(null);
         cargarTablaC();
-        cargarPrimero();
+        cargarTablaE();
     }
 
     /**
@@ -102,47 +85,92 @@ public class frmCuidador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaC = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaE = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jNombreC = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jDireccionC = new javax.swing.JTextField();
-        jTelefonoC = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jIdC = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jEspecie = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jNombreCE = new javax.swing.JTextField();
-        jMarca = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jDescripcion = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         bAgregar = new javax.swing.JButton();
         bEliminar = new javax.swing.JButton();
         bActualizar = new javax.swing.JButton();
-        bOrdenar = new javax.swing.JButton();
-        comboC = new javax.swing.JComboBox<>();
-        rAscendente = new javax.swing.JRadioButton();
-        rDescendente = new javax.swing.JRadioButton();
         bEspecie = new javax.swing.JButton();
-        bAgregarE = new javax.swing.JButton();
+        rDescendente = new javax.swing.JRadioButton();
+        rAscendente = new javax.swing.JRadioButton();
+        comboC = new javax.swing.JComboBox<>();
+        bOrdenar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaC = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaE = new javax.swing.JTable();
         bOrdenar1 = new javax.swing.JButton();
         comboE = new javax.swing.JComboBox<>();
-        bEliminarE = new javax.swing.JButton();
-        bActualizarE = new javax.swing.JButton();
         rAscendenteE = new javax.swing.JRadioButton();
         rDescendenteE = new javax.swing.JRadioButton();
+        bVerEspecies = new javax.swing.JButton();
+        bEliminarE = new javax.swing.JButton();
+        bAgregarE = new javax.swing.JButton();
+        jTelefonoC = new javax.swing.JTextField();
+        bMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
+
+        jLabel1.setText("Nombre");
+
+        jNombreC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNombreCActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Dirección");
+
+        jLabel4.setText("ID");
+
+        jLabel3.setText("Teléfono");
+
+        bAgregar.setText("Agregar ");
+        bAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAgregarActionPerformed(evt);
+            }
+        });
+
+        bEliminar.setText("Eliminar ");
+        bEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEliminarActionPerformed(evt);
+            }
+        });
+
+        bActualizar.setText("Actualizar ");
+        bActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bActualizarActionPerformed(evt);
+            }
+        });
+
+        bEspecie.setText("Ver Especie(s) cuidada(s)");
+        bEspecie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEspecieActionPerformed(evt);
+            }
+        });
+
+        rDescendente.setText("Descendente");
+
+        rAscendente.setSelected(true);
+        rAscendente.setText("Ascendente");
+
+        comboC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "ID" }));
+
+        bOrdenar.setText("Ordenar ");
+        bOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bOrdenarActionPerformed(evt);
+            }
+        });
 
         tablaC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,67 +198,31 @@ public class frmCuidador extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaE);
 
-        jLabel1.setText("Nombre");
-
-        jLabel2.setText("Dirección");
-
-        jLabel3.setText("Teléfono");
-
-        jLabel4.setText("ID");
-
-        jLabel6.setText("Especie");
-
-        jLabel7.setText("Nombre Científico");
-
-        jLabel8.setText("Marca");
-
-        jLabel9.setText("Descripción");
-
-        jDescripcion.setColumns(20);
-        jDescripcion.setRows(5);
-        jScrollPane3.setViewportView(jDescripcion);
-
-        bAgregar.setText("Agregar ");
-        bAgregar.addActionListener(new java.awt.event.ActionListener() {
+        bOrdenar1.setText("Ordenar ");
+        bOrdenar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bAgregarActionPerformed(evt);
+                bOrdenar1ActionPerformed(evt);
             }
         });
 
-        bEliminar.setText("Eliminar ");
-        bEliminar.addActionListener(new java.awt.event.ActionListener() {
+        comboE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "ID" }));
+
+        rAscendenteE.setSelected(true);
+        rAscendenteE.setText("Ascendente");
+
+        rDescendenteE.setText("Descendente");
+
+        bVerEspecies.setText("Ver Especie(s)");
+        bVerEspecies.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEliminarActionPerformed(evt);
+                bVerEspeciesActionPerformed(evt);
             }
         });
 
-        bActualizar.setText("Actualizar ");
-        bActualizar.addActionListener(new java.awt.event.ActionListener() {
+        bEliminarE.setText("Eliminar ");
+        bEliminarE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bActualizarActionPerformed(evt);
-            }
-        });
-
-        bOrdenar.setText("Ordenar ");
-        bOrdenar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bOrdenarActionPerformed(evt);
-            }
-        });
-
-        comboC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "ID" }));
-
-        buttonGroup1.add(rAscendente);
-        rAscendente.setSelected(true);
-        rAscendente.setText("Ascendente");
-
-        buttonGroup1.add(rDescendente);
-        rDescendente.setText("Descendente");
-
-        bEspecie.setText("Ver Especie(s)");
-        bEspecie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEspecieActionPerformed(evt);
+                bEliminarEActionPerformed(evt);
             }
         });
 
@@ -241,189 +233,146 @@ public class frmCuidador extends javax.swing.JFrame {
             }
         });
 
-        bOrdenar1.setText("Ordenar ");
-        bOrdenar1.addActionListener(new java.awt.event.ActionListener() {
+        bMenu.setText("Menu Principal");
+        bMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bOrdenar1ActionPerformed(evt);
+                bMenuActionPerformed(evt);
             }
         });
-
-        comboE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "ID" }));
-
-        bEliminarE.setText("Eliminar ");
-        bEliminarE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEliminarEActionPerformed(evt);
-            }
-        });
-
-        bActualizarE.setText("Actualizar ");
-        bActualizarE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bActualizarEActionPerformed(evt);
-            }
-        });
-
-        buttonGroup2.add(rAscendenteE);
-        rAscendenteE.setSelected(true);
-        rAscendenteE.setText("Ascendente");
-
-        buttonGroup2.add(rDescendenteE);
-        rDescendenteE.setText("Descendente");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTelefonoC, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jIdC, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jDireccionC, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(179, 179, 179))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bOrdenar1)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboE, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rAscendenteE)
-                                .addGap(18, 18, 18)
-                                .addComponent(rDescendenteE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bAgregarE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bEliminarE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bActualizarE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                                                .addGap(38, 38, 38)
-                                                .addComponent(jNombreCE, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(22, 22, 22)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bAgregar)
-                                .addGap(18, 18, 18)
-                                .addComponent(bEliminar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bOrdenar)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bActualizar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rAscendente)
-                                .addGap(18, 18, 18)
-                                .addComponent(rDescendente)))
-                        .addContainerGap(872, Short.MAX_VALUE))))
+                        .addGap(99, 99, 99)
+                        .addComponent(jTelefonoC, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(568, 568, 568)
+                        .addComponent(bMenu)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(bAgregar)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(bEliminar))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(bOrdenar)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(comboC, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(bActualizar)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(bEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(rAscendente)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rDescendente)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bOrdenar1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(comboE, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(rAscendenteE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(rDescendenteE)
+                                    .addGap(51, 51, 51))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(25, 25, 25)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jDireccionC, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jIdC, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(307, 307, 307)
+                                    .addComponent(bAgregarE)
+                                    .addGap(54, 54, 54)
+                                    .addComponent(bEliminarE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                                    .addComponent(bVerEspecies, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(65, 65, 65)))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDireccionC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jNombreCE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTelefonoC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jIdC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bAgregar)
-                            .addComponent(bEliminar)
-                            .addComponent(bActualizar)
-                            .addComponent(bEspecie))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bOrdenar)
-                            .addComponent(comboC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rAscendente)
-                            .addComponent(rDescendente))
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bAgregarE)
-                            .addComponent(bEliminarE)
-                            .addComponent(bActualizarE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bOrdenar1)
-                            .addComponent(comboE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rAscendenteE)
-                            .addComponent(rDescendenteE))
-                        .addGap(7, 7, 7)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(bMenu)
+                .addGap(38, 38, 38)
+                .addComponent(jTelefonoC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(71, 71, 71)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jDireccionC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jIdC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(35, 35, 35)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(bAgregar)
+                                .addComponent(bEliminar)
+                                .addComponent(bActualizar)
+                                .addComponent(bEspecie))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(bOrdenar)
+                                .addComponent(comboC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(rAscendente)
+                                .addComponent(rDescendente)
+                                .addComponent(rDescendenteE)
+                                .addComponent(rAscendenteE)
+                                .addComponent(comboE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bOrdenar1))
+                            .addGap(245, 245, 245))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(55, 55, 55)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(bAgregarE)
+                                .addComponent(bEliminarE)
+                                .addComponent(bVerEspecies))
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jNombreCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombreCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNombreCActionPerformed
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         // TODO add your handling code here:
@@ -433,101 +382,72 @@ public class frmCuidador extends javax.swing.JFrame {
             try {
                 System.out.println(ctrs.guardar(new Cuidador(jNombreC.getText(), jDireccionC.getText(),
                         jTelefonoC.getText(), Short.parseShort(jIdC.getText()))));
-            } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Guardar", JOptionPane.ERROR_MESSAGE);
-            } finally {
                 jNombreC.setText("");
                 jDireccionC.setText("");
                 jTelefonoC.setText("");
+            } catch (MyExcepcion ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Guardar", JOptionPane.ERROR_MESSAGE);
+            } finally {
                 jIdC.setText("");
                 cargarTablaC();
             }
         }
     }//GEN-LAST:event_bAgregarActionPerformed
 
-    private void bEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEspecieActionPerformed
-        // TODO add your handling code here:
-        if (tablaC.getSelectedRow() > -1) {
-            cuidador = cuidadores.get(tablaC.getSelectedRow());
-            cargarTablaE(cuidador);
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila", "Error al mostrar", JOptionPane.ERROR_MESSAGE);
-        }
-
-    }//GEN-LAST:event_bEspecieActionPerformed
-
-    private void bAgregarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarEActionPerformed
-        // TODO add your handling code here:
-        if (tablaC.getSelectedRow() > -1 & !validarCamposE()) {
-            cuidador = cuidadores.get(tablaC.getSelectedRow());
-            Especie especieV = (Especie) etrs.buscarConId(Short.parseShort(jMarca.getText()));
-            if (especieV == null) {
-                especie = new Especie(jEspecie.getText(), jNombreCE.getText(),
-                        jDescripcion.getText(), Short.parseShort(jMarca.getText()));
-                cuidador.cuidarNuevaEspecie(especie);
-                especie.agregarCuidador(cuidador);
-                try {
-                    ctrs.actulizar(cuidador);
-                    etrs.guardar(especie);
-                } catch (MyExcepcion ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                } finally {
-                    cargarTablaE(cuidador);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "La marca ya está ocupada por otra especie", "Error", JOptionPane.ERROR_MESSAGE);
-                jMarca.setText("");
-            }
-        } else if (tablaC.getSelectedRow() + tablaE.getSelectedRow() > -1) {
-            cuidador = cuidadores.get(tablaC.getSelectedRow());
-            especie = especiese.get(tablaE.getSelectedRow());
-            cuidador.cuidarNuevaEspecie(especie);
-            especie.agregarCuidador(cuidador);
-            especie.setFechaRegistrada(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
-            try {
-                ctrs.actulizar(cuidador);
-                etrs.actulizar(especie);
-            } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                cargarTablaE(cuidador);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila o los campos están vacíos",
-                    "Error al mostrar", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_bAgregarEActionPerformed
-
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
         // TODO add your handling code here:
         if (tablaC.getSelectedRow() > -1) {
             try {
-                System.out.println(ctrs.eliminar(cuidadores.get(tablaC.getSelectedRow())));
-                modeloC.removeRow(tablaC.getSelectedRow()); //No olvidarse de poner esta linea pues salta error al eliminar si no está
+                UtilGestion.eliminacionCompleta(cuidadores.get(tablaC.getSelectedRow()));
+                ctrs.eliminar(cuidadores.get(tablaC.getSelectedRow()));
             } catch (MyExcepcion ex) {
                 Logger.getLogger(frmCuidador.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                especies = (List<Especie>) etrs.listar();
+                cargarTablaC();
+                cargarTablaE();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila", "Error al mostrar", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila",
+                    "Error al mostrar", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_bEliminarActionPerformed
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
         // TODO add your handling code here:
-        if (tablaC.getSelectedRow() > -1) {
-            JOptionPane.showMessageDialog(null, "Solo se puede actualizar la dirección y el teléfono", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            cuidador = cuidadores.get(tablaC.getSelectedRow());
+        if (tablaC.getSelectedRow() > -1 & !validarCampos()) {
+            JOptionPane.showMessageDialog(null, "El ID no se actualiza.",
+                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            Cuidador cuidador = cuidadores.get(tablaC.getSelectedRow());
             try {
-                System.out.println(ctrs.actulizar(new Cuidador(cuidador.getNombre(), jDireccionC.getText(), jTelefonoC.getText(), cuidador.getId())));
+                System.out.println(ctrs.actulizar(new Cuidador(jNombreC.getText(),
+                        jDireccionC.getText(), jTelefonoC.getText(), cuidador.getId())));
+                jNombreC.setText("");
+                jDireccionC.setText("");
+                jTelefonoC.setText("");
+                jIdC.setText("");
             } catch (MyExcepcion ex) {
                 Logger.getLogger(frmCuidador.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 cargarTablaC();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila", "Error al mostrar", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila o los campos están vacíos",
+                    "Error al mostrar", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_bActualizarActionPerformed
+
+    private void bEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEspecieActionPerformed
+        // TODO add your handling code here:
+        if (tablaC.getSelectedRow() > -1) {
+            especies = cuidadores.get(tablaC.getEditingRow()).getEspecies();
+            cargarTablaE();
+            bandera = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar una "
+                    + "fila", "Error al mostrar", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bEspecieActionPerformed
 
     private void bOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOrdenarActionPerformed
         // TODO add your handling code here:
@@ -539,7 +459,7 @@ public class frmCuidador extends javax.swing.JFrame {
                 Collections.sort(cuidadores, Collections.reverseOrder());
             }
         } else if (comboC.getSelectedIndex() == 1) {
-            cuidador.bandera = true;
+            Cuidador.bandera = true;
             if (rAscendente.isSelected()) {
                 Collections.sort(cuidadores, Collections.reverseOrder());
             } else if (rDescendente.isSelected()) {
@@ -549,87 +469,105 @@ public class frmCuidador extends javax.swing.JFrame {
         cargarTablaC();
     }//GEN-LAST:event_bOrdenarActionPerformed
 
-    private void bEliminarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarEActionPerformed
-        // TODO add your handling code here:
-        if (tablaE.getSelectedRow() > -1) {
-            List<Especie> especies = cuidador.getEspecies();
-            especie = especies.get(tablaE.getSelectedRow());
-            cuidador.eliminarEspecie(especie);
-            especie.eliminarCuidador(cuidador);
-            try {
-                System.out.println(ctrs.actulizar(cuidador));
-                System.out.println(etrs.actulizar(especie));
-            } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila", "Error al aliminar", JOptionPane.ERROR_MESSAGE);
-        }
-        cargarTablaE(cuidador);
-    }//GEN-LAST:event_bEliminarEActionPerformed
-
-    private void bActualizarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarEActionPerformed
-        // TODO add your handling code here:
-        if (tablaE.getSelectedRow() > -1 & !validarCamposE()) {
-            JOptionPane.showMessageDialog(null, "La Marca no se pueden actualizar",
-                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            especies = cuidador.getEspecies();
-            especie = especies.get(tablaE.getSelectedRow());
-            Especie especieN = new Especie(jEspecie.getText(), jNombreCE.getText(),
-                    jDescripcion.getText(), especie.getMarca());
-            especies.set(tablaE.getSelectedRow(), especieN);
-            especie = especieN;
-            try {
-                System.out.println(etrs.actulizar(especieN));
-                System.out.println(ctrs.actulizar(cuidador));
-            } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                jEspecie.setText("");
-                jNombreCE.setText("");
-                jDescripcion.setText("");
-                jMarca.setText("");
-                cargarTablaE(cuidador);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila o los campos están vacíos",
-                    "Error al mostrar", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_bActualizarEActionPerformed
-
     private void bOrdenar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOrdenar1ActionPerformed
         // TODO add your handling code here:
-        List<Especie> especies = cuidador.getEspecies();
-        if (comboE.getSelectedIndex() == 0) {
-            Especie.bandera = false;
-            if (rAscendenteE.isSelected()) {
-                Collections.sort(especies);
-            } else if (rDescendenteE.isSelected()) {
-                Collections.sort(especies, Collections.reverseOrder());
+        if (tablaC.getSelectedRow() > -1) {
+            if (comboE.getSelectedIndex() == 0) {
+                Especie.bandera = false;
+                if (rAscendenteE.isSelected()) {
+                    Collections.sort(especies);
+                } else if (rDescendenteE.isSelected()) {
+                    Collections.sort(especies, Collections.reverseOrder());
+                }
+            } else if (comboE.getSelectedIndex() == 1) {
+                Especie.bandera = true;
+                if (rAscendenteE.isSelected()) {
+                    Collections.sort(especies, Collections.reverseOrder());
+                } else if (rDescendenteE.isSelected()) {
+                    Collections.sort(especies);
+                }
             }
-        } else if (comboE.getSelectedIndex() == 1) {
-            Especie.bandera = true;
-            if (rAscendenteE.isSelected()) {
-                Collections.sort(especies, Collections.reverseOrder());
-            } else if (rDescendenteE.isSelected()) {
-                Collections.sort(especies);
-            }
+            cargarTablaE();
         }
-        cargarTablaE(cuidador);
     }//GEN-LAST:event_bOrdenar1ActionPerformed
+
+    private void bVerEspeciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerEspeciesActionPerformed
+        // TODO add your handling code here:
+        especies = (List<Especie>) etrs.listar();
+        bandera = false;
+        cargarTablaE();
+    }//GEN-LAST:event_bVerEspeciesActionPerformed
+
+    private void bEliminarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarEActionPerformed
+        // TODO add your handling code here:
+        if (tablaC.getSelectedRow() > -1 & tablaE.getSelectedRow() > -1 & bandera) {
+            Cuidador cuidador = cuidadores.get(tablaC.getSelectedRow());
+            Especie especie = cuidador.getEspecies().get(tablaE.getSelectedRow());
+            System.out.println(especie.getNombreEspecie());
+            if (frmEspecie.buscarObjeto((byte) 1, especie, cuidador)) {
+                cuidador.eliminarEspecie(especie);
+                especie.eliminarCuidador(cuidador);
+                try {
+                    System.out.println(ctrs.actulizar(cuidador));
+                    System.out.println(etrs.actulizar(especie));
+                    especies = cuidador.getEspecies();
+                    for (Especie e : especies) {
+                        System.out.println(e);
+                    }
+                    JOptionPane.showMessageDialog(null, cuidador.getNombre() + " dejó de cuidar a "
+                            + especie.getNombreEspecie(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (MyExcepcion ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    cargarTablaE();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pude eliminar la Especie " + especie.getNombreEspecie()
+                        + " pues no es cuidada por " + cuidador.getNombre(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bEliminarEActionPerformed
+
+    private void bAgregarEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarEActionPerformed
+        // TODO add your handling code here
+        if (tablaC.getSelectedRow() > -1 & tablaE.getSelectedRow() > -1 & !bandera) {
+            Cuidador cuidador = cuidadores.get(tablaC.getSelectedRow());
+            Especie especie = especies.get(tablaE.getSelectedRow());
+            if (!frmEspecie.buscarObjeto((byte) 1, especie, cuidador)) {
+                cuidador.cuidarNuevaEspecie(especie);
+                especie.agregarCuidador(cuidador);
+                especie.setFechaRegistrada(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
+                try {
+                    ctrs.actulizar(cuidador);
+                    etrs.actulizar(especie);
+                    JOptionPane.showMessageDialog(null, cuidador.getNombre() + " empezó a cuidar a "
+                            + especie.getNombreEspecie(), "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (MyExcepcion ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    cargarTablaE();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "La Especie que intenta agregar a " + cuidador.getNombre()
+                        + " ya está agregado a la lista asociada al Cuidador.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila debe de agregar desde "
+                    + "la ventana general de especies", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bAgregarEActionPerformed
+
+    private void bMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMenuActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new frmMenuPrincipal().setVisible(true);
+    }//GEN-LAST:event_bMenuActionPerformed
 
     public boolean validarCampos() {
         if (jNombreC.getText().isEmpty() | jTelefonoC.getText().isEmpty()
                 | jDireccionC.getText().isEmpty() | jIdC.getText().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean validarCamposE() {
-        if (jEspecie.getText().isEmpty() | jDescripcion.getText().isEmpty()
-                | jNombreCE.getText().isEmpty() | jMarca.getText().isEmpty()) {
             return true;
         }
         return false;
@@ -661,6 +599,7 @@ public class frmCuidador extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmCuidador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -672,36 +611,26 @@ public class frmCuidador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bActualizar;
-    private javax.swing.JButton bActualizarE;
     private javax.swing.JButton bAgregar;
     private javax.swing.JButton bAgregarE;
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bEliminarE;
     private javax.swing.JButton bEspecie;
+    private javax.swing.JButton bMenu;
     private javax.swing.JButton bOrdenar;
     private javax.swing.JButton bOrdenar1;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton bVerEspecies;
     private javax.swing.JComboBox<String> comboC;
     private javax.swing.JComboBox<String> comboE;
-    private javax.swing.JTextArea jDescripcion;
     private javax.swing.JTextField jDireccionC;
-    private javax.swing.JTextField jEspecie;
     private javax.swing.JTextField jIdC;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jMarca;
     private javax.swing.JTextField jNombreC;
-    private javax.swing.JTextField jNombreCE;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTelefonoC;
     private javax.swing.JRadioButton rAscendente;
     private javax.swing.JRadioButton rAscendenteE;

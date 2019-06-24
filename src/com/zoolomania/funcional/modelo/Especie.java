@@ -48,7 +48,6 @@ public class Especie implements Serializable, Comparable<Especie> {
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
         this.marca = marca;
-        fechaRegistrada = LocalDateTime.of(LocalDate.now(), LocalTime.now());
         cuiadores = new ArrayList<>();
         habitats = new ArrayList<>();
         zonas = new ArrayList<>();
@@ -96,7 +95,7 @@ public class Especie implements Serializable, Comparable<Especie> {
 
     public void eliminarZona(Zona zona) {
         zonas.remove(zona);
-        System.out.println("Zona eliinara de la especie");
+        System.out.println("Zona eliminada de la especie");
     }
 
     public List<Cuidador> getCuiadores() {
@@ -184,6 +183,18 @@ public class Especie implements Serializable, Comparable<Especie> {
     public String toString() {
         return "Marca N°" + this.marca + " Especie: " + this.nombreEspecie + ". Nombre Científico: " + this.nombreCientifico
                 + ". Descripción: \n" + this.descripcion;
+    }
+
+    public void setCuiadores(List<Cuidador> cuiadores) {
+        this.cuiadores = cuiadores;
+    }
+
+    public void setHabitats(List<Habitat> habitats) {
+        this.habitats = habitats;
+    }
+
+    public void setZonas(List<Zona> zonas) {
+        this.zonas = zonas;
     }
 
 }

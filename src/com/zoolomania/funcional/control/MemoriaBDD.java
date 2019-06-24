@@ -45,13 +45,9 @@ public abstract class MemoriaBDD<T> {
             try {
                 fichero.createNewFile();
                 valoresDefecto();
-                System.out.println("Fichero de " + nombreFichero + " creado correctamente");
-                System.out.println("Su ruta ->" + fichero.getAbsolutePath() + "\n");
             } catch (IOException ex) {
                 Logger.getLogger(MemoriaBDD.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            System.out.println("Fichero " + nombreFichero + " existente, Su ruta ->" + fichero.getAbsolutePath() + "\n");
         }
     }
 
@@ -85,8 +81,8 @@ public abstract class MemoriaBDD<T> {
     }
 
     /**
-     * Método que permite, si no existen ficheros creados, agregar objetos evitar un
-     * funcionamiento desde 0.
+     * Método que permite, si no existen ficheros creados, agregar objetos
+     * evitar un funcionamiento desde 0.
      */
     protected abstract void valoresDefecto();
 

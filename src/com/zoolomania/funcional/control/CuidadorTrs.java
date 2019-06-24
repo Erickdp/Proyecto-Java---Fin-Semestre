@@ -6,7 +6,7 @@
 package com.zoolomania.funcional.control;
 
 import com.zoolomania.funcional.modelo.Cuidador;
-import com.zoolomania.funcional.modelo.Especie;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +53,7 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
         } else {
             for (Cuidador cuidadorAntiguo : listaObjetos) {
                 if (cuidadorAntiguo.getId() == actualizarCuidador.getId()) {
+                    actualizarCuidador.setFechInicioTrabajar(cuidadorAntiguo.getFechInicioTrabajar());
                     listaObjetos.set(listaObjetos.indexOf(cuidadorAntiguo), actualizarCuidador);
                     guardarFichero();
                     return "Actualizado Correctamente";
@@ -91,24 +92,24 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
 
     @Override
     protected void valoresDefecto() {
-        /*List<Cuidador> cuidadors = new ArrayList<>();
-
-        cuidadors.add(new Cuidador("Leon", "Panthera",
-                "Mamífero Carníror de la familia de los félidos y una de las cinco cuidadors del género Panthera."));
-        cuidadors.add(new Cuidador("Elefante", "Elephantidee", "Son una familia de mamíderos placentarios del orden "
-                + "Proboscidea. Existen hoy en día tres cuidadors y diversas subcuidadors"));
-        cuidadors.add(new Cuidador("Chimpancé", "Pan", "Es un género de primates homínidos que comprende las "
-                + "cuidadors Pan troglodytes y Pan paniscus. Su promedio de vida es de 50 años."));
-        cuidadors.add(new Cuidador("Cebra", "Equus grevji", "Las cebras son altamente sociables. Aun así, su estructura "
-                + "social depende de la cuidador. Las cebras de comtaña y cebras comunes viven en grupos, conocidos"
-                + " como \"harenes"));*/
-//        cuidadorDefecto.cuidarNuevaCuidador(new Cuidador("Perro", "Perrus", "Pelusa", (short) 1));
         try {
-            guardar(new Cuidador("Carlos", "Floresta", "331234", (short)1));
+            guardar(new Cuidador("Carlos", "Floresta", "331234", (short) 1));
+            guardar(new Cuidador("José", "Oriental", "32423", (short) 2));
+            guardar(new Cuidador("Esteban", "Quitumbe", "43252", (short) 3));
+            guardar(new Cuidador("Mauro", "U.C.E", "23452", (short) 4));
+            guardar(new Cuidador("Javier", "Ronda", "2345", (short) 5));
+            guardar(new Cuidador("Antonio", "Santa Rita", "23421",(short) 6));
+            guardar(new Cuidador("Carmen", "Teleferico", "32412", (short) 7));
+            guardar(new Cuidador("Rosa", "Atahualpa", "3241", (short) 8));
+            guardar(new Cuidador("Manuel", "Estadio Olimpico", "34214", (short) 9));
+            guardar(new Cuidador("David", "Solanda", "32432", (short) 10));
+            guardar(new Cuidador("Daniel", "Universitaria", "3242345", (short) 11));
+            guardar(new Cuidador("Hugo", "Av. Simón Bolivar", "235412", (short) 12));
+            guardar(new Cuidador("Pablo", "Gasca", "45321", (short) 13));
+            guardar(new Cuidador("Lucas", "Oriental", "7563", (short) 14));
+            guardar(new Cuidador("Mateo", "Aucas", "543872", (short) 15));
         } catch (MyExcepcion ex) {
             Logger.getLogger(CuidadorTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
 }

@@ -48,6 +48,10 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
         return nombre;
     }
 
+    public void setFechInicioTrabajar(LocalDateTime fechInicioTrabajar) {
+        this.fechInicioTrabajar = fechInicioTrabajar;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

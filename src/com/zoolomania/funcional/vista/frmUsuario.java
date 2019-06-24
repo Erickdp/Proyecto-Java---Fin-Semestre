@@ -344,16 +344,16 @@ public class frmUsuario extends javax.swing.JFrame {
         if (jCitem.getSelectedIndex() == 0) {
             Usuario.bandera = false;
             if (jAscendente.isSelected()) {
-                Collections.sort(usuarios);
-            } else if (jrDescendente.isSelected()) {
                 Collections.sort(usuarios, Collections.reverseOrder());
+            } else if (jrDescendente.isSelected()) {
+                Collections.sort(usuarios);
             }
         } else if (jCitem.getSelectedIndex() == 1) {
             Usuario.bandera = true;
             if (jAscendente.isSelected()) {
-                Collections.sort(usuarios, Collections.reverseOrder());
-            } else if (jrDescendente.isSelected()) {
                 Collections.sort(usuarios);
+            } else if (jrDescendente.isSelected()) {
+                Collections.sort(usuarios, Collections.reverseOrder());
             }
         }
         cargarTabla();

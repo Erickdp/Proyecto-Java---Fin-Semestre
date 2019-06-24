@@ -8,8 +8,6 @@ package com.zoolomania.funcional.vista;
 import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.control.UsuarioTrs;
 import com.zoolomania.funcional.modelo.Usuario;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -161,7 +159,7 @@ public class frmRegistro extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                             .addComponent(jCorreo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -170,8 +168,8 @@ public class frmRegistro extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jp2, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)
-                        .addGap(149, 149, 149))
+                        .addComponent(jp2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                        .addGap(88, 88, 88))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jpassr, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
@@ -277,9 +275,9 @@ public class frmRegistro extends javax.swing.JFrame {
             jCorreo.setText("");
         } else {
             try {
-                utrs.guardar(new Usuario(jNombre.getText(), new String(jpass.getPassword()), jCorreo.getText()));
+                System.out.println(utrs.guardar(new Usuario(jNombre.getText(), new String(jpass.getPassword()), jCorreo.getText())));
             } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Erros al resgistrar", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al resgistrar", JOptionPane.ERROR_MESSAGE);
             }
         }
 

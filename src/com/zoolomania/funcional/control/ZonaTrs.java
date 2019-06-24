@@ -92,10 +92,16 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
     @Override
     protected void valoresDefecto() {
         try {
-            /*
-            Esta zona no sirve utilizar constructor que permite ingresar listas
-             */
             guardar(new Zona("Media", 2.2F, (short) 1));
+            guardar(new Zona("Alta", 3.5F, (short) 2));
+            guardar(new Zona("Baja", 1.2F, (short) 3));
+            guardar(new Zona("Calurosa", 1.8F, (short) 4));
+            guardar(new Zona("Norte", 2.7F, (short) 5));
+            guardar(new Zona("Sur", 1.9F, (short) 6));
+            guardar(new Zona("Oriente", 1.0F, (short) 7));
+            guardar(new Zona("Piedras", 2.3F, (short) 8));
+            guardar(new Zona("Lluviosa", 0.5F, (short) 9));
+            guardar(new Zona("Centro", 2.3F, (short) 10));
         } catch (MyExcepcion ex) {
             Logger.getLogger(ZonaTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

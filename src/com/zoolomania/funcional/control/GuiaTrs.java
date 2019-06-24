@@ -94,6 +94,9 @@ public class GuiaTrs extends MemoriaBDD<Guia> implements ICrud {
             guardar(new Guia("Marco", "América", "42134", (short) 2));
             guardar(new Guia("Octavio", "Solanda", "51233", (short) 3));
             guardar(new Guia("Omar", "Beaterio", "32412", (short) 4));
+            guardar(new Guia("Julia", "Plazoleta", "92387", (short) 5));
+            guardar(new Guia("Alvaro", "Las Casas", "90328", (short) 6));
+            guardar(new  Guia("Martín", "Rio Coca", "72129", (short) 7));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();
