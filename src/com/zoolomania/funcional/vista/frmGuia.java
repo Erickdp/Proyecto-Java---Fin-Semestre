@@ -28,8 +28,8 @@ public class frmGuia extends javax.swing.JFrame {
 
     GuiaTrs gtrs = new GuiaTrs();
     ItinerarioTrs itrs = new ItinerarioTrs();
-    List<Guia> guias = (List<Guia>) gtrs.listar();
-    List<Itinerario> itinerarios = (List<Itinerario>) itrs.listar();
+    List<Guia> guias = gtrs.listar();
+    List<Itinerario> itinerarios = itrs.listar();
     boolean bandera = false;
 
     private void cargarTablaI() {
@@ -426,7 +426,7 @@ public class frmGuia extends javax.swing.JFrame {
                         "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
             } finally {
                 cargarTablaG();
-                itinerarios = (List<Itinerario>) itrs.listar();
+                itinerarios = itrs.listar();
                 cargarTablaI();
             }
         } else {
@@ -511,7 +511,7 @@ public class frmGuia extends javax.swing.JFrame {
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar el itinerario pues no está en la lista del guia.",
-                         "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                        "Aviso", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Si desea eliminar un itinerario eliminelo desde la lista del Guia",
@@ -561,7 +561,7 @@ public class frmGuia extends javax.swing.JFrame {
 
     private void bRelacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelacion1ActionPerformed
         // TODO add your handling code here:
-        itinerarios = (List<Itinerario>) itrs.listar();
+        itinerarios = itrs.listar();
         cargarTablaI();
         bandera = false;
     }//GEN-LAST:event_bRelacion1ActionPerformed

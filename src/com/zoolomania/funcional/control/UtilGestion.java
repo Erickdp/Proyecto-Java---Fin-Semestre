@@ -33,12 +33,12 @@ public class UtilGestion {
     private static List<Cuidador> cuidadores;
 
     static {
-        zonas = (List<Zona>) ztrs.listar();
-        especies = (List<Especie>) etrs.listar();
-        guias = (List<Guia>) gtrs.listar();
-        habitats = (List<Habitat>) htrs.listar();
-        itinerarios = (List<Itinerario>) itrs.listar();
-        cuidadores = (List<Cuidador>) ctrs.listar();
+        zonas = ztrs.listar();
+        especies = etrs.listar();
+        guias =  gtrs.listar();
+        habitats =  htrs.listar();
+        itinerarios =  itrs.listar();
+        cuidadores =  ctrs.listar();
     }
 
     public static void eliminacionCompleta(Object registro) throws MyExcepcion {
@@ -79,7 +79,7 @@ public class UtilGestion {
             for (Itinerario i : itinerarios) {
                 if (i.getZonas().contains(registro)) {
                     i.getZonas().remove(registro);
-                    itrs.actulizar(registro);
+                    itrs.actulizar(i);
                 }
             }
         } else if (registro instanceof Habitat) { //Eliminar Especie

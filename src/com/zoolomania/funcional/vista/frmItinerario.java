@@ -16,8 +16,6 @@ import com.zoolomania.funcional.modelo.Zona;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,9 +28,9 @@ public class frmItinerario extends javax.swing.JFrame {
     GuiaTrs gtrs = new GuiaTrs();
     ZonaTrs ztrs = new ZonaTrs();
     ItinerarioTrs itrs = new ItinerarioTrs();
-    List<Guia> guias = (List<Guia>) gtrs.listar();
-    List<Zona> zonas = (List<Zona>) ztrs.listar();
-    List<Itinerario> itinerarios = (List<Itinerario>) itrs.listar();
+    List<Guia> guias = gtrs.listar();
+    List<Zona> zonas = ztrs.listar();
+    List<Itinerario> itinerarios = itrs.listar();
     boolean bandera = false;
 
     private void cargarTablaI() {
@@ -450,8 +448,8 @@ public class frmItinerario extends javax.swing.JFrame {
             } catch (MyExcepcion ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
             } finally {
-                guias = (List<Guia>) gtrs.listar();
-                zonas = (List<Zona>) ztrs.listar();
+                guias = gtrs.listar();
+                zonas = ztrs.listar();
                 cargarTablaG();
                 cargarTablaI();
                 cargarTablaZ();
@@ -476,8 +474,8 @@ public class frmItinerario extends javax.swing.JFrame {
 
     private void bVerTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerTodoActionPerformed
         // TODO add your handling code here:
-        zonas = (List<Zona>) ztrs.listar();
-        guias = (List<Guia>) gtrs.listar();
+        zonas = ztrs.listar();
+        guias = gtrs.listar();
         itinerarios = (List<Itinerario>) itrs.listar();
         cargarTablaG();
         cargarTablaI();

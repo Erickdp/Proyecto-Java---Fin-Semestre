@@ -30,9 +30,9 @@ public class frmZona extends javax.swing.JFrame {
     ZonaTrs ztrs = new ZonaTrs();
     EspecieTrs etrs = new EspecieTrs();
     ItinerarioTrs itrs = new ItinerarioTrs();
-    List<Zona> zonas = (List<Zona>) ztrs.listar();
-    List<Especie> especies = (List<Especie>) etrs.listar();
-    List<Itinerario> itinerarios = (List<Itinerario>) itrs.listar();
+    List<Zona> zonas = ztrs.listar();
+    List<Especie> especies = etrs.listar();
+    List<Itinerario> itinerarios = itrs.listar();
     boolean bandera = false;
 
     private void cargarTablaZ() {
@@ -448,10 +448,11 @@ public class frmZona extends javax.swing.JFrame {
     }//GEN-LAST:event_bAgregarActionPerformed
 
     /**
-     * Lo que hace la implementación de este método es que si se elimina la Zona entonces esta debe de 
-     * eliminarse en todas las demás relaciones que puedan existir hacia este objeto, se elimina el registro
-     * completo.
-     * @param evt 
+     * Lo que hace la implementación de este método es que si se elimina la Zona
+     * entonces esta debe de eliminarse en todas las demás relaciones que puedan
+     * existir hacia este objeto, se elimina el registro completo.
+     *
+     * @param evt
      */
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
         // TODO add your handling code here:
@@ -462,8 +463,8 @@ public class frmZona extends javax.swing.JFrame {
             } catch (MyExcepcion ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
             } finally {
-                especies = (List<Especie>) etrs.listar();
-                itinerarios = (List<Itinerario>) itrs.listar();
+                especies = etrs.listar();
+                itinerarios = itrs.listar();
                 cargarTablaZ();
                 cargarTablaE();
                 cargarTablaI();
@@ -610,8 +611,8 @@ public class frmZona extends javax.swing.JFrame {
                 try {
                     System.out.println(ztrs.actulizar(zona));
                     System.out.println(etrs.actulizar(especie));
-                    JOptionPane.showMessageDialog(null, especie.getNombreEspecie() + 
-                            " eliminado de la Zona.", "Aviso", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, especie.getNombreEspecie()
+                            + " eliminado de la Zona.", "Aviso", JOptionPane.ERROR_MESSAGE);
                 } catch (MyExcepcion ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
@@ -647,9 +648,9 @@ public class frmZona extends javax.swing.JFrame {
         bandera = false;
         /*
         No olvidar devolver a la lista su valores no relacionados al objeto
-        */
-        especies = (List<Especie>) etrs.listar();
-        itinerarios = (List<Itinerario>) itrs.listar();
+         */
+        especies = etrs.listar();
+        itinerarios = itrs.listar();
         cargarTablaE();
         cargarTablaI();
     }//GEN-LAST:event_jButton3ActionPerformed

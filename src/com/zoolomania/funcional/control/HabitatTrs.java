@@ -13,29 +13,28 @@ import java.util.List;
  *
  * @author Santiago Sisalem - Erick Díaz (Unplugged)
  */
-public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
+public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud<Habitat> {
 
     public HabitatTrs() {
         super("Habitat");
         leerFichero();
     }
 
-   @Override
-    public String guardar(Object registro) throws MyExcepcion {
-        Habitat guardarHabitat = (Habitat) registro;
+    @Override
+    public String guardar(Habitat registro) throws MyExcepcion {
         boolean bandera = false;
-        if (buscarConId(guardarHabitat.getId()) != null) {
+        if (buscarConId(registro.getId()) != null) {
             throw new MyExcepcion("3");
         } else {
             for (Habitat habitatRepetido : listaObjetos) {
-                if (habitatRepetido.equals(guardarHabitat)) {
+                if (habitatRepetido.equals(registro)) {
                     bandera = true;
                     throw new MyExcepcion("1");
                 }
             }
         }
         if (!bandera) {
-            listaObjetos.add(guardarHabitat);
+            listaObjetos.add(registro);
             guardarFichero();
             return "Guardado Correctamente";
         } else {
@@ -44,14 +43,13 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
     }
 
     @Override
-    public String actulizar(Object registro) throws MyExcepcion {
-        Habitat actualizarHabitat = (Habitat) registro;
-        if (buscarConId(actualizarHabitat.getId()) == null) {
+    public String actulizar(Habitat registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("2");
         } else {
             for (Habitat habitatAntiguo : listaObjetos) {
-                if (habitatAntiguo.getId() == actualizarHabitat.getId()) {
-                    listaObjetos.set(listaObjetos.indexOf(habitatAntiguo), actualizarHabitat);
+                if (habitatAntiguo.getId() == registro.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(habitatAntiguo), registro);
                     guardarFichero();
                     return "Actualizado Correctamente";
                 }
@@ -61,15 +59,19 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
     }
 
     @Override
-    public String eliminar(Object registro) throws MyExcepcion {
-        Habitat eliminarHabitat = (Habitat) registro;
-        if (buscarConId(eliminarHabitat.getId()) == null) {
+    public String eliminar(Habitat registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("4");
         } else {
-            listaObjetos.remove(eliminarHabitat);
+            listaObjetos.remove(registro);
             guardarFichero();
             return "Eliminación Correcta";
         }
+    }
+
+    @Override
+    public List<Habitat> listar() {
+        return listaObjetos;
     }
 
     @Override
@@ -80,11 +82,6 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
             }
         }
         return null;
-    }
-
-    @Override
-    public List<?> listar() {
-        return listaObjetos;
     }
 
     @Override
@@ -100,4 +97,5 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud {
             ex.getStackTrace();
         }
     }
+
 }

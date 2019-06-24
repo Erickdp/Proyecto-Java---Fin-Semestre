@@ -14,9 +14,9 @@ import java.util.logging.Logger;
 /**
  * Clase que representa las operaciones de negio para Itinerarios
  *
- * @author Santiago Sisalem - Erick Díaz
+ * @author Erick Díaz
  */
-public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
+public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud<Itinerario> {
 
     public ItinerarioTrs() {
         super("Itinerario");
@@ -24,21 +24,20 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
     }
 
     @Override
-    public String guardar(Object registro) throws MyExcepcion {
-        Itinerario guardarItinerario = (Itinerario) registro;
+    public String guardar(Itinerario registro) throws MyExcepcion {
         boolean bandera = false;
-        if (buscarConId(guardarItinerario.getId()) != null) {
+        if (buscarConId(registro.getId()) != null) {
             throw new MyExcepcion("3");
         } else {
             for (Itinerario itinerarioRepetido : listaObjetos) {
-                if (itinerarioRepetido.equals(guardarItinerario)) {
+                if (itinerarioRepetido.equals(registro)) {
                     bandera = true;
                     throw new MyExcepcion("1");
                 }
             }
         }
         if (!bandera) {
-            listaObjetos.add(guardarItinerario);
+            listaObjetos.add(registro);
             guardarFichero();
             return "Guardado Correctamente";
         } else {
@@ -47,14 +46,13 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
     }
 
     @Override
-    public String actulizar(Object registro) throws MyExcepcion {
-        Itinerario actualizarItinerario = (Itinerario) registro;
-        if (buscarConId(actualizarItinerario.getId()) == null) {
+    public String actulizar(Itinerario registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("2");
         } else {
             for (Itinerario itinerarioAntiguo : listaObjetos) {
-                if (itinerarioAntiguo.getId() == actualizarItinerario.getId()) {
-                    listaObjetos.set(listaObjetos.indexOf(itinerarioAntiguo), actualizarItinerario);
+                if (itinerarioAntiguo.getId() == registro.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(itinerarioAntiguo), registro);
                     guardarFichero();
                     return "Actualizado Correctamente";
                 }
@@ -64,15 +62,19 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
     }
 
     @Override
-    public String eliminar(Object registro) throws MyExcepcion {
-        Itinerario eliminarItinerario = (Itinerario) registro;
-        if (buscarConId(eliminarItinerario.getId()) == null) {
+    public String eliminar(Itinerario registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("4");
         } else {
-            listaObjetos.remove(eliminarItinerario);
+            listaObjetos.remove(registro);
             guardarFichero();
             return "Eliminación Correcta";
         }
+    }
+
+    @Override
+    public List<Itinerario> listar() {
+        return listaObjetos;
     }
 
     @Override
@@ -83,11 +85,6 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
             }
         }
         return null;
-    }
-
-    @Override
-    public List<?> listar() {
-        return listaObjetos;
     }
 
     @Override
@@ -104,4 +101,5 @@ public class ItinerarioTrs extends MemoriaBDD<Itinerario> implements ICrud {
             Logger.getLogger(ItinerarioTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

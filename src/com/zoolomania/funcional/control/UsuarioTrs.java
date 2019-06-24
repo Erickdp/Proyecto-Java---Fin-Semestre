@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * Clase que representa las operaciones de negocio para Usuarios
  *
- * @author Santiago Sisalem - Erick Díaz (unplugged)
+ * @author Erick Díaz (unplugged)
  */
-public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
+public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud<Usuario> {
 
     public UsuarioTrs() {
         super("Usuario");
@@ -21,21 +21,20 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
     }
 
     @Override
-    public String guardar(Object registro) throws MyExcepcion {
-        Usuario guardarUsuario = (Usuario) registro;
+    public String guardar(Usuario registro) throws MyExcepcion {
         boolean bandera = false;
-        if (buscarConId(guardarUsuario.getId()) != null) {
+        if (buscarConId(registro.getId()) != null) {
             throw new MyExcepcion("3");
         } else {
             for (Usuario usuarioRepetido : listaObjetos) {
-                if (usuarioRepetido.getUserName().equalsIgnoreCase(guardarUsuario.getUserName()) 
-                        || usuarioRepetido.getEmail().equalsIgnoreCase(guardarUsuario.getEmail())) {
+                if (usuarioRepetido.getUserName().equalsIgnoreCase(registro.getUserName())
+                        || usuarioRepetido.getEmail().equalsIgnoreCase(registro.getEmail())) {
                     bandera = true;
                     break;
                 }
             }
             if (!bandera) {
-                listaObjetos.add(guardarUsuario);
+                listaObjetos.add(registro);
                 guardarFichero();
                 return "Guardado Correctamente";
             } else {
@@ -45,14 +44,13 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
     }
 
     @Override
-    public String actulizar(Object registro) throws MyExcepcion {
-        Usuario actualizarUsuario = (Usuario) registro;
-        if (buscarConId(actualizarUsuario.getId()) == null) {
+    public String actulizar(Usuario registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("2");
         } else {
             for (Usuario usuarioAntiguo : listaObjetos) {
-                if (usuarioAntiguo.getId() == actualizarUsuario.getId()) {
-                    listaObjetos.set(listaObjetos.indexOf(usuarioAntiguo), actualizarUsuario);
+                if (usuarioAntiguo.getId() == registro.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(usuarioAntiguo), registro);
                     guardarFichero();
                     return "Actualizado Correctamente";
                 }
@@ -62,15 +60,19 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
     }
 
     @Override
-    public String eliminar(Object registro) throws MyExcepcion {
-        Usuario eliminarUsuario = (Usuario) registro;
-        if (buscarConId(eliminarUsuario.getId()) == null) {
+    public String eliminar(Usuario registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("4");
         } else {
-            listaObjetos.remove(eliminarUsuario);
+            listaObjetos.remove(registro);
             guardarFichero();
             return "Eliminación Correcta";
         }
+    }
+
+    @Override
+    public List<Usuario> listar() {
+        return listaObjetos;
     }
 
     @Override
@@ -81,11 +83,6 @@ public class UsuarioTrs extends MemoriaBDD<Usuario> implements ICrud {
             }
         }
         return null;
-    }
-
-    @Override
-    public List<?> listar() {
-        return listaObjetos;
     }
 
     @Override

@@ -38,10 +38,10 @@ public class frmEspecie extends javax.swing.JFrame {
     cada clase que declararlas dentro de los métodos, pues producen 
     excepciones debido a que no se actualizan
      */
-    List<Especie> especies = (List<Especie>) etrs.listar();
-    List<Cuidador> cuidadores = (List<Cuidador>) ctrs.listar();
-    List<Habitat> habitats = (List<Habitat>) htrs.listar();
-    List<Zona> zonas = (List<Zona>) ztrs.listar();
+    List<Especie> especies = etrs.listar();
+    List<Cuidador> cuidadores = ctrs.listar();
+    List<Habitat> habitats = htrs.listar();
+    List<Zona> zonas = ztrs.listar();
     List<Especie> especiesR; //Lista que permite gestionar operaciones adicionales
     boolean bandera = false;
 
@@ -500,9 +500,9 @@ public class frmEspecie extends javax.swing.JFrame {
             } catch (MyExcepcion ex) {
                 Logger.getLogger(frmEspecie.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
-                cuidadores = (List<Cuidador>) ctrs.listar();
-                habitats = (List<Habitat>) htrs.listar();
-                zonas = (List<Zona>) ztrs.listar();
+                cuidadores = ctrs.listar();
+                habitats = htrs.listar();
+                zonas = ztrs.listar();
                 cargarTablaE();
                 cargarTablaC();
                 cargarTablaH();
@@ -586,8 +586,8 @@ public class frmEspecie extends javax.swing.JFrame {
                 try {
                     System.out.println(etrs.actulizar(especieN));
                     System.out.println(ctrs.actulizar(cuidadorN));
-                    JOptionPane.showMessageDialog(null, "Cuidador agregado a " + especieN.getNombreEspecie(), "Aviso"
-                            , JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Cuidador agregado a " + especieN.getNombreEspecie(), "Aviso",
+                             JOptionPane.INFORMATION_MESSAGE);
                 } catch (MyExcepcion ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -604,8 +604,8 @@ public class frmEspecie extends javax.swing.JFrame {
                 try {
                     etrs.actulizar(especieN);
                     htrs.actulizar(habitatN);
-                    JOptionPane.showMessageDialog(null, "Habitat agregado a " + especieN.getNombreEspecie(), "Aviso"
-                            , JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Habitat agregado a " + especieN.getNombreEspecie(), "Aviso",
+                             JOptionPane.INFORMATION_MESSAGE);
                 } catch (MyExcepcion ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -622,8 +622,8 @@ public class frmEspecie extends javax.swing.JFrame {
                 try {
                     etrs.actulizar(especieN);
                     ztrs.actulizar(zonaN);
-                    JOptionPane.showMessageDialog(null, "Zona agregado a " + especieN.getNombreEspecie(), "Aviso"
-                            , JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Zona agregado a " + especieN.getNombreEspecie(), "Aviso",
+                             JOptionPane.INFORMATION_MESSAGE);
                 } catch (MyExcepcion ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -718,9 +718,9 @@ public class frmEspecie extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         bandera = false;
-        cuidadores = (List<Cuidador>) ctrs.listar();
-        habitats = (List<Habitat>) htrs.listar();
-        zonas = (List<Zona>) ztrs.listar();
+        cuidadores = ctrs.listar();
+        habitats = htrs.listar();
+        zonas = ztrs.listar();
         cargarTablaC();
         cargarTablaH();
         cargarTablaZ();
@@ -737,14 +737,14 @@ public class frmEspecie extends javax.swing.JFrame {
         if (tablaE.getSelectedRow() > -1) {
             cuidadores = especies.get(tablaE.getSelectedRow()).getCuiadores();
             habitats = especies.get(tablaE.getSelectedRow()).getHabitats();
-            zonas =  especies.get(tablaE.getSelectedRow()).getZonas();
+            zonas = especies.get(tablaE.getSelectedRow()).getZonas();
             cargarTablaC();
             cargarTablaH();
             cargarTablaZ();
             bandera = true;
         } else {
             JOptionPane.showMessageDialog(null, "Elija la fila que quiere ver sus relaciones",
-                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -26,8 +26,8 @@ public class frmHabitat extends javax.swing.JFrame {
 
     HabitatTrs htrs = new HabitatTrs();
     EspecieTrs etrs = new EspecieTrs();
-    List<Habitat> habitats = (List<Habitat>) htrs.listar();
-    List<Especie> especies = (List<Especie>) etrs.listar();
+    List<Habitat> habitats = htrs.listar();
+    List<Especie> especies = etrs.listar();
     boolean bandera = false;
 
     public void cargarTablaE() {
@@ -423,7 +423,7 @@ public class frmHabitat extends javax.swing.JFrame {
             } catch (MyExcepcion ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Guardar", JOptionPane.ERROR_MESSAGE);
             } finally {
-                habitats = (List<Habitat>) htrs.listar();
+                habitats = htrs.listar();
                 cargarTablaE();
                 cargarTablaH();
             }
@@ -488,7 +488,7 @@ public class frmHabitat extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila del habitat a la cual desea agregarle la especie. O salga de las especies del habitat",
-                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_bAgregarOActionPerformed
 
@@ -515,14 +515,14 @@ public class frmHabitat extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una fila del habitat a la cual desea agregarle la especie. O ingrese a las especies del Habitat",
-                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_bEliminarOActionPerformed
 
     private void bVerTodoOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerTodoOActionPerformed
         // TODO add your handling code here:
-        especies = (List<Especie>) etrs.listar();
-        habitats = (List<Habitat>) htrs.listar();
+        especies = etrs.listar();
+        habitats = htrs.listar();
         cargarTablaE();
         bandera = false;
     }//GEN-LAST:event_bVerTodoOActionPerformed
@@ -553,14 +553,14 @@ public class frmHabitat extends javax.swing.JFrame {
             Habitat.bandera = false;
             if (rAscendente.isEnabled()) {
                 Collections.sort(habitats, Collections.reverseOrder());
-            } else if (rDescendente.isEnabled()){
+            } else if (rDescendente.isEnabled()) {
                 Collections.sort(habitats);
             }
-        } else if(cBox.getSelectedIndex() == 1){
+        } else if (cBox.getSelectedIndex() == 1) {
             Habitat.bandera = true;
             if (rAscendente.isEnabled()) {
                 Collections.sort(habitats);
-            } else if (rDescendente.isEnabled()){
+            } else if (rDescendente.isEnabled()) {
                 Collections.sort(habitats, Collections.reverseOrder());
             }
         }

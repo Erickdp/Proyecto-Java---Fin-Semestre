@@ -15,46 +15,44 @@ import java.util.logging.Logger;
  *
  * @author Erick Díaz
  */
-public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
-    
+public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud<Especie> {
+
     public EspecieTrs() {
         super("Especie");
         leerFichero();
     }
-    
+
     @Override
-    public String guardar(Object registro) throws MyExcepcion {
-        Especie guardarEspecie = (Especie) registro;
+    public String guardar(Especie registro) throws MyExcepcion {
         boolean bandera = false;
-        if (buscarConId(guardarEspecie.getMarca()) != null) {
+        if (buscarConId(registro.getMarca()) != null) {
             throw new MyExcepcion("3");
         } else {
             for (Especie especieRepetida : listaObjetos) {
-                if (especieRepetida.equals(guardarEspecie)) {
+                if (especieRepetida.equals(registro)) {
                     bandera = true;
                     throw new MyExcepcion("1");
                 }
             }
         }
         if (!bandera) {
-            listaObjetos.add(guardarEspecie);
+            listaObjetos.add(registro);
             guardarFichero();
             return "Guardado Correctamente";
         } else {
             return "No se pudo guardar";
         }
     }
-    
+
     @Override
-    public String actulizar(Object registro) throws MyExcepcion {
-        Especie actualizarEspecie = (Especie) registro;
-        if (buscarConId(actualizarEspecie.getMarca()) == null) {
+    public String actulizar(Especie registro) throws MyExcepcion {
+        if (buscarConId(registro.getMarca()) == null) {
             throw new MyExcepcion("2");
         } else {
             for (Especie especieAntiguo : listaObjetos) {
-                if (especieAntiguo.getMarca() == actualizarEspecie.getMarca()) {
-                    actualizarEspecie.setFechaRegistrada(especieAntiguo.getFechaRegistrada());
-                    listaObjetos.set(listaObjetos.indexOf(especieAntiguo), actualizarEspecie);
+                if (especieAntiguo.getMarca() == registro.getMarca()) {
+                    registro.setFechaRegistrada(especieAntiguo.getFechaRegistrada());
+                    listaObjetos.set(listaObjetos.indexOf(especieAntiguo), registro);
                     guardarFichero();
                     return "Actualizado Correctamente";
                 }
@@ -62,19 +60,23 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
         }
         return "No se pudo actualizar";
     }
-    
+
     @Override
-    public String eliminar(Object registro) throws MyExcepcion {
-        Especie eliminarEspecie = (Especie) registro;
-        if (buscarConId(eliminarEspecie.getMarca()) == null) {
+    public String eliminar(Especie registro) throws MyExcepcion {
+        if (buscarConId(registro.getMarca()) == null) {
             throw new MyExcepcion("4");
         } else {
-            listaObjetos.remove(eliminarEspecie);
+            listaObjetos.remove(registro);
             guardarFichero();
             return "Eliminación Correcta";
         }
     }
-    
+
+    @Override
+    public List<Especie> listar() {
+        return listaObjetos;
+    }
+
     @Override
     public Object buscarConId(short id) throws NumberFormatException {
         for (Especie especie : listaObjetos) {
@@ -84,12 +86,7 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
         }
         return null;
     }
-    
-    @Override
-    public List<?> listar() {
-        return listaObjetos;
-    }
-    
+
     @Override
     protected void valoresDefecto() {
         try {
@@ -105,7 +102,7 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
             guardar(new Especie("Pingüino", "Spheniscidae", "Los pingüinos son una familia de aves, la única del orden Sphenisciformes. Son aves marinas, no voladoras, "
                     + "\nque se distribuyen casi exclusivamente en el hemisferio sur, exceptuando el pingüino de las islas Galápagos.", (short) 5));
             guardar(new Especie("Iguana", "Laurenti‎", "Iguana es un género de sauropsidos escamosos de la familia Iguanidae nativos de "
-                    + "zonas tropicales de Centroamérica, Sudamérica y el Caribe.", (short)6));
+                    + "zonas tropicales de Centroamérica, Sudamérica y el Caribe.", (short) 6));
             guardar(new Especie("Torutga", "Testudines", "Las tortugas o quelonios forman un orden de reptiles caracterizados por tener un "
                     + "\ntronco ancho y corto, y un caparazón que protege los órganos internos de su cuerpo", (short) 7));
             guardar(new Especie("Gavilán", "Accipiter nisus", "El gavilán común ​​ es una especie de ave accipitriforme de la familia Accipitridae, "
@@ -118,4 +115,5 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud {
             Logger.getLogger(EspecieTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

@@ -6,7 +6,6 @@
 package com.zoolomania.funcional.control;
 
 import com.zoolomania.funcional.modelo.Cuidador;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author Erick Díaz
  */
-public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
+public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud<Cuidador> {
 
     public CuidadorTrs() {
         super("Cuidador");
@@ -23,21 +22,20 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
     }
 
     @Override
-    public String guardar(Object registro) throws MyExcepcion {
-        Cuidador guardarCuidador = (Cuidador) registro;
+    public String guardar(Cuidador registro) throws MyExcepcion {
         boolean bandera = false;
-        if (buscarConId(guardarCuidador.getId()) != null) {
+        if (buscarConId(registro.getId()) != null) {
             throw new MyExcepcion("3");
         } else {
             for (Cuidador cuidadorRepetido : listaObjetos) {
-                if (cuidadorRepetido.equals(guardarCuidador)) {
+                if (cuidadorRepetido.equals(registro)) {
                     bandera = true;
                     throw new MyExcepcion("1");
                 }
             }
         }
         if (!bandera) {
-            listaObjetos.add(guardarCuidador);
+            listaObjetos.add(registro);
             guardarFichero();
             return "Guardado Correctamente";
         } else {
@@ -46,15 +44,14 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
     }
 
     @Override
-    public String actulizar(Object registro) throws MyExcepcion {
-        Cuidador actualizarCuidador = (Cuidador) registro;
-        if (buscarConId(actualizarCuidador.getId()) == null) {
+    public String actulizar(Cuidador registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("2");
         } else {
             for (Cuidador cuidadorAntiguo : listaObjetos) {
-                if (cuidadorAntiguo.getId() == actualizarCuidador.getId()) {
-                    actualizarCuidador.setFechInicioTrabajar(cuidadorAntiguo.getFechInicioTrabajar());
-                    listaObjetos.set(listaObjetos.indexOf(cuidadorAntiguo), actualizarCuidador);
+                if (cuidadorAntiguo.getId() == registro.getId()) {
+                    registro.setFechInicioTrabajar(cuidadorAntiguo.getFechInicioTrabajar());
+                    listaObjetos.set(listaObjetos.indexOf(cuidadorAntiguo), registro);
                     guardarFichero();
                     return "Actualizado Correctamente";
                 }
@@ -64,12 +61,11 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
     }
 
     @Override
-    public String eliminar(Object registro) throws MyExcepcion {
-        Cuidador eliminarCuidador = (Cuidador) registro;
-        if (buscarConId(eliminarCuidador.getId()) == null) {
+    public String eliminar(Cuidador registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("4");
         } else {
-            listaObjetos.remove(eliminarCuidador);
+            listaObjetos.remove(registro);
             guardarFichero();
             return "Eliminación Correcta";
         }
@@ -86,7 +82,7 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
     }
 
     @Override
-    public List<?> listar() {
+    public List<Cuidador> listar() {
         return listaObjetos;
     }
 
@@ -98,7 +94,7 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
             guardar(new Cuidador("Esteban", "Quitumbe", "43252", (short) 3));
             guardar(new Cuidador("Mauro", "U.C.E", "23452", (short) 4));
             guardar(new Cuidador("Javier", "Ronda", "2345", (short) 5));
-            guardar(new Cuidador("Antonio", "Santa Rita", "23421",(short) 6));
+            guardar(new Cuidador("Antonio", "Santa Rita", "23421", (short) 6));
             guardar(new Cuidador("Carmen", "Teleferico", "32412", (short) 7));
             guardar(new Cuidador("Rosa", "Atahualpa", "3241", (short) 8));
             guardar(new Cuidador("Manuel", "Estadio Olimpico", "34214", (short) 9));
@@ -112,4 +108,5 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud {
             Logger.getLogger(CuidadorTrs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

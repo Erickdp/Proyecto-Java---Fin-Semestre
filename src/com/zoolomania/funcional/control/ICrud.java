@@ -12,16 +12,15 @@ import java.util.List;
  *
  * @author Santiago Sisalem - Erick Díaz
  */
-public interface ICrud {
+public interface ICrud<T> {
 
     /**
-     * Método que permite Guardar/Crear un objeto
-     *
+     * Método que permite Guardar/Crear un objeto de tipo T
      * @param registro
      * @return
-     * @throws MyExcepcion
+     * @throws MyExcepcion 
      */
-    public String guardar(Object registro) throws MyExcepcion;
+    public String guardar(T registro) throws MyExcepcion;
 
     /**
      * Método que permite actualizar un objeto
@@ -30,30 +29,27 @@ public interface ICrud {
      * @return
      * @throws MyExcepcion
      */
-    public String actulizar(Object registro) throws MyExcepcion;
+    public String actulizar(T registro) throws MyExcepcion;
 
     /**
      * Método que permitirá devolver el estado del objeto a consultar
-     *
      * @param id
      * @return
-     * @throws NumberFormatException
+     * @throws NumberFormatException 
      */
     public Object buscarConId(short id) throws NumberFormatException;
 
     /**
      * Método que permite eliminar un registro a través de su ID
-     *
      * @param registro
      * @return
-     * @throws MyExcepcion
+     * @throws MyExcepcion 
      */
-    public String eliminar(Object registro) throws MyExcepcion;
+    public String eliminar(T registro) throws MyExcepcion;
 
     /**
-     * Método que permite listar con conjuto de objetos
-     *
-     * @return Lista de objetos de tipo ? almacenados
+     *Método que permite listar con conjuto de objetos
+     * @return 
      */
-    public List<?> listar();
+    public List<T> listar();
 }

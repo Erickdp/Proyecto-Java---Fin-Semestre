@@ -8,7 +8,7 @@ package com.zoolomania.funcional.control;
 /**
  * Clase que repersenta la creación de una expeción comprobada
  *
- * @author Santiago Sisalem - Erick Díaz
+ * @author Erick Díaz
  */
 public class MyExcepcion extends Exception {
 

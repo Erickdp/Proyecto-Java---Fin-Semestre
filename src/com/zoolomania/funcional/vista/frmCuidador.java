@@ -30,8 +30,8 @@ public class frmCuidador extends javax.swing.JFrame {
 
     CuidadorTrs ctrs = new CuidadorTrs();
     EspecieTrs etrs = new EspecieTrs();
-    List<Cuidador> cuidadores = (List<Cuidador>) ctrs.listar();
-    List<Especie> especies = (List<Especie>) etrs.listar();
+    List<Cuidador> cuidadores = ctrs.listar();
+    List<Especie> especies = etrs.listar();
     Cuidador cuidadorEliminar;
     Especie especieEliminar;
     boolean bandera = false;
@@ -403,7 +403,7 @@ public class frmCuidador extends javax.swing.JFrame {
             } catch (MyExcepcion ex) {
                 Logger.getLogger(frmCuidador.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
-                especies = (List<Especie>) etrs.listar();
+                especies = etrs.listar();
                 cargarTablaC();
                 cargarTablaE();
             }
@@ -493,7 +493,7 @@ public class frmCuidador extends javax.swing.JFrame {
 
     private void bVerEspeciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerEspeciesActionPerformed
         // TODO add your handling code here:
-        especies = (List<Especie>) etrs.listar();
+        especies = etrs.listar();
         bandera = false;
         cargarTablaE();
     }//GEN-LAST:event_bVerEspeciesActionPerformed

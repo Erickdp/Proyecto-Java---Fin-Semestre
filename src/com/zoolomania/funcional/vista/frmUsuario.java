@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmUsuario extends javax.swing.JFrame {
 
     UsuarioTrs utrs = new UsuarioTrs();
-    List<Usuario> usuarios = (List<Usuario>) utrs.listar();
+    List<Usuario> usuarios = utrs.listar();
     DefaultTableModel modelo;
 
     public void cargarTabla() {

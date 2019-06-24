@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 /**
  * Clase que representa las operaciones de negocio para Zonas
  *
- * @author Santiago Sisalem - Erick Díaz (Unplugged)
+ * @author Erick Díaz (Unplugged)
  */
-public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
+public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud<Zona> {
 
     public ZonaTrs() {
         super("Zona");
@@ -23,21 +23,20 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
     }
 
     @Override
-    public String guardar(Object registro) throws MyExcepcion {
-        Zona guardarZona = (Zona) registro;
+    public String guardar(Zona registro) throws MyExcepcion {
         boolean bandera = false;
-        if (buscarConId(guardarZona.getId()) != null) {
+        if (buscarConId(registro.getId()) != null) {
             throw new MyExcepcion("3");
         } else {
             for (Zona zonaRepetido : listaObjetos) {
-                if (zonaRepetido.equals(guardarZona)) {
+                if (zonaRepetido.equals(registro)) {
                     bandera = true;
                     throw new MyExcepcion("1");
                 }
             }
         }
         if (!bandera) {
-            listaObjetos.add(guardarZona);
+            listaObjetos.add(registro);
             guardarFichero();
             return "Guardado Correctamente";
         } else {
@@ -46,14 +45,13 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
     }
 
     @Override
-    public String actulizar(Object registro) throws MyExcepcion {
-        Zona actualizarZona = (Zona) registro;
-        if (buscarConId(actualizarZona.getId()) == null) {
+    public String actulizar(Zona registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("2");
         } else {
             for (Zona zonaAntiguo : listaObjetos) {
-                if (zonaAntiguo.getId() == actualizarZona.getId()) {
-                    listaObjetos.set(listaObjetos.indexOf(zonaAntiguo), actualizarZona);
+                if (zonaAntiguo.getId() == registro.getId()) {
+                    listaObjetos.set(listaObjetos.indexOf(zonaAntiguo), registro);
                     guardarFichero();
                     return "Actualizado Correctamente";
                 }
@@ -63,15 +61,19 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
     }
 
     @Override
-    public String eliminar(Object registro) throws MyExcepcion {
-        Zona eliminarZona = (Zona) registro;
-        if (buscarConId(eliminarZona.getId()) == null) {
+    public String eliminar(Zona registro) throws MyExcepcion {
+        if (buscarConId(registro.getId()) == null) {
             throw new MyExcepcion("4");
         } else {
-            listaObjetos.remove(eliminarZona);
+            listaObjetos.remove(registro);
             guardarFichero();
             return "Eliminación Correcta";
         }
+    }
+
+    @Override
+    public List<Zona> listar() {
+        return listaObjetos;
     }
 
     @Override
@@ -82,11 +84,6 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
             }
         }
         return null;
-    }
-
-    @Override
-    public List<?> listar() {
-        return listaObjetos;
     }
 
     @Override
@@ -107,4 +104,5 @@ public class ZonaTrs extends MemoriaBDD<Zona> implements ICrud {
         }
 
     }
+
 }
