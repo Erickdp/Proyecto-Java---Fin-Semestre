@@ -276,7 +276,8 @@ public class frmUsuario extends javax.swing.JFrame {
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
         // TODO add your handling code here:
-        if (validarCampos()) {
+        if ((jNombre.getText().isEmpty() | jCorreo.getText().isEmpty()
+                | jContrasena.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Exiten campos sin llenar, revise de nuevo", "Registro Denegado", JOptionPane.ERROR_MESSAGE);
         } else if (!validarEmail()) {
             JOptionPane.showMessageDialog(null, "Ingrese un email correcto", "Registro Denegado", JOptionPane.ERROR_MESSAGE);
@@ -314,7 +315,8 @@ public class frmUsuario extends javax.swing.JFrame {
     private void jActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActualizarActionPerformed
         // TODO add your handling code here:
         int fila = jTabla.getSelectedRow();
-        if (fila > -1 & (!validarCampos() & validarEmail())) {
+        if (fila > -1 & (!(jNombre.getText().isEmpty() | jCorreo.getText().isEmpty()
+                | jContrasena.getText().isEmpty()) & validarEmail())) {
             Usuario usuarioV = usuarios.get(fila);
             try {
                 System.out.println(utrs.actulizar(new Usuario(jNombre.getText(), jContrasena.getText(), jCorreo.getText(), usuarioV.getId())));
@@ -358,14 +360,6 @@ public class frmUsuario extends javax.swing.JFrame {
         }
         cargarTabla();
     }//GEN-LAST:event_jOrdenarActionPerformed
-
-    public boolean validarCampos() {
-        if (jNombre.getText().isEmpty() | jCorreo.getText().isEmpty()
-                | jContrasena.getText().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
 
     public boolean validarEmail() {
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";

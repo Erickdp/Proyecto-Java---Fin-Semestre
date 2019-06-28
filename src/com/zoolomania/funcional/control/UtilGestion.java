@@ -5,6 +5,7 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.modelo.Continente;
 import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Especie;
 import com.zoolomania.funcional.modelo.Guia;
@@ -25,20 +26,23 @@ public class UtilGestion {
     private static GuiaTrs gtrs = new GuiaTrs();
     private static HabitatTrs htrs = new HabitatTrs();
     private static CuidadorTrs ctrs = new CuidadorTrs();
+    private static ContinenteTrs cctrs = new ContinenteTrs();
     private static List<Zona> zonas;
     private static List<Especie> especies;
     private static List<Guia> guias;
     private static List<Habitat> habitats;
     private static List<Itinerario> itinerarios;
     private static List<Cuidador> cuidadores;
+    private static List<Continente> continentes;
 
     static {
         zonas = ztrs.listar();
         especies = etrs.listar();
-        guias =  gtrs.listar();
-        habitats =  htrs.listar();
-        itinerarios =  itrs.listar();
-        cuidadores =  ctrs.listar();
+        guias = gtrs.listar();
+        habitats = htrs.listar();
+        itinerarios = itrs.listar();
+        cuidadores = ctrs.listar();
+        continentes = cctrs.listar();
     }
 
     public static void eliminacionCompleta(Object registro) throws MyExcepcion {
@@ -89,6 +93,12 @@ public class UtilGestion {
                     etrs.actulizar(e);
                 }
             }
+            for (Continente c : continentes) {
+                if (c.getHabitats().contains(registro)) {
+                    c.getHabitats().remove(registro);
+                    cctrs.actulizar(c);
+                }
+            }
         } else if (registro instanceof Itinerario) { //Eliminar Zona y Guia
             for (Zona z : zonas) {
                 if (z.getItinerarios().contains(registro)) {
@@ -104,13 +114,19 @@ public class UtilGestion {
             }
         } else if (registro instanceof Guia) { // Eliminar Itinerario
             for (Itinerario i : itinerarios) {
-                if (i.getGuias().remove(registro)) {
+                if (i.getGuias().contains(registro)) {
                     i.getGuias().remove(registro);
                     itrs.actulizar(i);
                 }
             }
+        } else if (registro instanceof Continente) {
+            for (Habitat h : habitats) {
+                if (h.getContinentes().contains(registro)) {
+                    h.getContinentes().remove(registro);
+                }
+            }
         } else {
-            System.out.println("El registro no es objeto de ninguna clase");
+            throw new MyExcepcion();
         }
     }
 

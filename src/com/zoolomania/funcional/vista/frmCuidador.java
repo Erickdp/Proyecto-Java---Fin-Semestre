@@ -376,7 +376,8 @@ public class frmCuidador extends javax.swing.JFrame {
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         // TODO add your handling code here:
-        if (validarCampos()) {
+        if (!(jNombreC.getText().isEmpty() | jTelefonoC.getText().isEmpty()
+                | jDireccionC.getText().isEmpty() | jIdC.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Exiten campos sin llenar, revise de nuevo", "Registro Denegado", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
@@ -415,7 +416,8 @@ public class frmCuidador extends javax.swing.JFrame {
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
         // TODO add your handling code here:
-        if (tablaC.getSelectedRow() > -1 & !validarCampos()) {
+        if (tablaC.getSelectedRow() > -1 & !(jNombreC.getText().isEmpty() | jTelefonoC.getText().isEmpty()
+                | jDireccionC.getText().isEmpty() | jIdC.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "El ID no se actualiza.",
                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
             Cuidador cuidador = cuidadores.get(tablaC.getSelectedRow());
@@ -503,8 +505,7 @@ public class frmCuidador extends javax.swing.JFrame {
         if (tablaC.getSelectedRow() > -1 & tablaE.getSelectedRow() > -1 & bandera) {
             Cuidador cuidador = cuidadores.get(tablaC.getSelectedRow());
             Especie especie = cuidador.getEspecies().get(tablaE.getSelectedRow());
-            System.out.println(especie.getNombreEspecie());
-            if (frmEspecie.buscarObjeto((byte) 1, especie, cuidador)) {
+            if (cuidador.getEspecies().contains(especie)) {
                 cuidador.eliminarEspecie(especie);
                 especie.eliminarCuidador(cuidador);
                 try {
@@ -535,7 +536,7 @@ public class frmCuidador extends javax.swing.JFrame {
         if (tablaC.getSelectedRow() > -1 & tablaE.getSelectedRow() > -1 & !bandera) {
             Cuidador cuidador = cuidadores.get(tablaC.getSelectedRow());
             Especie especie = especies.get(tablaE.getSelectedRow());
-            if (!frmEspecie.buscarObjeto((byte) 1, especie, cuidador)) {
+            if (!cuidador.getEspecies().contains(especie)) {
                 cuidador.cuidarNuevaEspecie(especie);
                 especie.agregarCuidador(cuidador);
                 especie.setFechaRegistrada(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
@@ -565,13 +566,6 @@ public class frmCuidador extends javax.swing.JFrame {
         new frmMenuPrincipal().setVisible(true);
     }//GEN-LAST:event_bMenuActionPerformed
 
-    public boolean validarCampos() {
-        if (jNombreC.getText().isEmpty() | jTelefonoC.getText().isEmpty()
-                | jDireccionC.getText().isEmpty() | jIdC.getText().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * @param args the command line arguments

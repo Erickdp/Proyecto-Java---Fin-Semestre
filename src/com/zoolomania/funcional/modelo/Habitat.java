@@ -17,12 +17,12 @@ import java.util.Objects;
  */
 public class Habitat implements Serializable, Comparable<Habitat> {
 
-    private static long serialVersionUID = -1L; //Constante que evita errores en la serializacion
+    private static final long serialVersionUID = -1L; //Constante que evita errores en la serializacion
 
     private String nombreHabitat;
     private String clima;
     private String vegetacion;
-    private String continente;
+    private List<Continente> continentes;
     private List<Especie> especies;
     /*
     Permite determinar a través de que atributo se ordenará la lista
@@ -36,38 +36,41 @@ public class Habitat implements Serializable, Comparable<Habitat> {
      * @param nombreHabitat
      * @param clima
      * @param vegetacion
-     * @param continente
      * @param id
      */
-    public Habitat(String nombreHabitat, String clima, String vegetacion, String continente, short id) {
+    public Habitat(String nombreHabitat, String clima, String vegetacion, short id) {
         this.nombreHabitat = nombreHabitat;
         this.clima = clima;
         this.vegetacion = vegetacion;
-        this.continente = continente;
+        this.continentes = new ArrayList<>();
         this.id = id;
         especies = new ArrayList<>();
     }
-    
+
     public void agregarEspecie(Especie especie) {
         especies.add(especie);
         System.out.println("Especie agregada al habitat " + this.nombreHabitat);
     }
-    
+
     public void eliminarEspecie(Especie especie) {
         especies.remove(especie);
         System.out.println("Especie eliminada del habitat " + this.nombreHabitat);
+    }
+
+    public void agregarContinente(Continente continente) {
+        continentes.add(continente);
+    }
+
+    public void eliminarContinente(Continente continente) {
+        continentes.remove(continente);
     }
 
     public List<Especie> getEspecies() {
         return especies;
     }
 
-    public String getContinente() {
-        return continente;
-    }
-
-    public void setContinente(String continente) {
-        this.continente = continente;
+    public List<Continente> getContinentes() {
+        return continentes;
     }
 
     public String getNombreHabitat() {
@@ -129,7 +132,7 @@ public class Habitat implements Serializable, Comparable<Habitat> {
 
     @Override
     public String toString() {
-        return "Habitat{" + "nombreHabitat=" + nombreHabitat + ", clima=" + clima + ", vegetacion=" + vegetacion + ", continente=" + continente + ", id=" + id + '}';
+        return "Habitat{" + "nombreHabitat=" + nombreHabitat + ", clima=" + clima + ", vegetacion=" + vegetacion + ", id=" + id + '}';
     }
 
     @Override

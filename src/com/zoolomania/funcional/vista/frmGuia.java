@@ -397,7 +397,8 @@ public class frmGuia extends javax.swing.JFrame {
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         // TODO add your handling code here:
-        if (!validarCampos()) {
+        if (!(jNombre.getText().isEmpty() | jTelefono.getText().isEmpty()
+                | jDireccion.getText().isEmpty() | jid.getText().isEmpty())) {
             try {
                 gtrs.guardar(new Guia(jNombre.getText(), jDireccion.getText(), jTelefono.getText(),
                         Short.parseShort(jid.getText())));
@@ -437,7 +438,8 @@ public class frmGuia extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (tablaG.getSelectedRow() > -1 & !validarCampos()) {
+        if (tablaG.getSelectedRow() > -1 & !(jNombre.getText().isEmpty() | jTelefono.getText().isEmpty()
+                | jDireccion.getText().isEmpty() | jid.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Solo el ID no puede ser actualizado",
                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
             try {
@@ -566,13 +568,6 @@ public class frmGuia extends javax.swing.JFrame {
         bandera = false;
     }//GEN-LAST:event_bRelacion1ActionPerformed
 
-    public boolean validarCampos() {
-        if (jNombre.getText().isEmpty() | jTelefono.getText().isEmpty()
-                | jDireccion.getText().isEmpty() | jid.getText().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * @param args the command line arguments

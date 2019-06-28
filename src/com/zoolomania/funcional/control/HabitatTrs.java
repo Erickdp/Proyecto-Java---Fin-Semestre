@@ -87,11 +87,11 @@ public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud<Habitat> {
     @Override
     protected void valoresDefecto() {
         try {
-            guardar(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", "África", (short) 1));
-            guardar(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", "América\nAsia", (short) 2));
-            guardar(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", "América", (short) 3));
-            guardar(new Habitat("Pantano", "Seco", "Escorrentía", "Sudamérica", (short) 4));
-            guardar(new Habitat("Selva", "Calido", "Vegetación Ttropical", "Sudamérica, Asia", (short) 5));
+            guardar(new Habitat("Sabana", "Trópico Seco", "Sabanas herbácea", (short) 1));
+            guardar(new Habitat("Bosque", "Subpolar & Continental", "Árboles y Matas", (short) 2));
+            guardar(new Habitat("Montaña", "Frío y Húmedo", "Pradera Alphina", (short) 3));
+            guardar(new Habitat("Pantano", "Seco", "Escorrentía", (short) 4));
+            guardar(new Habitat("Selva", "Calido", "Vegetación Ttropical", (short) 5));
         } catch (MyExcepcion ex) {
             ex.getMessage();
             ex.getStackTrace();

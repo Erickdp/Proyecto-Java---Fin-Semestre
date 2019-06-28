@@ -430,7 +430,8 @@ public class frmZona extends javax.swing.JFrame {
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         // TODO add your handling code here:
-        if (!validarCampos()) {
+        if (!(jNombre.getText().isEmpty() | jExtension.getText().isEmpty()
+                | jID.getText().isEmpty())) {
             try {
                 System.out.println(ztrs.guardar(new Zona(jNombre.getText(), Float.parseFloat(jExtension.getText()),
                         Short.parseShort(jID.getText()))));
@@ -476,7 +477,8 @@ public class frmZona extends javax.swing.JFrame {
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
         // TODO add your handling code here:
-        if (tablaZ.getSelectedRow() > -1 & !validarCampos()) {
+        if (tablaZ.getSelectedRow() > -1 & !(jNombre.getText().isEmpty() | jExtension.getText().isEmpty()
+                | jID.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "El ID de la zona no puede actualizarse.",
                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
             try {
@@ -548,7 +550,7 @@ public class frmZona extends javax.swing.JFrame {
         if (tablaZ.getSelectedRow() > -1 & tablaE.getSelectedRow() > -1 & !bandera) {
             Zona zona = zonas.get(tablaZ.getSelectedRow());
             Especie especie = especies.get(tablaE.getSelectedRow());
-            if (!frmEspecie.buscarObjeto((byte) 3, especie, zona)) {
+            if (!zona.getEspecies().contains(especie)) {
                 zona.agregarEspecie(especie);
                 especie.agregarZona(zona);
                 try {
@@ -565,7 +567,7 @@ public class frmZona extends javax.swing.JFrame {
         } else if (tablaZ.getSelectedRow() > -1 & tablaI.getSelectedRow() > -1 & !bandera) {
             Zona zona = zonas.get(tablaZ.getSelectedRow());
             Itinerario itinerario = itinerarios.get(tablaI.getSelectedRow());
-            if (!buscarItinerario(zona, itinerario)) {
+            if (!zona.getItinerarios().contains(itinerario)) {
                 zona.agregarItinerario(itinerario);
                 itinerario.agregarZona(zona);
                 try {
@@ -605,7 +607,7 @@ public class frmZona extends javax.swing.JFrame {
         if (tablaZ.getSelectedRow() > -1 & tablaE.getSelectedRow() > -1 & bandera) {
             Zona zona = zonas.get(tablaZ.getSelectedRow());
             Especie especie = especies.get(tablaE.getSelectedRow());
-            if (frmEspecie.buscarObjeto((byte) 3, especie, zona)) {
+            if (zona.getEspecies().contains(especie)) {
                 zona.eliminarEspecie(especie);
                 especie.eliminarZona(zona);
                 try {
@@ -626,16 +628,20 @@ public class frmZona extends javax.swing.JFrame {
         } else if (tablaZ.getSelectedRow() > -1 & tablaI.getSelectedRow() > -1 & bandera) {
             Zona zona = zonas.get(tablaZ.getSelectedRow());
             Itinerario itinerario = itinerarios.get(tablaI.getSelectedRow());
-            zona.eliminarItinerario(itinerario);
-            itinerario.eliminarZona(zona);
-            try {
-                System.out.println(ztrs.actulizar(zona));
-                System.out.println(itrs.actulizar(itinerario));
-            } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                itinerarios = zona.getItinerarios();
-                cargarTablaI();
+            if (zona.getItinerarios().contains(itinerario)) {
+                zona.eliminarItinerario(itinerario);
+                itinerario.eliminarZona(zona);
+                try {
+                    System.out.println(ztrs.actulizar(zona));
+                    System.out.println(itrs.actulizar(itinerario));
+                } catch (MyExcepcion ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    itinerarios = zona.getItinerarios();
+                    cargarTablaI();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El Itinerario no está relacionada con la zona", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe de seleccionar la fila a eliminar y solo desde la tabla asociada",
@@ -658,24 +664,6 @@ public class frmZona extends javax.swing.JFrame {
     private void rAscendenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAscendenteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rAscendenteActionPerformed
-
-    private boolean validarCampos() {
-        if (jNombre.getText().isEmpty() | jExtension.getText().isEmpty()
-                | jID.getText().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean buscarItinerario(Zona zona, Itinerario itinerario) {
-        List<Itinerario> itinerarios = zona.getItinerarios();
-        for (Itinerario i : itinerarios) {
-            if (i.equals(itinerario)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * @param args the command line arguments

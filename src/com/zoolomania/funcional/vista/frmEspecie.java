@@ -75,15 +75,14 @@ public class frmEspecie extends javax.swing.JFrame {
     }
 
     public void cargarTablaH() {
-        Object[] columna = {"ID", "Nombre", "Clima", "Vegetación", "Continente"};
+        Object[] columna = {"ID", "Nombre", "Clima", "Vegetación"};
         DefaultTableModel modeloH = new DefaultTableModel(columna, 0);
         for (Habitat h : habitats) {
             short id = h.getId();
             String nombre = h.getNombreHabitat();
             String clima = h.getClima();
             String vegetacion = h.getVegetacion();
-            String continente = h.getContinente();
-            Object[] fila = {id, nombre, clima, vegetacion, continente};
+            Object[] fila = {id, nombre, clima, vegetacion};
             modeloH.addRow(fila);
         }
         this.tablaH.setModel(modeloH);
@@ -447,7 +446,8 @@ public class frmEspecie extends javax.swing.JFrame {
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
         // TODO add your handling code here:
-        if (validarCamposE()) {
+        if (!(jEspecie.getText().isEmpty() | jDescripcion.getText().isEmpty()
+                | jNombreC.getText().isEmpty() | jMarca.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Todos los campos de especie deben de estar llenos", "Error al guardar",
                     JOptionPane.ERROR_MESSAGE);
         } else {
@@ -468,7 +468,8 @@ public class frmEspecie extends javax.swing.JFrame {
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
         // TODO add your handling code here:
-        if (tablaE.getSelectedRow() > -1 & !validarCamposE()) {
+        if (tablaE.getSelectedRow() > -1 & !(jEspecie.getText().isEmpty() | jDescripcion.getText().isEmpty()
+                | jNombreC.getText().isEmpty() | jMarca.getText().isEmpty())) {
             JOptionPane.showMessageDialog(null, "Solo la Marca no se puede actualizar",
                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
             Especie especieV = especies.get(tablaE.getSelectedRow());
@@ -580,7 +581,7 @@ public class frmEspecie extends javax.swing.JFrame {
         if (tablaE.getSelectedRow() > -1 & tablaC.getSelectedRow() > -1 & !bandera) {
             Especie especieN = especies.get(tablaE.getSelectedRow());
             Cuidador cuidadorN = cuidadores.get(tablaC.getSelectedRow());
-            if (!buscarObjeto((byte) 1, especieN, cuidadorN)) {
+            if (!especieN.getCuiadores().contains(cuidadorN)) {
                 especieN.agregarCuidador(cuidadorN);
                 cuidadorN.cuidarNuevaEspecie(especieN);
                 try {
@@ -598,7 +599,7 @@ public class frmEspecie extends javax.swing.JFrame {
         } else if (tablaE.getSelectedRow() > -1 & tablaH.getSelectedRow() > -1 & !bandera) {
             Especie especieN = especies.get(tablaE.getSelectedRow());
             Habitat habitatN = habitats.get(tablaH.getSelectedRow());
-            if (!buscarObjeto((byte) 2, especieN, habitatN)) {
+            if (!especieN.getHabitats().contains(habitatN)) {
                 especieN.agregarHabitat(habitatN);
                 habitatN.agregarEspecie(especieN);
                 try {
@@ -616,7 +617,7 @@ public class frmEspecie extends javax.swing.JFrame {
         } else if (tablaE.getSelectedRow() > -1 & tablaZ.getSelectedRow() > -1 & !bandera) {
             Especie especieN = especies.get(tablaE.getSelectedRow());
             Zona zonaN = zonas.get(tablaZ.getSelectedRow());
-            if (!buscarObjeto((byte) 3, especieN, zonaN)) {
+            if (!especieN.getZonas().contains(zonaN)) {
                 especieN.agregarZona(zonaN);
                 zonaN.agregarEspecie(especieN);
                 try {
@@ -645,7 +646,7 @@ public class frmEspecie extends javax.swing.JFrame {
         if (tablaE.getSelectedRow() > -1 & tablaC.getSelectedRow() > -1 & bandera) {
             Especie especieN = especies.get(tablaE.getSelectedRow());
             Cuidador cuidadorV = cuidadores.get(tablaC.getSelectedRow());
-            if (buscarObjeto((byte) 1, especieN, cuidadorV)) {
+            if (especieN.getCuiadores().contains(cuidadorV)) {
                 especieN.eliminarCuidador(cuidadorV);
                 cuidadorV.eliminarEspecie(especieN);
                 try {
@@ -666,7 +667,7 @@ public class frmEspecie extends javax.swing.JFrame {
         } else if (tablaE.getSelectedRow() > -1 & tablaH.getSelectedRow() > -1 & bandera) {
             Especie especieN = especies.get(tablaE.getSelectedRow());
             Habitat habitatN = habitats.get(tablaH.getSelectedRow());
-            if (buscarObjeto((byte) 2, especieN, habitatN)) {
+            if (especieN.getHabitats().contains(habitatN)) {
                 especieN.elimninarHabitat(habitatN);
                 habitatN.eliminarEspecie(especieN);
                 try {
@@ -687,7 +688,7 @@ public class frmEspecie extends javax.swing.JFrame {
         } else if (tablaE.getSelectedRow() > -1 & tablaZ.getSelectedRow() > -1 & bandera) {
             Especie especieN = especies.get(tablaE.getSelectedRow());
             Zona zonaN = zonas.get(tablaZ.getSelectedRow());
-            if (buscarObjeto((byte) 3, especieN, zonaN)) {
+            if (especieN.getZonas().contains(zonaN)) {
                 especieN.eliminarZona(zonaN);
                 zonaN.eliminarEspecie(especieN);
                 try {
@@ -748,56 +749,6 @@ public class frmEspecie extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * Método que permite buscar en las listas de Especie si el objeto que se
-     * intentra añadir a dicha lista ya existe o no. 1. Cuidador 2. Habitats 3.
-     * Zonas
-     *
-     * @param caso
-     * @param especieAnfitrion
-     * @return
-     */
-    public static boolean buscarObjeto(byte caso, Especie especieAnfitrion, Object registro) {
-        boolean bandera = false;
-        switch (caso) {
-            case 1:
-                List<Cuidador> cuidadoresDeEspecie = especieAnfitrion.getCuiadores();
-                for (Cuidador buscarCuidador : cuidadoresDeEspecie) {
-                    if (buscarCuidador.equals((Cuidador) registro)) {
-                        bandera = true;
-                        break;
-                    }
-                }
-                break;
-            case 2:
-                List<Habitat> habitatsDeEspecie = especieAnfitrion.getHabitats();
-                for (Habitat buscarHabitat : habitatsDeEspecie) {
-                    if (buscarHabitat.equals((Habitat) registro)) {
-                        bandera = true;
-                        break;
-                    }
-                }
-                break;
-            case 3:
-                List<Zona> zonasDeEspecie = especieAnfitrion.getZonas();
-                for (Zona buscarZona : zonasDeEspecie) {
-                    if (buscarZona.equals((Zona) registro)) {
-                        bandera = true;
-                        break;
-                    }
-                }
-                break;
-        }
-        return bandera;
-    }
-
-    public boolean validarCamposE() {
-        if (jEspecie.getText().isEmpty() | jDescripcion.getText().isEmpty()
-                | jNombreC.getText().isEmpty() | jMarca.getText().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * @param args the command line arguments

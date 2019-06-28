@@ -399,7 +399,8 @@ public class frmItinerario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (!validarCampos()) {
+        if (!(jiD.getText().isEmpty() | jCodigo.getText().isEmpty()
+                | jLongitud.getText().isEmpty() | jNumPersonas.getText().isEmpty())) {
             try {
                 itrs.guardar(new Itinerario(jCodigo.getText(), Byte.parseByte(jNumPersonas.getText()),
                         Short.parseShort(jiD.getText()), Short.parseShort(jLongitud.getText())));
@@ -419,7 +420,8 @@ public class frmItinerario extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (!validarCampos() & tablaI.getSelectedRow() > -1) {
+        if (!(jiD.getText().isEmpty() | jCodigo.getText().isEmpty()
+                | jLongitud.getText().isEmpty() | jNumPersonas.getText().isEmpty()) & tablaI.getSelectedRow() > -1) {
             JOptionPane.showMessageDialog(null, "Solo el Id no se puede actualizar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             try {
                 itrs.actulizar(new Itinerario(jCodigo.getText(), Byte.parseByte(jNumPersonas.getText()),
@@ -573,14 +575,6 @@ public class frmItinerario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bEliminarOActionPerformed
-
-    private boolean validarCampos() {
-        if (jiD.getText().isEmpty() | jCodigo.getText().isEmpty()
-                | jLongitud.getText().isEmpty() | jNumPersonas.getText().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * @param args the command line arguments

@@ -5,10 +5,12 @@
  */
 package com.zoolomania.funcional.vista;
 
+import com.zoolomania.funcional.control.ContinenteTrs;
 import com.zoolomania.funcional.control.EspecieTrs;
 import com.zoolomania.funcional.control.HabitatTrs;
 import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.control.UtilGestion;
+import com.zoolomania.funcional.modelo.Continente;
 import com.zoolomania.funcional.modelo.Especie;
 import com.zoolomania.funcional.modelo.Habitat;
 import java.util.Collections;
@@ -26,8 +28,10 @@ public class frmHabitat extends javax.swing.JFrame {
 
     HabitatTrs htrs = new HabitatTrs();
     EspecieTrs etrs = new EspecieTrs();
+    ContinenteTrs ctrs = new ContinenteTrs();
     List<Habitat> habitats = htrs.listar();
     List<Especie> especies = etrs.listar();
+    List<Continente> continentes = ctrs.listar();
     boolean bandera = false;
 
     public void cargarTablaE() {
@@ -45,18 +49,29 @@ public class frmHabitat extends javax.swing.JFrame {
     }
 
     private void cargarTablaH() {
-        Object[] columna = {"ID", "Habitat", "Clima", "Vegetación", "Continente(s)"};
+        Object[] columna = {"ID", "Habitat", "Clima", "Vegetación"};
         DefaultTableModel modeloH = new DefaultTableModel(columna, 0);
         for (Habitat h : habitats) {
             short id = h.getId();
             String nombreH = h.getNombreHabitat();
             String clima = h.getClima();
             String vegetacion = h.getVegetacion();
-            String continenete = h.getContinente();
-            Object[] fila = {id, nombreH, clima, vegetacion, continenete};
+            Object[] fila = {id, nombreH, clima, vegetacion};
             modeloH.addRow(fila);
         }
         this.tablaH.setModel(modeloH);
+    }
+
+    private void cargarTablaC() {
+        Object[] columna = {"ID", "Continente"};
+        DefaultTableModel modeloC = new DefaultTableModel(columna, 0);
+        for (Continente c : continentes) {
+            short id = c.getId();
+            String continente = c.getNombreContienete();
+            Object[] fila = {id, continente};
+            modeloC.addRow(fila);
+        }
+        this.tablaC.setModel(modeloC);
     }
 
     /**
@@ -67,6 +82,7 @@ public class frmHabitat extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         cargarTablaE();
         cargarTablaH();
+        cargarTablaC();
     }
 
     /**
@@ -88,9 +104,6 @@ public class frmHabitat extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jVegetacion = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jContinente = new javax.swing.JTextArea();
         bAgregar = new javax.swing.JButton();
         bActualizar = new javax.swing.JButton();
         bEliminar = new javax.swing.JButton();
@@ -109,8 +122,11 @@ public class frmHabitat extends javax.swing.JFrame {
         cBoxO = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaH = new javax.swing.JTable();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaE = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaC = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,12 +137,6 @@ public class frmHabitat extends javax.swing.JFrame {
         jLabel3.setText("Clima");
 
         jLabel4.setText("Vegetación");
-
-        jLabel5.setText("Continente(s)");
-
-        jContinente.setColumns(20);
-        jContinente.setRows(5);
-        jScrollPane1.setViewportView(jContinente);
 
         bAgregar.setText("Agregar");
         bAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +252,23 @@ public class frmHabitat extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tablaE);
 
+        jTabbedPane1.addTab("Especies", jScrollPane3);
+
+        tablaC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaC);
+
+        jTabbedPane1.addTab("Continentes", jScrollPane1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -250,73 +277,73 @@ public class frmHabitat extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jid, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jClima, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jVegetacion, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(bRelaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bActualizar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bEliminar)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(bRegresar)
-                                .addContainerGap())
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(126, 126, 126)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rAscendenteO)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(rDescendenteO)
-                                        .addGap(48, 48, 48)
-                                        .addComponent(cBoxO, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bOrdenarO)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(bAgregarO)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(bEliminarO)
-                                        .addGap(39, 39, 39)
-                                        .addComponent(bVerTodoO))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bOrdenar)
-                        .addGap(36, 36, 36)
-                        .addComponent(rAscendente)
-                        .addGap(30, 30, 30)
-                        .addComponent(rDescendente)
-                        .addGap(48, 48, 48)
-                        .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jid, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jClima, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jVegetacion, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(37, 37, 37)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(bRelaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                            .addComponent(bAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(18, 18, 18)
+                                .addComponent(bActualizar)
+                                .addGap(38, 38, 38)
+                                .addComponent(bEliminar)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, Short.MAX_VALUE)
+                                        .addComponent(bRegresar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(126, 126, 126)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(rAscendenteO)
+                                                        .addGap(30, 30, 30)
+                                                        .addComponent(rDescendenteO)
+                                                        .addGap(48, 48, 48)
+                                                        .addComponent(cBoxO, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(bOrdenarO)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(bAgregarO)
+                                                        .addGap(33, 33, 33)
+                                                        .addComponent(bEliminarO)
+                                                        .addGap(39, 39, 39)
+                                                        .addComponent(bVerTodoO)))
+                                                .addGap(0, 0, Short.MAX_VALUE))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bOrdenar)
+                                .addGap(36, 36, 36)
+                                .addComponent(rAscendente)
+                                .addGap(30, 30, 30)
+                                .addComponent(rDescendente)
+                                .addGap(48, 48, 48)
+                                .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,17 +351,14 @@ public class frmHabitat extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
@@ -370,18 +394,18 @@ public class frmHabitat extends javax.swing.JFrame {
                             .addComponent(rAscendenteO)
                             .addComponent(cBoxO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bOrdenar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rDescendente)
+                        .addComponent(rAscendente)
+                        .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bOrdenar)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(rDescendente)
-                                .addComponent(rAscendente)
-                                .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(41, 41, 41)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -395,14 +419,14 @@ public class frmHabitat extends javax.swing.JFrame {
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         // TODO add your handling code here:
-        if (!validarCampos()) {
+        if (!(jNombre.getText().isEmpty() | jVegetacion.getText().isEmpty()
+                | jClima.getText().isEmpty() | jid.getText().isEmpty())) {
             try {
                 htrs.guardar(new Habitat(jNombre.getText(), jClima.getText(), jVegetacion.getText(),
-                        jContinente.getText(), Short.parseShort(jid.getText())));
+                        Short.parseShort(jid.getText())));
                 jNombre.setText("");
                 jClima.setText("");
                 jVegetacion.setText("");
-                jContinente.setText("");
             } catch (MyExcepcion ex) {
                 Logger.getLogger(frmHabitat.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
@@ -424,6 +448,8 @@ public class frmHabitat extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Guardar", JOptionPane.ERROR_MESSAGE);
             } finally {
                 habitats = htrs.listar();
+                continentes = ctrs.listar();
+                cargarTablaC();
                 cargarTablaE();
                 cargarTablaH();
             }
@@ -434,15 +460,15 @@ public class frmHabitat extends javax.swing.JFrame {
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
         // TODO add your handling code here:
-        if (!validarCampos() & tablaH.getSelectedRow() > -1) {
+        if (!(jNombre.getText().isEmpty() | jVegetacion.getText().isEmpty()
+                | jClima.getText().isEmpty() | jid.getText().isEmpty()) & tablaH.getSelectedRow() > -1) {
             JOptionPane.showMessageDialog(null, "El ID no se puede modificar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             try {
                 htrs.actulizar(new Habitat(jNombre.getText(), jClima.getText(), jVegetacion.getText(),
-                        jContinente.getText(), habitats.get(tablaH.getSelectedRow()).getId()));
+                        habitats.get(tablaH.getSelectedRow()).getId()));
                 jNombre.setText("");
                 jClima.setText("");
                 jVegetacion.setText("");
-                jContinente.setText("");
             } catch (MyExcepcion ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Actualizar", JOptionPane.ERROR_MESSAGE);
             } finally {
@@ -486,9 +512,26 @@ public class frmHabitat extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se puede agregar la especie pues ya está dentro de la lista.",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else if (tablaH.getSelectedRow() > -1 & tablaC.getSelectedRow() > -1 & !bandera) {
+            Habitat habitat = habitats.get(tablaH.getSelectedRow());
+            Continente continente = continentes.get(tablaC.getSelectedRow());
+            if (!habitat.getContinentes().contains(continente)) {
+                habitat.agregarContinente(continente);
+                continente.agregarHabitat(habitat);
+                try {
+                    htrs.actulizar(habitat);
+                    ctrs.actulizar(continente);
+                    JOptionPane.showMessageDialog(null, "Se a agregado continente al Habitat", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (MyExcepcion ex) {
+                    Logger.getLogger(frmHabitat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede agregar el continente pues ya está dentro de la lista.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila del habitat a la cual desea agregarle la especie. O salga de las especies del habitat",
-                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila a agregar la relación, o salga de las relaciones del Habitat",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_bAgregarOActionPerformed
 
@@ -513,8 +556,24 @@ public class frmHabitat extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar la especie pues no está dentro de la lista.",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else if (tablaH.getSelectedRow() > -1 & tablaC.getSelectedRow() > -1 & bandera) {
+            Habitat habitat = habitats.get(tablaH.getSelectedRow());
+            Continente continente = continentes.get(tablaC.getSelectedRow());
+            if (habitat.getContinentes().contains(continente)) {
+                habitat.eliminarContinente(continente);
+                continente.eliminarHabitat(habitat);
+                try {
+                    htrs.actulizar(habitat);
+                    ctrs.actulizar(continente);
+                    JOptionPane.showMessageDialog(null, "Continente Eliminado del Habitat", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                } catch (MyExcepcion ex) {
+                    Logger.getLogger(frmHabitat.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    cargarTablaC();
+                }
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila del habitat a la cual desea agregarle la especie. O ingrese a las especies del Habitat",
+            JOptionPane.showMessageDialog(null, "Seleccione una fila del habitat a la cual desea agregarle la especie. O ingrese a las relaciones del Habitat",
                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_bEliminarOActionPerformed
@@ -523,7 +582,9 @@ public class frmHabitat extends javax.swing.JFrame {
         // TODO add your handling code here:
         especies = etrs.listar();
         habitats = htrs.listar();
+        continentes = ctrs.listar();
         cargarTablaE();
+        cargarTablaC();
         bandera = false;
     }//GEN-LAST:event_bVerTodoOActionPerformed
 
@@ -533,15 +594,27 @@ public class frmHabitat extends javax.swing.JFrame {
             Especie.bandera = false;
             if (rAscendenteO.isEnabled()) {
                 Collections.sort(especies, Collections.reverseOrder());
+                Collections.sort(continentes, (o1, o2) -> {
+                  return o2.getNombreContienete().compareToIgnoreCase(o1.getNombreContienete());
+                });
             } else if (rDescendenteO.isEnabled()) {
                 Collections.sort(especies);
+                Collections.sort(continentes, (o1, o2) -> {
+                    return o1.getNombreContienete().compareToIgnoreCase(o2.getNombreContienete());
+                });
             }
         } else if (cBoxO.getSelectedIndex() == 1) {
             Especie.bandera = true;
             if (rAscendenteO.isEnabled()) {
                 Collections.sort(especies, Collections.reverseOrder());
+                Collections.sort(continentes, (o1, o2) -> {
+                    return Short.compare(o2.getId(), o1.getId());
+                });
             } else if (rDescendenteO.isEnabled()) {
                 Collections.sort(especies);
+                Collections.sort(continentes, (o1, o2) -> {
+                    return Short.compare(o1.getId(), o2.getId());
+                });
             }
         }
         cargarTablaE();
@@ -566,14 +639,6 @@ public class frmHabitat extends javax.swing.JFrame {
         }
         cargarTablaH();
     }//GEN-LAST:event_bOrdenarActionPerformed
-
-    private boolean validarCampos() {
-        if (jNombre.getText().isEmpty() | jVegetacion.getText().isEmpty()
-                | jClima.getText().isEmpty() | jContinente.getText().isEmpty() | jid.getText().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * @param args the command line arguments
@@ -626,22 +691,22 @@ public class frmHabitat extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cBox;
     private javax.swing.JComboBox<String> cBoxO;
     private javax.swing.JTextField jClima;
-    private javax.swing.JTextArea jContinente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jNombre;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jVegetacion;
     private javax.swing.JTextField jid;
     private javax.swing.JRadioButton rAscendente;
     private javax.swing.JRadioButton rAscendenteO;
     private javax.swing.JRadioButton rDescendente;
     private javax.swing.JRadioButton rDescendenteO;
+    private javax.swing.JTable tablaC;
     private javax.swing.JTable tablaE;
     private javax.swing.JTable tablaH;
     // End of variables declaration//GEN-END:variables
