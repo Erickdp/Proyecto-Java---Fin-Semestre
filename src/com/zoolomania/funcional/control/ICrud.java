@@ -5,6 +5,7 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.control.MyExcepcion;
 import java.util.List;
 
 /**

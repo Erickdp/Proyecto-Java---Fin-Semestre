@@ -5,6 +5,9 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.control.ICrud;
+import com.zoolomania.funcional.control.MemoriaBDD;
+import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.modelo.Especie;
 import java.util.List;
 import java.util.logging.Level;
@@ -111,6 +114,27 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud<Especie> {
                     + "\nobos marinos. Esta subfamilia está dentro de la familia Otariidae en la superfamilia Pinnipedia.", (short) 9));
             guardar(new Especie("Fragata", "Fregata", "Fregata es un género de aves suliformes, el único de la familia Fregatidae, ​​ conocidas "
                     + "\nvulgarmente como rabihorcados o fragatas. Viven en zonas tropicales de los océanos Pacífico y Atlántico.", (short) 10));
+            guardar(new Especie("Avestruz", "Struthio camelus", "Pertenece a las especies de aves no voladoras , ​​ conocidas "
+                    + "\nestrutioniformes. Viven en zonas aridas y semiaridas como desiertos y sabanas de Africa.", (short) 11));
+           guardar(new Especie("Ave Martillo", "Scopus umbretta", "Es una especie  de ave pelecaniforme de la familia Scopidae "
+                    + "\nvulgarmente como Pelacaniforme. Habita los rios y humedales del Africa subsahariana.", (short) 12));
+           guardar(new Especie("Cigueña de Abdim", "Ciconia abdimil", "Se alimenta casi exclusivamente de grandes insectos  "
+                    + "\nAve migratoria intra-africana en temporadas de lluvias.Habita toda la region de la sabana africana", (short) 13));
+           guardar(new Especie("Condor", "Vuitur gryphus", "es una ave  sudamericana en la familia de  buitres, ​​ se encuentra en peligro de Extincion "
+                    + "\nSe en cuentran en la coordillera de los andes  y en las costas adyacentes del Pacifico.", (short) 14));
+           guardar(new Especie("Jirafa", "Giraffa camelopardalis rosthscildi", "Destacan por su cuello largo, miembros anteriores mas largos que los posteriores "
+                    + "\nson nativas de Africa, viven tanto en los pastos  como es bosques y llanuras.", (short) 15));
+           guardar(new Especie("Gorila", "Gorilla", "Pertenecientes  al genero Gorilla son primates con, ​​ composiciones "
+                    + "\ngeneticas muy parecidas las del ser humano, habita en bosques tropicales de Camerun, republica Centroafricana", (short) 16));
+           guardar(new Especie("Buho Real", "Bubo bubo", "Es una de las aves rapaces mas conocidas gracias a su majestuosidad y abundancia, ​ "
+                    + "\nHabita en lugarestan dispares como regiones desericas de Africa y Asia.", (short) 17));
+           guardar(new Especie("Aguila", "Aquila chrysaetos", "Esta gran ave tiene el cuerpo muy delgado y unas amplias alas con grandes ojos, ​​ "
+                    + "\nSe encuentran en cualquier region del mundo, siempre y cuando el luar donde vivan no sea demasiado frio", (short) 18));
+           guardar(new Especie("Cocodrilo", "Crocodylus niloticus", "Son una especie de depredadores mas grande que existe en la tierra, incluso mas que los tigres y los leones "
+                    + "\nSe encuentran en las zonas tropicales y subtropicales tanto en Africa como en CentroAmerica", (short) 19));
+           guardar(new Especie("Koala", "Phascolarctos Cinereus", "Marsupial herviboro, su dentadura esta adaptada con afilados dientes incisivos para cortar hojas​ "
+                    + "\nVive exclusivamente en regiones australiana", (short) 20));
+           
         } catch (MyExcepcion ex) {
             Logger.getLogger(EspecieTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

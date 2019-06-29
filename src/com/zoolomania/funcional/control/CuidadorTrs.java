@@ -5,6 +5,9 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.control.ICrud;
+import com.zoolomania.funcional.control.MemoriaBDD;
+import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.modelo.Cuidador;
 import java.util.List;
 import java.util.logging.Level;
@@ -104,6 +107,12 @@ public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud<Cuidador>
             guardar(new Cuidador("Pablo", "Gasca", "45321", (short) 13));
             guardar(new Cuidador("Lucas", "Oriental", "7563", (short) 14));
             guardar(new Cuidador("Mateo", "Aucas", "543872", (short) 15));
+            guardar(new Cuidador("Rogelio", "La palma", "44948",(short) 16));
+            guardar(new Cuidador("Santiago", "Biloxi", "5339202", (short) 17));
+            guardar(new Cuidador("Ernesto", "Santa Maria", "541112", (short) 18));
+            guardar(new Cuidador("Leonel", "Zambrano", "5433332", (short) 19));
+            guardar(new Cuidador("Pablo", "la Santiago", "2222872", (short) 20));
+            
         } catch (MyExcepcion ex) {
             Logger.getLogger(CuidadorTrs.class.getName()).log(Level.SEVERE, null, ex);
         }

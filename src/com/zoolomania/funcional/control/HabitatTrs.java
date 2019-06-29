@@ -5,6 +5,9 @@
  */
 package com.zoolomania.funcional.control;
 
+import com.zoolomania.funcional.control.ICrud;
+import com.zoolomania.funcional.control.MemoriaBDD;
+import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.modelo.Habitat;
 import java.util.List;
 

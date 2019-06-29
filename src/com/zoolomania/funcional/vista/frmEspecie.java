@@ -42,10 +42,10 @@ public class frmEspecie extends javax.swing.JFrame {
     List<Cuidador> cuidadores = ctrs.listar();
     List<Habitat> habitats = htrs.listar();
     List<Zona> zonas = ztrs.listar();
-    List<Especie> especiesR; //Lista que permite gestionar operaciones adicionales
     boolean bandera = false;
 
     public void cargarTablaE() {
+        //Falta agregar la fecha en la que el cuidador empezó a cuidar a la especie
         Object[] columna = {"Marca", "Especie", "Nombre Científico", "Descripción"};
         DefaultTableModel modeloE = new DefaultTableModel(columna, 0);
         for (Especie e : especies) {
@@ -106,6 +106,7 @@ public class frmEspecie extends javax.swing.JFrame {
      */
     public frmEspecie() {
         initComponents();
+        rsscalelabel.RSScaleLabel.setScaleLabel(jLabel5, "src/iconos/logo.jpg");
         setLocationRelativeTo(null);
         cargarTablaE();
         cargarTablaC();
@@ -124,115 +125,103 @@ public class frmEspecie extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        bActualizar = new javax.swing.JButton();
-        jEspecie = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jNombreC = new javax.swing.JTextField();
-        jMarca = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jDescripcion = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaE = new javax.swing.JTable();
-        bGuardar = new javax.swing.JButton();
-        bOrdenar = new javax.swing.JButton();
-        bEliminar = new javax.swing.JButton();
-        rAscendente = new javax.swing.JRadioButton();
-        rDescendente = new javax.swing.JRadioButton();
-        cBox = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        bGuardarT = new javax.swing.JButton();
+        bOrdenarT = new javax.swing.JButton();
+        bEliminarT = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        rAscendenteT = new javax.swing.JRadioButton();
+        rDescendenteT = new javax.swing.JRadioButton();
+        cBoxT = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
         tablaPanel = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaC = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaH = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaZ = new javax.swing.JTable();
-        bGuardarT = new javax.swing.JButton();
-        bEliminarT = new javax.swing.JButton();
-        bOrdenarT = new javax.swing.JButton();
-        rAscendenteT = new javax.swing.JRadioButton();
-        rDescendenteT = new javax.swing.JRadioButton();
-        cBoxT = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaC = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaE = new javax.swing.JTable();
+        bActualizar = new javax.swing.JButton();
+        bEliminar = new javax.swing.JButton();
+        bGuardar = new javax.swing.JButton();
+        rDescendente = new javax.swing.JRadioButton();
+        jEspecie = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        rAscendente = new javax.swing.JRadioButton();
+        bOrdenar = new javax.swing.JButton();
+        jNombreC = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jMarca = new javax.swing.JTextField();
+        jDescripcion = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cBox = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        jLabel1.setText("Especie");
+        jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
-        bActualizar.setText("Actualizar");
-        bActualizar.addActionListener(new java.awt.event.ActionListener() {
+        bGuardarT.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        bGuardarT.setText("Guardar");
+        bGuardarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bActualizarActionPerformed(evt);
+                bGuardarTActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Nombre Científico");
-
-        jLabel3.setText("Marca");
-
-        jLabel4.setText("Descripción");
-
-        tablaE.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(tablaE);
-
-        bGuardar.setText("Guardar");
-        bGuardar.addActionListener(new java.awt.event.ActionListener() {
+        bOrdenarT.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        bOrdenarT.setText("Ordenar");
+        bOrdenarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bGuardarActionPerformed(evt);
+                bOrdenarTActionPerformed(evt);
             }
         });
 
-        bOrdenar.setText("Ordenar");
-        bOrdenar.addActionListener(new java.awt.event.ActionListener() {
+        bEliminarT.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        bEliminarT.setText("Eliminar");
+        bEliminarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bOrdenarActionPerformed(evt);
+                bEliminarTActionPerformed(evt);
             }
         });
 
-        bEliminar.setText("Eliminar");
-        bEliminar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        jButton1.setText("Ver Todo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEliminarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(rAscendente);
-        rAscendente.setSelected(true);
-        rAscendente.setText("Ascendente");
+        buttonGroup2.add(rAscendenteT);
+        rAscendenteT.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        rAscendenteT.setText("Ascendente");
 
-        buttonGroup1.add(rDescendente);
-        rDescendente.setText("Descendente");
+        buttonGroup2.add(rDescendenteT);
+        rDescendenteT.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        rDescendenteT.setText("Descendente");
 
-        cBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Especie", "Marca" }));
+        cBoxT.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        cBoxT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "ID" }));
 
-        tablaC.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
+        jButton3.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        jButton3.setText("Ver todas las relaciones");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
-        ));
-        jScrollPane2.setViewportView(tablaC);
+        });
 
-        tablaPanel.addTab("Cuidadores", jScrollPane2);
+        tablaPanel.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
 
         tablaH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -264,43 +253,111 @@ public class frmEspecie extends javax.swing.JFrame {
 
         tablaPanel.addTab("Zonas", jScrollPane4);
 
-        bGuardarT.setText("Guardar");
-        bGuardarT.addActionListener(new java.awt.event.ActionListener() {
+        tablaC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tablaC);
+
+        tablaPanel.addTab("Cuidadores", jScrollPane2);
+
+        tablaE.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaE);
+
+        bActualizar.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        bActualizar.setText("Actualizar");
+        bActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bGuardarTActionPerformed(evt);
+                bActualizarActionPerformed(evt);
             }
         });
 
-        bEliminarT.setText("Eliminar");
-        bEliminarT.addActionListener(new java.awt.event.ActionListener() {
+        bEliminar.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        bEliminar.setText("Eliminar");
+        bEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEliminarTActionPerformed(evt);
+                bEliminarActionPerformed(evt);
             }
         });
 
-        bOrdenarT.setText("Ordenar");
-        bOrdenarT.addActionListener(new java.awt.event.ActionListener() {
+        bGuardar.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        bGuardar.setText("Guardar");
+        bGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bOrdenarTActionPerformed(evt);
+                bGuardarActionPerformed(evt);
             }
         });
 
-        buttonGroup2.add(rAscendenteT);
-        rAscendenteT.setSelected(true);
-        rAscendenteT.setText("Ascendente");
+        buttonGroup1.add(rDescendente);
+        rDescendente.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        rDescendente.setText("Descendente");
 
-        buttonGroup2.add(rDescendenteT);
-        rDescendenteT.setText("Descendente");
+        jEspecie.setBackground(new java.awt.Color(0, 102, 153));
+        jEspecie.setForeground(new java.awt.Color(255, 255, 255));
+        jEspecie.setBorder(null);
 
-        cBoxT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "ID" }));
+        jLabel1.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        jLabel1.setText("Especie:");
 
-        jButton1.setText("Ver Todo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rAscendente);
+        rAscendente.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        rAscendente.setText("Ascendente");
+
+        bOrdenar.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        bOrdenar.setText("Ordenar");
+        bOrdenar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bOrdenarActionPerformed(evt);
             }
         });
 
+        jNombreC.setBackground(new java.awt.Color(0, 102, 153));
+        jNombreC.setForeground(new java.awt.Color(255, 255, 255));
+        jNombreC.setBorder(null);
+        jNombreC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNombreCActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        jLabel2.setText("Nombre Científico:");
+
+        jMarca.setBackground(new java.awt.Color(0, 102, 153));
+        jMarca.setForeground(new java.awt.Color(255, 255, 255));
+        jMarca.setBorder(null);
+
+        jDescripcion.setBackground(new java.awt.Color(0, 102, 153));
+        jDescripcion.setForeground(new java.awt.Color(255, 255, 255));
+        jDescripcion.setBorder(null);
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        jLabel3.setText("Marca:");
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        jLabel4.setText("Descripción:");
+
+        cBox.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
+        cBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Especie", "Marca" }));
+
+        jButton2.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
         jButton2.setText("Menu Principal");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,338 +365,192 @@ public class frmEspecie extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Ver todas las relaciones");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        jLabel5.setText("jLabel5");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rAscendente)
+                                .addGap(18, 18, 18)
+                                .addComponent(rDescendente))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(276, 276, 276)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tablaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129)
+                .addComponent(bOrdenarT, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(rAscendenteT))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rDescendenteT)
+                    .addComponent(bEliminarT, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(151, 151, 151))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(91, 91, 91)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton3)
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(319, 319, 319)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(bGuardarT, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(350, 350, 350))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(bGuardarT)
+                                    .addComponent(jButton1)
+                                    .addComponent(bEliminarT))
+                                .addGap(35, 35, 35))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(59, 59, 59)
+                                        .addComponent(bActualizar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(bGuardar))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton3)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(jEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(17, 17, 17)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(17, 17, 17)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bOrdenarT)
+                            .addComponent(cBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rAscendenteT)
+                            .addComponent(rDescendenteT))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tablaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bEliminar)
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rDescendente)
+                            .addComponent(rAscendente)
+                            .addComponent(bOrdenar)
+                            .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(bOrdenar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(rAscendente)
-                            .addGap(44, 44, 44)
-                            .addComponent(rDescendente)
-                            .addGap(18, 18, 18)
-                            .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(39, 39, 39))
-                                .addComponent(jEspecie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jMarca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jDescripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(98, 98, 98)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(90, 90, 90)
-                        .addComponent(jButton3)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bOrdenarT, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rAscendenteT)
-                        .addGap(44, 44, 44)
-                        .addComponent(rDescendenteT)
-                        .addGap(18, 18, 18)
-                        .addComponent(cBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bGuardarT, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(bEliminarT, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(128, 128, 128))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tablaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1252, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bGuardar)
-                            .addComponent(bGuardarT)
-                            .addComponent(bEliminarT)
-                            .addComponent(jButton1))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jNombreC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(bActualizar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jButton3)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bOrdenarT)
-                                    .addComponent(rAscendenteT)
-                                    .addComponent(rDescendenteT)
-                                    .addComponent(cBoxT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(bEliminar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bOrdenar)
-                            .addComponent(rAscendente)
-                            .addComponent(rDescendente)
-                            .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tablaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(23, 23, 23))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (!(jEspecie.getText().isEmpty() | jDescripcion.getText().isEmpty()
-                | jNombreC.getText().isEmpty() | jMarca.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "Todos los campos de especie deben de estar llenos", "Error al guardar",
-                    JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                etrs.guardar(new Especie(jEspecie.getText(), jNombreC.getText(), jDescripcion.getText(),
-                        Short.parseShort(jMarca.getText())));
-                jEspecie.setText("");
-                jDescripcion.setText("");
-                jNombreC.setText("");
-            } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Guardar", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                jMarca.setText("");
-                cargarTablaE();
-            }
-        }
-    }//GEN-LAST:event_bGuardarActionPerformed
-
-    private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
-        // TODO add your handling code here:
-        if (tablaE.getSelectedRow() > -1 & !(jEspecie.getText().isEmpty() | jDescripcion.getText().isEmpty()
-                | jNombreC.getText().isEmpty() | jMarca.getText().isEmpty())) {
-            JOptionPane.showMessageDialog(null, "Solo la Marca no se puede actualizar",
-                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            Especie especieV = especies.get(tablaE.getSelectedRow());
-            try {
-                etrs.actulizar(new Especie(jEspecie.getText(), jEspecie.getText(),
-                        jDescripcion.getText(), especieV.getMarca()));
-            } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al actualizar",
-                        JOptionPane.ERROR_MESSAGE);
-            } finally {
-                jNombreC.setText("");
-                jDescripcion.setText("");
-                jEspecie.setText("");
-                jMarca.setText("");
-                cargarTablaE();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor seleccione la fila a actualizar "
-                    + "(Tener en cuenta que la marca no pude actualizarse)", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_bActualizarActionPerformed
-
-    private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-        // TODO add your handling code here:
-        if (tablaE.getSelectedRow() > -1) {
-            try {
-                UtilGestion.eliminacionCompleta(especies.get(tablaE.getSelectedRow()));
-                System.out.println(etrs.eliminar(especies.get(tablaE.getSelectedRow())));
-            } catch (MyExcepcion ex) {
-                Logger.getLogger(frmEspecie.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                cuidadores = ctrs.listar();
-                habitats = htrs.listar();
-                zonas = ztrs.listar();
-                cargarTablaE();
-                cargarTablaC();
-                cargarTablaH();
-                cargarTablaZ();
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila a eliminar", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_bEliminarActionPerformed
-
-    private void bOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOrdenarActionPerformed
-        // TODO add your handling code here:
-        if (cBox.getSelectedIndex() == 0) {
-            Especie.bandera = false; //Cambia la forma de ordenar los objetos Especie (Nombre)
-            if (rAscendente.isSelected()) {
-                Collections.sort(especies);
-            } else if (rDescendente.isSelected()) {
-                Collections.sort(especies, Collections.reverseOrder());
-            }
-        } else if (cBox.getSelectedIndex() == 1) {
-            Especie.bandera = true; //Cambia la forma de ordenar los objetos Especie (Marca)
-            if (rAscendente.isSelected()) {
-                Collections.sort(especies, Collections.reverseOrder());
-            } else if (rDescendente.isSelected()) {
-                Collections.sort(especies);
-            }
-        }
-        cargarTablaE();
-    }//GEN-LAST:event_bOrdenarActionPerformed
-
-    /**
-     * Método que permite ordenar una lista dentro de un jTable ya sea por
-     * nombre o identificador
-     *
-     * @param evt
-     */
-    private void bOrdenarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOrdenarTActionPerformed
-        // TODO add your handling code here:
-        if (cBoxT.getSelectedIndex() == 0) {
-            Cuidador.bandera = false;
-            Habitat.bandera = false;
-            Zona.bandera = false;
-            if (rAscendenteT.isSelected()) {
-                Collections.sort(zonas);
-                Collections.sort(cuidadores);
-                Collections.sort(habitats);
-            } else if (rDescendenteT.isSelected()) {
-                Collections.sort(cuidadores, Collections.reverseOrder());
-                Collections.sort(zonas, Collections.reverseOrder());
-                Collections.sort(habitats, Collections.reverseOrder());
-            }
-        } else if (cBoxT.getSelectedIndex() == 1) {
-            //El cambio de bandera indica a la clase como va a ser ejecutado el compareTo
-            Cuidador.bandera = true;
-            Habitat.bandera = true;
-            Zona.bandera = true;
-            if (rAscendenteT.isSelected()) {
-                Collections.sort(cuidadores, Collections.reverseOrder());
-                Collections.sort(zonas, Collections.reverseOrder());
-                Collections.sort(habitats, Collections.reverseOrder());
-            } else if (rDescendenteT.isSelected()) {
-                Collections.sort(zonas);
-                Collections.sort(cuidadores);
-                Collections.sort(habitats);
-            }
-        }
-        cargarTablaC();
-        cargarTablaH();
-        cargarTablaZ();
-    }//GEN-LAST:event_bOrdenarTActionPerformed
-
-    private void bGuardarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarTActionPerformed
-        // TODO add your handling code here:
-        if (tablaE.getSelectedRow() > -1 & tablaC.getSelectedRow() > -1 & !bandera) {
-            Especie especieN = especies.get(tablaE.getSelectedRow());
-            Cuidador cuidadorN = cuidadores.get(tablaC.getSelectedRow());
-            if (!especieN.getCuiadores().contains(cuidadorN)) {
-                especieN.agregarCuidador(cuidadorN);
-                cuidadorN.cuidarNuevaEspecie(especieN);
-                try {
-                    System.out.println(etrs.actulizar(especieN));
-                    System.out.println(ctrs.actulizar(cuidadorN));
-                    JOptionPane.showMessageDialog(null, "Cuidador agregado a " + especieN.getNombreEspecie(), "Aviso",
-                             JOptionPane.INFORMATION_MESSAGE);
-                } catch (MyExcepcion ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "El cuidador que intenta agregar a " + especieN.getNombreEspecie()
-                        + " ya está agregado a la lista asociada a la especie.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else if (tablaE.getSelectedRow() > -1 & tablaH.getSelectedRow() > -1 & !bandera) {
-            Especie especieN = especies.get(tablaE.getSelectedRow());
-            Habitat habitatN = habitats.get(tablaH.getSelectedRow());
-            if (!especieN.getHabitats().contains(habitatN)) {
-                especieN.agregarHabitat(habitatN);
-                habitatN.agregarEspecie(especieN);
-                try {
-                    etrs.actulizar(especieN);
-                    htrs.actulizar(habitatN);
-                    JOptionPane.showMessageDialog(null, "Habitat agregado a " + especieN.getNombreEspecie(), "Aviso",
-                             JOptionPane.INFORMATION_MESSAGE);
-                } catch (MyExcepcion ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "El Habitat que intenta agregar a " + especieN.getNombreEspecie()
-                        + " ya está agregado a la lista asociada a la especie.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else if (tablaE.getSelectedRow() > -1 & tablaZ.getSelectedRow() > -1 & !bandera) {
-            Especie especieN = especies.get(tablaE.getSelectedRow());
-            Zona zonaN = zonas.get(tablaZ.getSelectedRow());
-            if (!especieN.getZonas().contains(zonaN)) {
-                especieN.agregarZona(zonaN);
-                zonaN.agregarEspecie(especieN);
-                try {
-                    etrs.actulizar(especieN);
-                    ztrs.actulizar(zonaN);
-                    JOptionPane.showMessageDialog(null, "Zona agregado a " + especieN.getNombreEspecie(), "Aviso",
-                             JOptionPane.INFORMATION_MESSAGE);
-                } catch (MyExcepcion ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "La Zona que intenta agregar a " + especieN.getNombreEspecie()
-                        + " ya está agregado a la lista asociada a la especie.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else if (bandera) {
-            JOptionPane.showMessageDialog(null, "Solo puede agregar relaciones entre especie accediendo a la lista completa",
-                    "Error al Aregar", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila de la especie a realizar"
-                    + " la asociación y una fila de la tabla a asociar el elemento.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }//GEN-LAST:event_bGuardarTActionPerformed
+        this.setVisible(false);
+        new frmMenuPrincipal().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void bEliminarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarTActionPerformed
         // TODO add your handling code here:
@@ -716,22 +627,70 @@ public class frmEspecie extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bEliminarTActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bGuardarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarTActionPerformed
         // TODO add your handling code here:
-        bandera = false;
-        cuidadores = ctrs.listar();
-        habitats = htrs.listar();
-        zonas = ztrs.listar();
-        cargarTablaC();
-        cargarTablaH();
-        cargarTablaZ();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new frmMenuPrincipal().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (tablaE.getSelectedRow() > -1 & tablaC.getSelectedRow() > -1 & !bandera) {
+            Especie especieN = especies.get(tablaE.getSelectedRow());
+            Cuidador cuidadorN = cuidadores.get(tablaC.getSelectedRow());
+            if (!especieN.getCuiadores().contains(cuidadorN)) {
+                especieN.agregarCuidador(cuidadorN);
+                cuidadorN.cuidarNuevaEspecie(especieN);
+                try {
+                    System.out.println(etrs.actulizar(especieN));
+                    System.out.println(ctrs.actulizar(cuidadorN));
+                    JOptionPane.showMessageDialog(null, "Cuidador agregado a " + especieN.getNombreEspecie(), "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } catch (MyExcepcion ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El cuidador que intenta agregar a " + especieN.getNombreEspecie()
+                        + " ya está agregado a la lista asociada a la especie.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (tablaE.getSelectedRow() > -1 & tablaH.getSelectedRow() > -1 & !bandera) {
+            Especie especieN = especies.get(tablaE.getSelectedRow());
+            Habitat habitatN = habitats.get(tablaH.getSelectedRow());
+            if (!especieN.getHabitats().contains(habitatN)) {
+                especieN.agregarHabitat(habitatN);
+                habitatN.agregarEspecie(especieN);
+                try {
+                    etrs.actulizar(especieN);
+                    htrs.actulizar(habitatN);
+                    JOptionPane.showMessageDialog(null, "Habitat agregado a " + especieN.getNombreEspecie(), "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } catch (MyExcepcion ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El Habitat que intenta agregar a " + especieN.getNombreEspecie()
+                        + " ya está agregado a la lista asociada a la especie.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (tablaE.getSelectedRow() > -1 & tablaZ.getSelectedRow() > -1 & !bandera) {
+            Especie especieN = especies.get(tablaE.getSelectedRow());
+            Zona zonaN = zonas.get(tablaZ.getSelectedRow());
+            if (!especieN.getZonas().contains(zonaN)) {
+                especieN.agregarZona(zonaN);
+                zonaN.agregarEspecie(especieN);
+                try {
+                    etrs.actulizar(especieN);
+                    ztrs.actulizar(zonaN);
+                    JOptionPane.showMessageDialog(null, "Zona agregado a " + especieN.getNombreEspecie(), "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } catch (MyExcepcion ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "La Zona que intenta agregar a " + especieN.getNombreEspecie()
+                        + " ya está agregado a la lista asociada a la especie.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (bandera) {
+            JOptionPane.showMessageDialog(null, "Solo puede agregar relaciones entre especie accediendo a la lista completa",
+                    "Error al Aregar", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila de la especie a realizar"
+                    + " la asociación y una fila de la tabla a asociar el elemento.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_bGuardarTActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -749,6 +708,152 @@ public class frmEspecie extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        // TODO add your handling code here:
+        if (!(jEspecie.getText().isEmpty() | jDescripcion.getText().isEmpty()
+                | jNombreC.getText().isEmpty() | jMarca.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Todos los campos de especie deben de estar llenos", "Error al guardar",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                etrs.guardar(new Especie(jEspecie.getText(), jNombreC.getText(), jDescripcion.getText(),
+                        Short.parseShort(jMarca.getText())));
+                jEspecie.setText("");
+                jDescripcion.setText("");
+                jNombreC.setText("");
+            } catch (MyExcepcion ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Guardar", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                jMarca.setText("");
+                cargarTablaE();
+            }
+        }
+    }//GEN-LAST:event_bGuardarActionPerformed
+
+    private void bOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOrdenarActionPerformed
+        // TODO add your handling code here:
+        if (cBox.getSelectedIndex() == 0) {
+            Especie.bandera = false; //Cambia la forma de ordenar los objetos Especie (Nombre)
+            if (rAscendente.isSelected()) {
+                Collections.sort(especies);
+            } else if (rDescendente.isSelected()) {
+                Collections.sort(especies, Collections.reverseOrder());
+            }
+        } else if (cBox.getSelectedIndex() == 1) {
+            Especie.bandera = true; //Cambia la forma de ordenar los objetos Especie (Marca)
+            if (rAscendente.isSelected()) {
+                Collections.sort(especies, Collections.reverseOrder());
+            } else if (rDescendente.isSelected()) {
+                Collections.sort(especies);
+            }
+        }
+        cargarTablaE();
+    }//GEN-LAST:event_bOrdenarActionPerformed
+
+    private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
+        // TODO add your handling code here:
+        if (tablaE.getSelectedRow() > -1 & !(jEspecie.getText().isEmpty() | jDescripcion.getText().isEmpty()
+                | jNombreC.getText().isEmpty() | jMarca.getText().isEmpty())) {
+            JOptionPane.showMessageDialog(null, "Solo la Marca no se puede actualizar",
+                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            Especie especieV = especies.get(tablaE.getSelectedRow());
+            try {
+                etrs.actulizar(new Especie(jEspecie.getText(), jEspecie.getText(),
+                        jDescripcion.getText(), especieV.getMarca()));
+            } catch (MyExcepcion ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al actualizar",
+                        JOptionPane.ERROR_MESSAGE);
+            } finally {
+                jNombreC.setText("");
+                jDescripcion.setText("");
+                jEspecie.setText("");
+                jMarca.setText("");
+                cargarTablaE();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione la fila a actualizar "
+                    + "(Tener en cuenta que la marca no pude actualizarse)", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bActualizarActionPerformed
+
+    /**
+     * Método que permite ordenar una lista dentro de un jTable ya sea por
+     * nombre o identificador
+     *
+     * @param evt
+     */
+    private void bOrdenarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOrdenarTActionPerformed
+        // TODO add your handling code here:
+        if (cBoxT.getSelectedIndex() == 0) {
+            Cuidador.bandera = false;
+            Habitat.bandera = false;
+            Zona.bandera = false;
+            if (rAscendenteT.isSelected()) {
+                Collections.sort(zonas);
+                Collections.sort(cuidadores);
+                Collections.sort(habitats);
+            } else if (rDescendenteT.isSelected()) {
+                Collections.sort(cuidadores, Collections.reverseOrder());
+                Collections.sort(zonas, Collections.reverseOrder());
+                Collections.sort(habitats, Collections.reverseOrder());
+            }
+        } else if (cBoxT.getSelectedIndex() == 1) {
+            //El cambio de bandera indica a la clase como va a ser ejecutado el compareTo
+            Cuidador.bandera = true;
+            Habitat.bandera = true;
+            Zona.bandera = true;
+            if (rAscendenteT.isSelected()) {
+                Collections.sort(cuidadores, Collections.reverseOrder());
+                Collections.sort(zonas, Collections.reverseOrder());
+                Collections.sort(habitats, Collections.reverseOrder());
+            } else if (rDescendenteT.isSelected()) {
+                Collections.sort(zonas);
+                Collections.sort(cuidadores);
+                Collections.sort(habitats);
+            }
+        }
+        cargarTablaC();
+        cargarTablaH();
+        cargarTablaZ();
+    }//GEN-LAST:event_bOrdenarTActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        bandera = false;
+        cuidadores = ctrs.listar();
+        habitats = htrs.listar();
+        zonas = ztrs.listar();
+        cargarTablaC();
+        cargarTablaH();
+        cargarTablaZ();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
+        // TODO add your handling code here:
+        if (tablaE.getSelectedRow() > -1) {
+            try {
+                UtilGestion.eliminacionCompleta(especies.get(tablaE.getSelectedRow()));
+                System.out.println(etrs.eliminar(especies.get(tablaE.getSelectedRow())));
+            } catch (MyExcepcion ex) {
+                Logger.getLogger(frmEspecie.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                cuidadores = ctrs.listar();
+                habitats = htrs.listar();
+                zonas = ztrs.listar();
+                cargarTablaE();
+                cargarTablaC();
+                cargarTablaH();
+                cargarTablaZ();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar una fila a eliminar", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bEliminarActionPerformed
+
+    private void jNombreCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombreCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNombreCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -811,12 +916,18 @@ public class frmEspecie extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jMarca;
     private javax.swing.JTextField jNombreC;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JRadioButton rAscendente;
     private javax.swing.JRadioButton rAscendenteT;
     private javax.swing.JRadioButton rDescendente;

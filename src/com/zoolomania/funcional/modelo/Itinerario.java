@@ -20,8 +20,8 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
 
     private static final long serialVersionUID = -1L; //Constante que evita errores en la serializacion
 
-    private String codigo; //El código no puede ser modificado una vez creado el itinerario
-    private LocalTime duracionRecorrido;
+    private final String codigo; //El código no puede ser modificado una vez creado el itinerario
+    private LocalTime duracionRecorrido, horaItinerario;
     private short longitud;
     private byte numMaxVisitantes;
 //    private byte numEspeciesVisitadas;
@@ -45,8 +45,8 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         this.id = id;
         this.numMaxVisitantes = numMaxVisitantes;
         this.longitud = longitud;
-        duracionRecorrido = LocalTime.of((int) Math.floor(Math.random() * 2),
-                (int) Math.floor(Math.random() * 59)); //Tendrá hasta un límite de 3 horas de duración
+        duracionRecorrido = LocalTime.of((int) (1 + Math.floor(Math.random() * 2)),
+                (int) Math.floor(Math.random() * 59)); //Tendrá hasta un límite de 4 horas de duración
         zonas = new ArrayList<>();
         guias = new ArrayList<>();
     }
@@ -68,19 +68,25 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
         }
         return numeroEspecies;
     }
-    
+
     public void agregarGuia(Guia guia) {
         guias.add(guia);
-        System.out.println("Guia agregado al itinerario " + this.getCodigo());
     }
 
     public void eliminarGuia(Guia guia) {
         guias.remove(guia);
-        System.out.println("Guia eliminado del itinerario " + this.codigo);
     }
 
     public List<Zona> getZonas() {
         return zonas;
+    }
+
+    public void setHoraItinerario(LocalTime horaItinerario) {
+        this.horaItinerario = horaItinerario;
+    }
+
+    public LocalTime getHoraItinerario() {
+        return horaItinerario;
     }
 
     public byte getNumMaxVisitantes() {
