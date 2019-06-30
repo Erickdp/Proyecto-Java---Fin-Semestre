@@ -469,8 +469,8 @@ public class frmZona extends javax.swing.JFrame {
                                 .addComponent(cBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(tablaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))
+                    .addComponent(tablaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -503,7 +503,7 @@ public class frmZona extends javax.swing.JFrame {
                 jNombre.setText("");
                 jExtension.setText("");
             } catch (NumberFormatException n) {
-                JOptionPane.showMessageDialog(null, "Por favor ingrese número enteros para los campos cuantitativos, la extensión si puede tener punto flotante",
+                JOptionPane.showMessageDialog(null, "Por favor ingrese número enteros para los campos cuantitativos, la extensión si puede tener punto flotante.",
                         "Error en la capa 8", JOptionPane.INFORMATION_MESSAGE);
             } catch (MyExcepcion ex) {
                 Logger.getLogger(frmZona.class.getName()).log(Level.SEVERE, null, ex);
