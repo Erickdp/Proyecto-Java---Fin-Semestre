@@ -17,12 +17,12 @@ import java.util.List;
  */
 public class Guia extends Empleado implements Serializable {
 
-    private static long serialVersionUID = -1L; //Constante que evita errores en la serializacion
+    private static final long serialVersionUID = -1L; //Constante que evita errores en la serializacion
 
-    private List<Itinerario> itinerarios;
+    private final List<Itinerario> itinerarios;
 
     /**
-     *
+     * Método constructor de la clase Guia
      * @param nombre
      * @param direccion
      * @param telefono
@@ -33,14 +33,18 @@ public class Guia extends Empleado implements Serializable {
         itinerarios = new ArrayList<>();
     }
 
+    /**
+     * Método que permite agregar itinerarios a la lista y darle una hora en la cuál el Guia deberá realizar
+     * el itinerario.
+     * @param itinerario 
+     */
     public void agregarItinerario(Itinerario itinerario) {
-        itinerario.setHoraItinerario(LocalTime.of((int) Math.floor(Math.random() * 23), (int) Math.floor(Math.random() * 59)));
+        itinerario.setHoraItinerario(LocalTime.of((int) (1 + (Math.floor(Math.random() * 16))), (int)  (1 + (Math.floor(Math.random() * 58)))));
         itinerarios.add(itinerario);
     }
     
     public void eliminarItinerario(Itinerario itinerario) {
         itinerarios.remove(itinerario);
-        System.out.println("Itinerario eliminado del Guia " + this.getNombre());
     }
 
     public List<Itinerario> getItinerarios() {

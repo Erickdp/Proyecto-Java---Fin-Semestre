@@ -263,7 +263,8 @@ public class frmRegistro extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (validarCampos()) {
+        if (jNombre.getText().isEmpty() | jCorreo.getText().isEmpty()
+                | new String(jpass.getPassword()).isEmpty()) {
             JOptionPane.showMessageDialog(null, "Exiten campos sin llenar, revise de nuevo", "Registro Denegado", JOptionPane.ERROR_MESSAGE);
         } else if (!new String(jpass.getPassword()).equals(new String(jpassr.getPassword()))) {
             JOptionPane.showMessageDialog(null, "Las contraseñas no coindice, vuleva a intentar", "Registro Denegado", JOptionPane.ERROR_MESSAGE);
@@ -291,21 +292,14 @@ public class frmRegistro extends javax.swing.JFrame {
     private void jCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCorreoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jCorreoKeyTyped
-
-    public boolean validarCampos() {
-        if (jNombre.getText().isEmpty() | jCorreo.getText().isEmpty() | 
-                new String(jpass.getPassword()).isEmpty()) {
-            return true;
-        } 
-        return false;
-    }
-    
+   
     public boolean validarEmail() {
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(jCorreo.getText());
         return matcher.matches();
     }
+
     /**
      * @param args the command line arguments
      */

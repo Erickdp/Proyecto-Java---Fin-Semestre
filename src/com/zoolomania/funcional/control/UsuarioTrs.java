@@ -5,7 +5,6 @@
  */
 package com.zoolomania.funcional.control;
 
-import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.modelo.Usuario;
 import java.util.List;
 

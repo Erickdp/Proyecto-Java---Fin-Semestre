@@ -49,12 +49,10 @@ public class Habitat implements Serializable, Comparable<Habitat> {
 
     public void agregarEspecie(Especie especie) {
         especies.add(especie);
-        System.out.println("Especie agregada al habitat " + this.nombreHabitat);
     }
 
     public void eliminarEspecie(Especie especie) {
         especies.remove(especie);
-        System.out.println("Especie eliminada del habitat " + this.nombreHabitat);
     }
 
     public void agregarContinente(Continente continente) {

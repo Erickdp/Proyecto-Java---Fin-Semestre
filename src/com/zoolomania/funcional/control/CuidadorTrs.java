@@ -5,16 +5,13 @@
  */
 package com.zoolomania.funcional.control;
 
-import com.zoolomania.funcional.control.ICrud;
-import com.zoolomania.funcional.control.MemoriaBDD;
-import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.modelo.Cuidador;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase que representa las operaciones de negocio para Cuidadores
  * @author Erick Díaz
  */
 public class CuidadorTrs extends MemoriaBDD<Cuidador> implements ICrud<Cuidador> {

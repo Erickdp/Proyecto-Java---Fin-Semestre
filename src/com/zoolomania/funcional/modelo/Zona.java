@@ -46,22 +46,18 @@ public class Zona implements Serializable, Comparable<Zona> {
 
     public void agregarEspecie(Especie especie) {
         especies.add(especie);
-        System.out.println("Especie agregada al habitat " + this.nombreZona);
     }
 
     public void eliminarEspecie(Especie especie) {
         especies.remove(especie);
-        System.out.println("Especie eliminada del habitat " + this.nombreZona);
     }
     
     public void agregarItinerario(Itinerario itinerario) {
         itinerarios.add(itinerario);
-        System.out.println("Itinerario agregado a la zona " + this.nombreZona);
     }
 
     public void eliminarItinerario(Itinerario itinerario) {
         itinerarios.remove(itinerario);
-        System.out.println("Itinerario eliminado de la zona " + this.nombreZona);
     }
 
     public List<Especie> getEspecies() {

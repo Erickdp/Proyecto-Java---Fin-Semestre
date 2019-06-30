@@ -5,13 +5,12 @@
  */
 package com.zoolomania.funcional.control;
 
-import com.zoolomania.funcional.control.MyExcepcion;
 import java.util.List;
 
 /**
- * Interface que representa el contraro de negocio CRUD
+ * Interface que representa el contrato de negocio CRUD
  *
- * @author Santiago Sisalem - Erick Díaz
+ * @author Erick Díaz
  */
 public interface ICrud<T> {
 

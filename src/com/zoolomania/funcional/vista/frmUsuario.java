@@ -324,9 +324,9 @@ public class frmUsuario extends javax.swing.JFrame {
             jCorreo.setText("");
         } else {
             try {
-                System.out.println(utrs.guardar(new Usuario(jNombre.getText(), jContrasena.getText(), jCorreo.getText())));
+                utrs.guardar(new Usuario(jNombre.getText(), jContrasena.getText(), jCorreo.getText()));
             } catch (MyExcepcion ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Erros al resgistrar", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al resgistrar", JOptionPane.ERROR_MESSAGE);
             } finally {
                 jNombre.setText("");
                 jCorreo.setText("");

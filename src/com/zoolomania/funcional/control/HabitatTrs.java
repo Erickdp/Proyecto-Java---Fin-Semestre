@@ -5,16 +5,13 @@
  */
 package com.zoolomania.funcional.control;
 
-import com.zoolomania.funcional.control.ICrud;
-import com.zoolomania.funcional.control.MemoriaBDD;
-import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.modelo.Habitat;
 import java.util.List;
 
 /**
  * Clase que representa las operaciones de negocio para Habitats
  *
- * @author Santiago Sisalem - Erick Díaz (Unplugged)
+ * @author Erick Díaz (Unplugged)
  */
 public class HabitatTrs extends MemoriaBDD<Habitat> implements ICrud<Habitat> {
 

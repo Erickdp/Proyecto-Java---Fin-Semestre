@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.Objects;
 
 /**
@@ -42,6 +41,9 @@ public abstract class Empleado implements Serializable, Comparable<Empleado> {
         this.direccion = direccion;
         this.telefono = telefono;
         this.id = id;
+        /*
+        Uso de la clase LocalDateTime y Math para generar fechas aleatorias
+        */
         this.fechInicioTrabajar = LocalDateTime.of(LocalDate.of(2019, (int) (1 + Math.floor(Math.random() * 11)), (int) (1 + Math.floor(Math.random() * 27)))
                 , LocalTime.of((int) Math.floor(Math.random() * 23), (int) Math.floor(Math.random() * 59)));
     }

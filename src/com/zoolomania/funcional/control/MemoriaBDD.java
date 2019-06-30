@@ -18,18 +18,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase que representa la base de datos en memoria
  *
  * @author Erick Díaz
  */
 public abstract class MemoriaBDD<T> {
 
-    private String nombreFichero;
     private String rutaFichero = "Fichero_";
     protected List<T> listaObjetos;
 
     protected MemoriaBDD(String nombreFichero) {
-        this.nombreFichero = nombreFichero;
-        rutaFichero += this.nombreFichero + ".ddr";
+        rutaFichero += nombreFichero + ".ddr";
         listaObjetos = new ArrayList<>();
         crearFichero();
     }
@@ -42,6 +41,7 @@ public abstract class MemoriaBDD<T> {
     private void crearFichero() {
         File fichero = new File(rutaFichero);
         if (!fichero.exists()) {
+            System.out.println("MemoriaBdd V1.0 - Erick Díaz - Santiago Sisalema - Diego Gualoto - U.C.E");
             try {
                 fichero.createNewFile();
                 valoresDefecto();
@@ -56,9 +56,9 @@ public abstract class MemoriaBDD<T> {
      * objetos en el programa.
      */
     protected void guardarFichero() {
-        try (ObjectOutputStream oss = new ObjectOutputStream(new FileOutputStream(rutaFichero))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(rutaFichero))) {
             //La línea anterior permite cerrar Ficheros automaticamente (posterior a version 7 Java)
-            oss.writeObject(listaObjetos);
+            oos.writeObject(listaObjetos); // No se necesita sobrescribir la cabezera pues entra toda la lista completa cada vez que se escribe
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MemoriaBDD.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

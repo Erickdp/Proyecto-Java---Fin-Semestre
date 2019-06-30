@@ -12,7 +12,7 @@ package com.zoolomania.funcional.control;
  */
 public class MyExcepcion extends Exception {
 
-    String error;
+    private String error;
 
     public MyExcepcion() {
     }

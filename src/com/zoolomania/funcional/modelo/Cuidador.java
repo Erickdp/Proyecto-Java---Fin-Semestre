@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que representa al objeto Cuidador y extiende de la clase Empleado.
+ * Clase que representa al objeto Cuidador que extiende de la clase Empleado.
  *
  * @author Erick Díaz
  */
@@ -20,7 +20,6 @@ public class Cuidador extends Empleado implements Serializable, Comparable<Emple
     private static final long serialVersionUID = -1L;
 
     private List<Especie> especies;
-    private LocalDate fechaDeEspecie;
 
     /**
      * Método constructor de la clase Cuidador
@@ -50,12 +49,15 @@ public class Cuidador extends Empleado implements Serializable, Comparable<Emple
      */
     public void cuidarNuevaEspecie(Especie nuevaEspecie) {
         especies.add(nuevaEspecie);
-        System.out.println("Nueva especie agregada al cuiaddor " + this.getNombre());
     }
 
+    /**
+     * Método que elimina de la lista del cuidador la especie pasadada como
+     * argumento
+     *
+     * @param especie
+     */
     public void eliminarEspecie(Especie especie) {
         especies.remove(especie);
-        System.out.println("Especie removida correctamente del cuidador " + this.getNombre());
     }
-
 }

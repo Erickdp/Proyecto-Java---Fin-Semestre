@@ -5,9 +5,6 @@
  */
 package com.zoolomania.funcional.control;
 
-import com.zoolomania.funcional.control.ICrud;
-import com.zoolomania.funcional.control.MemoriaBDD;
-import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.modelo.Especie;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,7 +51,6 @@ public class EspecieTrs extends MemoriaBDD<Especie> implements ICrud<Especie> {
         } else {
             for (Especie especieAntiguo : listaObjetos) {
                 if (especieAntiguo.getMarca() == registro.getMarca()) {
-                    registro.setFechaRegistrada(especieAntiguo.getFechaRegistrada());
                     listaObjetos.set(listaObjetos.indexOf(especieAntiguo), registro);
                     guardarFichero();
                     return "Actualizado Correctamente";

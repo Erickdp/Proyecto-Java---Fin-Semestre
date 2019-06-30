@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Clase que represetna las operaciones de negocio relacionadas con el continente
  * @author Erick Díaz
  */
 public class ContinenteTrs extends MemoriaBDD<Continente> implements ICrud<Continente> {
@@ -25,6 +25,11 @@ public class ContinenteTrs extends MemoriaBDD<Continente> implements ICrud<Conti
     public String guardar(Continente registro) throws MyExcepcion {
         if (buscarConId(registro.getId()) != null) {
             throw new MyExcepcion("1");
+        }
+        for (Continente continenteV : listaObjetos) {
+            if (continenteV.equals(registro)) {
+                throw new MyExcepcion("1");
+            }
         }
         listaObjetos.add(registro);
         guardarFichero();

@@ -22,7 +22,7 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
 
     private final String codigo; //El código no puede ser modificado una vez creado el itinerario
     private LocalTime duracionRecorrido, horaItinerario;
-    private short longitud;
+    private float longitud;
     private byte numMaxVisitantes;
 //    private byte numEspeciesVisitadas;
     private List<Zona> zonas;
@@ -40,7 +40,7 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
      * @param codigo
      * @param numMaxVisitantes
      */
-    public Itinerario(String codigo, byte numMaxVisitantes, short id, short longitud) {
+    public Itinerario(String codigo, byte numMaxVisitantes, short id, float longitud) {
         this.codigo = codigo;
         this.id = id;
         this.numMaxVisitantes = numMaxVisitantes;
@@ -53,12 +53,10 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
 
     public void agregarZona(Zona zona) {
         zonas.add(zona);
-        System.out.println("Zona agregada al Itinerario");
     }
 
     public void eliminarZona(Zona zona) {
         zonas.remove(zona);
-        System.out.println("Zona eliinara del Itinerario");
     }
 
     public int especiesVisitadas(List<Zona> zonas) {

@@ -5,10 +5,6 @@
  */
 package com.zoolomania.funcional.control;
 
-import com.zoolomania.funcional.control.MyExcepcion;
-import com.zoolomania.funcional.control.MyExcepcion;
-import com.zoolomania.funcional.control.ZonaTrs;
-import com.zoolomania.funcional.control.ZonaTrs;
 import com.zoolomania.funcional.modelo.Continente;
 import com.zoolomania.funcional.modelo.Cuidador;
 import com.zoolomania.funcional.modelo.Especie;
@@ -19,7 +15,8 @@ import com.zoolomania.funcional.modelo.Zona;
 import java.util.List;
 
 /**
- *
+ * Clase que contiene las operaciones utilitarias de gestión (Eliminación 
+ * prfunda de objetos)
  * @author Erick Díaz
  */
 public class UtilGestion {
@@ -49,6 +46,12 @@ public class UtilGestion {
         continentes = cctrs.listar();
     }
 
+    /**
+     * Método que permite buscar en las listas de los objetos existentes si esque 
+     * el objeto pasado como argumento los contiene, para eliminarlo de estas.
+     * @param registro
+     * @throws MyExcepcion 
+     */
     public static void eliminacionCompleta(Object registro) throws MyExcepcion {
         if (registro instanceof Especie) { // Eliminar de Cuidador, Habitat y Zona
             for (Cuidador c : cuidadores) {
@@ -127,6 +130,7 @@ public class UtilGestion {
             for (Habitat h : habitats) {
                 if (h.getContinentes().contains(registro)) {
                     h.getContinentes().remove(registro);
+                    htrs.actulizar(h);
                 }
             }
         } else {

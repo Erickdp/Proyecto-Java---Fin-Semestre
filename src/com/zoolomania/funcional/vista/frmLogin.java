@@ -22,8 +22,8 @@ public class frmLogin extends javax.swing.JFrame {
      */
     public frmLogin() {
         initComponents();
-        this.setLocationRelativeTo(null);
         rsscalelabel.RSScaleLabel.setScaleLabel(jLabel1, "src/iconos/LogoZoo.png");
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -52,7 +52,6 @@ public class frmLogin extends javax.swing.JFrame {
         setUndecorated(true);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/LogoZoo.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
         jLabel1.setPreferredSize(new java.awt.Dimension(219, 101));
 
         jPanel1.setBackground(new java.awt.Color(75, 144, 46));
@@ -151,7 +150,7 @@ public class frmLogin extends javax.swing.JFrame {
         );
 
         jLabel2.setFont(new java.awt.Font("Palatino Linotype", 3, 14)); // NOI18N
-        jLabel2.setText("SISTEMA DE GESTIÓN DEL ZOOLÓGICO");
+        jLabel2.setText("SISTEMA GESTIÓN DE ZOOLÓGICO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
