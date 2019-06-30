@@ -13,7 +13,6 @@ import com.zoolomania.funcional.control.ZonaTrs;
 import com.zoolomania.funcional.modelo.Guia;
 import com.zoolomania.funcional.modelo.Itinerario;
 import com.zoolomania.funcional.modelo.Zona;
-import com.zoolomania.funcional.vista.frmMenuPrincipal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collections;
@@ -22,7 +21,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Clase que permitirá simular el formulario para realizar operaciones
+ * de negocio con Itinerario
  * @author Erick Díaz
  */
 public class frmItinerario extends javax.swing.JFrame {
