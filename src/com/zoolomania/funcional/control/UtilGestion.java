@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * Clase que contiene las operaciones utilitarias de gestión (Eliminación 
- * prfunda de objetos)
+ * profunda de objetos)
  * @author Erick Díaz
  */
 public class UtilGestion {

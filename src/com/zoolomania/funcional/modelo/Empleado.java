@@ -12,7 +12,8 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 /**
- *
+ * Clase que representa la clase Empleado que servirá para ser extendida a Guia
+ * y Cuidador
  * @author Erick Díaz
  */
 public abstract class Empleado implements Serializable, Comparable<Empleado> {
