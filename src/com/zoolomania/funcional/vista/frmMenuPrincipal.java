@@ -6,7 +6,8 @@
 package com.zoolomania.funcional.vista;
 
 /**
- *
+ * Clase que permitirá simular el formulario para ingresar a los 
+ * diferentes fomrularios
  * @author Erick Díaz
  */
 public class frmMenuPrincipal extends javax.swing.JFrame {

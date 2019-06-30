@@ -8,7 +8,6 @@ package com.zoolomania.funcional.vista;
 import com.zoolomania.funcional.control.MyExcepcion;
 import com.zoolomania.funcional.control.UsuarioTrs;
 import com.zoolomania.funcional.modelo.Usuario;
-import com.zoolomania.funcional.vista.frmMenuPrincipal;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,7 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Clase que permitirá simular el formulario para realizar operaciones
+ * de negocio con Usuario
  * @author Erick Díaz
  */
 public class frmUsuario extends javax.swing.JFrame {

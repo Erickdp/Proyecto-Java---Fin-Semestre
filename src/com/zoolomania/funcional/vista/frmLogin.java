@@ -10,7 +10,8 @@ import com.zoolomania.funcional.modelo.Usuario;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase que permitirá simular el formulario para realizar operaciones
+ * de negocio para acceder al sistema.
  * @author Erick Díaz
  */
 public class frmLogin extends javax.swing.JFrame {

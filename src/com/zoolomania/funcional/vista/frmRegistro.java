@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase que permitirá simular el formulario para realizar operaciones
+ * de registro con Usuario
  * @author Erick Díaz
  */
 public class frmRegistro extends javax.swing.JFrame {

@@ -21,7 +21,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Clase que permitirá simular el formulario para realizar operaciones
+ * de negocio con Guia
  * @author Erick Díaz
  */
 public class frmGuia extends javax.swing.JFrame {

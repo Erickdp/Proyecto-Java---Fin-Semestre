@@ -19,7 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Clase que permitirá simular el formulario para realizar operaciones
+ * de negocio con Continente
  * @author Erick Díaz
  */
 public class frmContinente extends javax.swing.JFrame {
