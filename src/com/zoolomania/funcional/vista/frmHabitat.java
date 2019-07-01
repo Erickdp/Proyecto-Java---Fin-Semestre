@@ -21,8 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Clase que permitirá simular el formulario para realizar operaciones
- * de negocio con Habitat
+ * Clase que permitirá simular el formulario para realizar operaciones de
+ * negocio con Habitat
+ *
  * @author Erick Díaz
  */
 public class frmHabitat extends javax.swing.JFrame {
@@ -563,7 +564,9 @@ public class frmHabitat extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (tablaH.getSelectedRow() > -1) {
             especies = habitats.get(tablaH.getSelectedRow()).getEspecies();
+            continentes = habitats.get(tablaH.getSelectedRow()).getContinentes();
             cargarTablaE();
+            cargarTablaC();
             bandera = true;
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione la fila a la que quiere ver sus Especies", "Error",

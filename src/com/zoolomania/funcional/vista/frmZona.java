@@ -22,8 +22,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Clase que permitirá simular el formulario para realizar operaciones
- * de negocio con Zona
+ * Clase que permitirá simular el formulario para realizar operaciones de
+ * negocio con Zona
+ *
  * @author Erick Díaz
  */
 public class frmZona extends javax.swing.JFrame {
@@ -529,7 +530,7 @@ public class frmZona extends javax.swing.JFrame {
         if (tablaZ.getSelectedRow() > -1) {
             try {
                 UtilGestion.eliminacionCompleta(zonas.get(tablaZ.getSelectedRow()));
-                System.out.println(ztrs.eliminar(zonas.get(tablaZ.getSelectedRow())));
+                ztrs.eliminar(zonas.get(tablaZ.getSelectedRow()));
             } catch (MyExcepcion ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
             } finally {
@@ -550,8 +551,8 @@ public class frmZona extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El ID de la zona no puede actualizarse.",
                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
             try {
-                System.out.println(ztrs.actulizar(new Zona(jNombreZ.getText(), Float.parseFloat(jExtension.getText()),
-                        zonas.get(tablaZ.getSelectedRow()).getId())));
+                ztrs.actulizar(new Zona(jNombreZ.getText(), Float.parseFloat(jExtension.getText()),
+                        zonas.get(tablaZ.getSelectedRow()).getId()));
             } catch (MyExcepcion ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error al Actualizar", JOptionPane.ERROR_MESSAGE);
             } finally {
@@ -622,8 +623,15 @@ public class frmZona extends javax.swing.JFrame {
                 zona.agregarEspecie(especie);
                 especie.agregarZona(zona);
                 try {
-                    System.out.println(ztrs.actulizar(zona));
-                    System.out.println(etrs.actulizar(especie));
+                    //Este bloque servirá para mantener actualizado al 
+                    //itinerario de las especies que va a visitar
+                    for (Itinerario i : zona.getItinerarios()) {
+                        i.getZonas().set(i.getZonas().indexOf(zona), zona);
+                        itrs.actulizar(i);
+                    }
+                    ztrs.actulizar(zona);
+                    etrs.actulizar(especie);
+                    System.out.println(zona.getEspecies().size());
                     JOptionPane.showMessageDialog(null, "Agregada especie a la Zona: " + especie.getNombreEspecie(),
                             "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 } catch (MyExcepcion ex) {
@@ -639,8 +647,8 @@ public class frmZona extends javax.swing.JFrame {
                 zona.agregarItinerario(itinerario);
                 itinerario.agregarZona(zona);
                 try {
-                    System.out.println(ztrs.actulizar(zona));
-                    System.out.println(itrs.actulizar(itinerario));
+                    ztrs.actulizar(zona);
+                    itrs.actulizar(itinerario);
                     JOptionPane.showMessageDialog(null, "Itinerario agregado a la Zona: " + zona.getNombreZona(),
                             "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 } catch (MyExcepcion ex) {
@@ -679,15 +687,14 @@ public class frmZona extends javax.swing.JFrame {
                 zona.eliminarEspecie(especie);
                 especie.eliminarZona(zona);
                 try {
-                    System.out.println(ztrs.actulizar(zona));
-                    System.out.println(etrs.actulizar(especie));
+                    ztrs.actulizar(zona);
+                    etrs.actulizar(especie);
                     JOptionPane.showMessageDialog(null, especie.getNombreEspecie()
                             + " eliminado de la Zona.", "Aviso", JOptionPane.ERROR_MESSAGE);
                 } catch (MyExcepcion ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
                     especies = zona.getEspecies();
-                    cargarTablaZ(); //Se carga la tabla para que disminuya el número de especies que habitan allí
                     cargarTablaE();
                 }
             } else {

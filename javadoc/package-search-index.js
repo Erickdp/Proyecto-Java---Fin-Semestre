@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.zoolomania.funcional.control"},{"l":"com.zoolomania.funcional.modelo"},{"l":"com.zoolomania.funcional.vista"}]

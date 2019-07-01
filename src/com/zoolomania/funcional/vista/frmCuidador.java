@@ -22,8 +22,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Clase que permitirá simular el formulario para realizar operaciones
- * de negocio con Cuidador
+ * Clase que permitirá simular el formulario para realizar operaciones de
+ * negocio con Cuidador
+ *
  * @author Erick Díaz
  */
 public class frmCuidador extends javax.swing.JFrame {
@@ -99,6 +100,8 @@ public class frmCuidador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         bAgregarE = new javax.swing.JButton();
         bEliminarE = new javax.swing.JButton();
@@ -175,10 +178,12 @@ public class frmCuidador extends javax.swing.JFrame {
         comboE.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
         comboE.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "ID" }));
 
+        buttonGroup2.add(rAscendenteE);
         rAscendenteE.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
         rAscendenteE.setSelected(true);
         rAscendenteE.setText("Ascendente");
 
+        buttonGroup2.add(rDescendenteE);
         rDescendenteE.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
         rDescendenteE.setText("Descendente");
 
@@ -262,9 +267,11 @@ public class frmCuidador extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rDescendente);
         rDescendente.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
         rDescendente.setText("Descendente");
 
+        buttonGroup1.add(rAscendente);
         rAscendente.setFont(new java.awt.Font("sansserif", 3, 12)); // NOI18N
         rAscendente.setSelected(true);
         rAscendente.setText("Ascendente");
@@ -358,27 +365,27 @@ public class frmCuidador extends javax.swing.JFrame {
                                         .addGap(130, 130, 130)))
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bVerEspecies, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(563, 563, 563))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(bOrdenar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboE, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rDescendenteE)
-                            .addComponent(bAgregarE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bEliminarE)
-                            .addComponent(rAscendenteE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 756, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(bOrdenar1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboE, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rDescendenteE)
+                                    .addComponent(bAgregarE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bEliminarE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(rAscendenteE)
+                                        .addGap(42, 42, 42)
+                                        .addComponent(bVerEspecies, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -386,23 +393,20 @@ public class frmCuidador extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(102, 102, 102)
-                                .addComponent(bVerEspecies))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(bMenu)
-                                        .addGap(113, 113, 113)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(bAgregarE)
-                                            .addComponent(bEliminarE))))))
+                                .addComponent(bMenu)
+                                .addGap(113, 113, 113)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(bAgregarE)
+                                    .addComponent(bEliminarE))))
                         .addGap(18, 18, 18)
-                        .addComponent(rAscendenteE)
-                        .addGap(0, 4, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rAscendenteE)
+                            .addComponent(bVerEspecies))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -427,7 +431,7 @@ public class frmCuidador extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jIdC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bEspecie, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -465,7 +469,7 @@ public class frmCuidador extends javax.swing.JFrame {
     private void bOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOrdenarActionPerformed
         // TODO add your handling code here:
         if (comboC.getSelectedIndex() == 0) {
-            Empleado.bandera = false;
+            Cuidador.bandera = false;
             if (rAscendente.isSelected()) {
                 Collections.sort(cuidadores);
             } else if (rDescendente.isSelected()) {
@@ -489,8 +493,8 @@ public class frmCuidador extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Exiten campos sin llenar, revise de nuevo", "Registro Denegado", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                System.out.println(ctrs.guardar(new Cuidador(jNombreC.getText(), jDireccionC.getText(),
-                        jTelefonoC.getText(), Short.parseShort(jIdC.getText()))));
+                ctrs.guardar(new Cuidador(jNombreC.getText(), jDireccionC.getText(),
+                        jTelefonoC.getText(), Short.parseShort(jIdC.getText())));
                 jNombreC.setText("");
                 jDireccionC.setText("");
                 jTelefonoC.setText("");
@@ -533,8 +537,8 @@ public class frmCuidador extends javax.swing.JFrame {
                     "Aviso", JOptionPane.INFORMATION_MESSAGE);
             Cuidador cuidador = cuidadores.get(tablaC.getSelectedRow());
             try {
-                System.out.println(ctrs.actulizar(new Cuidador(jNombreC.getText(),
-                        jDireccionC.getText(), jTelefonoC.getText(), cuidador.getId())));
+                ctrs.actulizar(new Cuidador(jNombreC.getText(),
+                        jDireccionC.getText(), jTelefonoC.getText(), cuidador.getId()));
                 jNombreC.setText("");
                 jDireccionC.setText("");
                 jTelefonoC.setText("");
@@ -570,24 +574,22 @@ public class frmCuidador extends javax.swing.JFrame {
 
     private void bOrdenar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOrdenar1ActionPerformed
         // TODO add your handling code here:
-        if (tablaC.getSelectedRow() > -1) {
-            if (comboE.getSelectedIndex() == 0) {
-                Especie.bandera = false;
-                if (rAscendenteE.isSelected()) {
-                    Collections.sort(especies);
-                } else if (rDescendenteE.isSelected()) {
-                    Collections.sort(especies, Collections.reverseOrder());
-                }
-            } else if (comboE.getSelectedIndex() == 1) {
-                Especie.bandera = true;
-                if (rAscendenteE.isSelected()) {
-                    Collections.sort(especies, Collections.reverseOrder());
-                } else if (rDescendenteE.isSelected()) {
-                    Collections.sort(especies);
-                }
+        if (comboE.getSelectedIndex() == 0) {
+            Especie.bandera = false;
+            if (rAscendenteE.isSelected()) {
+                Collections.sort(especies);
+            } else if (rDescendenteE.isSelected()) {
+                Collections.sort(especies, Collections.reverseOrder());
             }
-            cargarTablaE();
+        } else if (comboE.getSelectedIndex() == 1) {
+            Especie.bandera = true;
+            if (rAscendenteE.isSelected()) {
+                Collections.sort(especies, Collections.reverseOrder());
+            } else if (rDescendenteE.isSelected()) {
+                Collections.sort(especies);
+            }
         }
+        cargarTablaE();
     }//GEN-LAST:event_bOrdenar1ActionPerformed
 
     private void bVerEspeciesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerEspeciesActionPerformed
@@ -700,6 +702,8 @@ public class frmCuidador extends javax.swing.JFrame {
     private javax.swing.JButton bOrdenar;
     private javax.swing.JButton bOrdenar1;
     private javax.swing.JButton bVerEspecies;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> comboC;
     private javax.swing.JComboBox<String> comboE;
     private javax.swing.JTextField jDireccionC;

@@ -21,8 +21,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Clase que permitirá simular el formulario para realizar operaciones
- * de negocio con Itinerario
+ * Clase que permitirá simular el formulario para realizar operaciones de
+ * negocio con Itinerario
+ *
  * @author Erick Díaz
  */
 public class frmItinerario extends javax.swing.JFrame {
@@ -70,9 +71,10 @@ public class frmItinerario extends javax.swing.JFrame {
         for (Guia g : guias) {
             short id = g.getId();
             String nombre = g.getNombre();
+            String direccion = g.getDireccion();
             String telefono = g.getTelefono();
             LocalDateTime fecha = g.getFechInicioTrabajar();
-            Object[] fila = {id, nombre, telefono, fecha};
+            Object[] fila = {id, nombre, direccion, telefono, fecha};
             modeloG.addRow(fila);
         }
         this.tablaG.setModel(modeloG);
@@ -409,14 +411,10 @@ public class frmItinerario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jButton8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(111, 111, 111)
-                                .addComponent(bAgregarO))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bEliminarO)
-                                .addGap(10, 10, 10))))
+                        .addGap(111, 111, 111)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bAgregarO)
+                            .addComponent(bEliminarO)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
@@ -600,7 +598,6 @@ public class frmItinerario extends javax.swing.JFrame {
             if (!itinerario.getZonas().contains(zona)) {
                 itinerario.agregarZona(zona);
                 zona.agregarItinerario(itinerario);
-                itinerario.especiesVisitadas(itinerario.getZonas());
                 try {
                     itrs.actulizar(itinerario);
                     ztrs.actulizar(zona);
@@ -609,7 +606,7 @@ public class frmItinerario extends javax.swing.JFrame {
                 } catch (MyExcepcion ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
-                    cargarTablaZ();
+                    cargarTablaI();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "La zona " + zona.getNombreZona() + ", ya se encuentra en el itinerario.",
@@ -662,6 +659,8 @@ public class frmItinerario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se puede eliminar a la Zona pues no se encuentra en el itinerario",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Solo se puede eliminar viendo sus relaciones", "Advertencia", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_bEliminarOActionPerformed
 

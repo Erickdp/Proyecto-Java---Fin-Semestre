@@ -61,8 +61,8 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
 
     public int especiesVisitadas(List<Zona> zonas) {
         int numeroEspecies = 0;
-        for (Zona z : zonas) {
-            numeroEspecies += z.getEspecies().size();
+        for (Zona zona : zonas) {
+            numeroEspecies += zona.getEspecies().size();
         }
         return numeroEspecies;
     }
@@ -130,7 +130,7 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 19 * hash + Objects.hashCode(this.codigo);
+        hash = 97 * hash + this.id;
         return hash;
     }
 
@@ -146,7 +146,7 @@ public class Itinerario implements Serializable, Comparable<Itinerario> {
             return false;
         }
         final Itinerario other = (Itinerario) obj;
-        if (!Objects.equals(this.codigo, other.codigo)) {
+        if (this.id != other.id) {
             return false;
         }
         return true;

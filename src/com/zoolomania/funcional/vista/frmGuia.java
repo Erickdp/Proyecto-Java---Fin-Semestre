@@ -21,18 +21,19 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Clase que permitirá simular el formulario para realizar operaciones
- * de negocio con Guia
+ * Clase que permitirá simular el formulario para realizar operaciones de
+ * negocio con Guia
+ *
  * @author Erick Díaz
  */
 public class frmGuia extends javax.swing.JFrame {
-
+    
     GuiaTrs gtrs = new GuiaTrs();
     ItinerarioTrs itrs = new ItinerarioTrs();
     List<Guia> guias = gtrs.listar();
     List<Itinerario> itinerarios = itrs.listar();
     boolean bandera = false;
-
+    
     private void cargarTablaI() {
         Object[] columna = {"ID", "Codigo", "N° Especies visitadas", "Duración (HH/mm)", "N° Max. Personas", "Longitud (Km)"};
         DefaultTableModel modeloI = new DefaultTableModel(columna, 0);
@@ -67,7 +68,7 @@ public class frmGuia extends javax.swing.JFrame {
         }
         this.tablaI.setModel(modeloI);
     }
-
+    
     private void cargarTablaG() {
         Object[] columna = {"ID", "Nombre", "Dirección", "Teléfono", "Fecha Inicio Trabajo"};
         DefaultTableModel modeloG = new DefaultTableModel(columna, 0);
@@ -541,7 +542,16 @@ public class frmGuia extends javax.swing.JFrame {
 
     private void bRelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRelacionActionPerformed
         // TODO add your handling code here:
+        int contador = 0;
         if (tablaG.getSelectedRow() > -1) {
+            for (Itinerario i : guias.get(tablaG.getSelectedRow()).getItinerarios()) {
+                for (Itinerario ii : itinerarios) {
+                    if (i.equals(ii)) {
+                        guias.get(tablaG.getSelectedRow()).getItinerarios().
+                                set(guias.get(tablaG.getSelectedRow()).getItinerarios().indexOf(i), ii);
+                    }
+                }
+            }
             itinerarios = guias.get(tablaG.getSelectedRow()).getItinerarios();
             cargarTablaGI();
             bandera = true;
